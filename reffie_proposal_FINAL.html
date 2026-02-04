@@ -804,6 +804,7 @@
                                         <span id="dealSizeValue" style="color: #10B981; font-weight: 700; font-size: 1.3rem;">$6K</span>
                                     </div>
                                     <input type="range" id="sliderDealSize" min="1" max="50" value="6" step="0.5" 
+                                        oninput="handleDealSizeChange(this.value)"
                                         style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #10B981 0%, #10B981 12%, #E2E8F0 12%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                                 </div>
 
@@ -816,6 +817,7 @@
                                         <span id="salesCycleValue" style="color: #06B6D4; font-weight: 700; font-size: 1.3rem;">45d</span>
                                     </div>
                                     <input type="range" id="sliderSalesCycle" min="7" max="120" value="45" step="1" 
+                                        oninput="handleSalesCycleChange(this.value)"
                                         style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #06B6D4 0%, #06B6D4 32%, #E2E8F0 32%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                                 </div>
 
@@ -828,6 +830,7 @@
                                         <span id="winRateValue" style="color: #8B5CF6; font-weight: 700; font-size: 1.3rem;">20%</span>
                                     </div>
                                     <input type="range" id="sliderWinRate" min="5" max="100" value="20" step="5" 
+                                        oninput="handleWinRateChange(this.value)"
                                         style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #8B5CF6 0%, #8B5CF6 18%, #E2E8F0 18%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                                 </div>
 
@@ -840,6 +843,7 @@
                                         <span id="callsPerDayValue" style="color: #F59E0B; font-weight: 700; font-size: 1.3rem;">6/day</span>
                                     </div>
                                     <input type="range" id="sliderCallsPerDay" min="1" max="30" value="6" step="1" 
+                                        oninput="handleCallsPerDayChange(this.value)"
                                         style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #F59E0B 0%, #F59E0B 19%, #E2E8F0 19%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                                 </div>
                             </div>
@@ -2581,10 +2585,44 @@
 
 <script>
 // =============================================================================
-// DIAGNOSTIC LOGGING
+// SIMPLE DIRECT SLIDER HANDLERS - GUARANTEED TO WORK
 // =============================================================================
-console.log('Script tag loaded');
-console.log('document.readyState:', document.readyState);
+
+function handleDealSizeChange(value) {
+    var val = parseFloat(value);
+    document.getElementById('dealSizeValue').textContent = '$' + val + 'K';
+    window.Calculator.update('avgDealSize', val * 1000);
+    updateSliderBg('sliderDealSize', 1, 50, '#10B981');
+}
+
+function handleSalesCycleChange(value) {
+    var val = parseFloat(value);
+    document.getElementById('salesCycleValue').textContent = val + 'd';
+    window.Calculator.update('salesCycle', val);
+    updateSliderBg('sliderSalesCycle', 7, 120, '#06B6D4');
+}
+
+function handleWinRateChange(value) {
+    var val = parseFloat(value);
+    document.getElementById('winRateValue').textContent = val + '%';
+    window.Calculator.update('winRate', val);
+    updateSliderBg('sliderWinRate', 5, 100, '#8B5CF6');
+}
+
+function handleCallsPerDayChange(value) {
+    var val = parseFloat(value);
+    document.getElementById('callsPerDayValue').textContent = val + '/day';
+    window.Calculator.update('callsPerDay', val);
+    updateSliderBg('sliderCallsPerDay', 1, 30, '#F59E0B');
+}
+
+function updateSliderBg(id, min, max, color) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var val = parseFloat(el.value);
+    var pct = ((val - min) / (max - min)) * 100;
+    el.style.background = 'linear-gradient(to right, ' + color + ' 0%, ' + color + ' ' + pct + '%, #E2E8F0 ' + pct + '%, #E2E8F0 100%)';
+}
 
 // =============================================================================
 // REACTIVE CALCULATOR - FRESH IMPLEMENTATION
@@ -2999,131 +3037,8 @@ console.log('Sprint object created:', window.Sprint !== undefined);
 // SLIDER EVENT HANDLERS - WITH DEBUGGING
 // =============================================================================
 
-function attachSliderHandlers() {
-    console.log('=== ATTACHING SLIDER HANDLERS ===');
-    
-    // Deal Size
-    const sliderDealSize = document.getElementById('sliderDealSize');
-    console.log('sliderDealSize element:', sliderDealSize ? 'FOUND' : 'NOT FOUND');
-    if (sliderDealSize) {
-        sliderDealSize.oninput = function() {
-            console.log('SLIDER FIRED: Deal Size =', this.value);
-            const val = parseFloat(this.value);
-            const displayEl = document.getElementById('dealSizeValue');
-            console.log('Display element:', displayEl ? 'FOUND' : 'NOT FOUND');
-            if (displayEl) {
-                displayEl.textContent = '$' + val + 'K';
-                console.log('Display updated to:', displayEl.textContent);
-            }
-            if (window.Calculator) {
-                console.log('Calling Calculator.update with avgDealSize:', val * 1000);
-                window.Calculator.update('avgDealSize', val * 1000);
-                console.log('Calculator.update completed');
-            } else {
-                console.error('Calculator NOT FOUND');
-            }
-            updateSliderBg('sliderDealSize', 1, 50, '#10B981');
-        };
-        console.log('Deal Size slider handler attached');
-    }
-    
-    // Sales Cycle
-    const sliderSalesCycle = document.getElementById('sliderSalesCycle');
-    console.log('sliderSalesCycle element:', sliderSalesCycle ? 'FOUND' : 'NOT FOUND');
-    if (sliderSalesCycle) {
-        sliderSalesCycle.oninput = function() {
-            console.log('SLIDER FIRED: Sales Cycle =', this.value);
-            const val = parseFloat(this.value);
-            const displayEl = document.getElementById('salesCycleValue');
-            if (displayEl) {
-                displayEl.textContent = val + 'd';
-                console.log('Sales Cycle display updated to:', displayEl.textContent);
-            }
-            if (window.Calculator) {
-                console.log('Calling Calculator.update with salesCycle:', val);
-                window.Calculator.update('salesCycle', val);
-            }
-            updateSliderBg('sliderSalesCycle', 7, 120, '#06B6D4');
-        };
-        console.log('Sales Cycle slider handler attached');
-    }
-    
-    // Win Rate
-    const sliderWinRate = document.getElementById('sliderWinRate');
-    console.log('sliderWinRate element:', sliderWinRate ? 'FOUND' : 'NOT FOUND');
-    if (sliderWinRate) {
-        sliderWinRate.oninput = function() {
-            console.log('SLIDER FIRED: Win Rate =', this.value);
-            const val = parseFloat(this.value);
-            const displayEl = document.getElementById('winRateValue');
-            if (displayEl) {
-                displayEl.textContent = val + '%';
-                console.log('Win Rate display updated to:', displayEl.textContent);
-            }
-            if (window.Calculator) {
-                console.log('Calling Calculator.update with winRate:', val);
-                window.Calculator.update('winRate', val);
-            }
-            updateSliderBg('sliderWinRate', 5, 100, '#8B5CF6');
-        };
-        console.log('Win Rate slider handler attached');
-    }
-    
-    // Calls Per Day
-    const sliderCallsPerDay = document.getElementById('sliderCallsPerDay');
-    console.log('sliderCallsPerDay element:', sliderCallsPerDay ? 'FOUND' : 'NOT FOUND');
-    if (sliderCallsPerDay) {
-        sliderCallsPerDay.oninput = function() {
-            console.log('SLIDER FIRED: Calls Per Day =', this.value);
-            const val = parseFloat(this.value);
-            const displayEl = document.getElementById('callsPerDayValue');
-            if (displayEl) {
-                displayEl.textContent = val + '/day';
-                console.log('Calls Per Day display updated to:', displayEl.textContent);
-            }
-            if (window.Calculator) {
-                console.log('Calling Calculator.update with callsPerDay:', val);
-                window.Calculator.update('callsPerDay', val);
-            }
-            updateSliderBg('sliderCallsPerDay', 1, 30, '#F59E0B');
-        };
-        console.log('Calls Per Day slider handler attached');
-    }
-    
-    // AE Salary
-    const sliderAeComp = document.getElementById('sliderAeComp');
-    console.log('sliderAeComp element:', sliderAeComp ? 'FOUND' : 'NOT FOUND');
-    if (sliderAeComp) {
-        sliderAeComp.oninput = function() {
-            console.log('SLIDER FIRED: AE Salary =', this.value);
-            const val = parseFloat(this.value);
-            const displayEl = document.getElementById('aeSalaryValue');
-            if (displayEl) {
-                displayEl.textContent = '$' + val + 'K';
-                console.log('AE Salary display updated to:', displayEl.textContent);
-            }
-            if (window.Sprint) {
-                console.log('Calling Sprint.update with:', val);
-                window.Sprint.update(val);
-            }
-            updateSliderBg('sliderAeComp', 80, 180, '#10B981');
-        };
-        console.log('AE Salary slider handler attached');
-    }
-    
-    console.log('=== ALL SLIDER HANDLERS ATTACHED ===');
-}
-
-function updateSliderBg(id, min, max, color) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const val = parseFloat(el.value);
-    const pct = ((val - min) / (max - min)) * 100;
-    el.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${pct}%, #E2E8F0 ${pct}%, #E2E8F0 100%)`;
-}
-
-// Don't attach handlers here - they'll be attached during initialization
-console.log('Slider handler functions defined. Will attach during initializeApp()');
+// Don't attach handlers here - they're inline in HTML now
+console.log('Slider handler functions defined as inline oninput handlers');
 
 window.selectSprintDuration = function(days) {
     console.log('=== SPRINT DURATION SELECTED ===', days);
@@ -3270,14 +3185,8 @@ window.initializeApp = function() {
         console.error('Error setting sprint duration:', e);
     }
     
-    try {
-        // Reattach slider handlers to ensure they work
-        console.log('Reattaching slider handlers...');
-        attachSliderHandlers();
-        console.log('✓ Slider handlers attached');
-    } catch(e) {
-        console.error('Error attaching handlers:', e);
-    }
+    // Slider handlers are now inline in HTML - no need to attach via JS
+    console.log('✓ Slider handlers defined inline in HTML');
     
     try {
         // Initialize navigation scroll tracking
