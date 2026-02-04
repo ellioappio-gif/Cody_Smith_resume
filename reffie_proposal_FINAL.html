@@ -2298,6 +2298,7 @@
                             <span id="aeSalaryValue" style="color: #10B981; font-weight: 700; font-size: 1.3rem;">$120K</span>
                         </div>
                         <input type="range" id="sliderAeComp" min="80" max="180" value="120" step="10"
+                            oninput="handleAeCompChange(this.value)"
                             style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #10B981 0%, #10B981 40%, #E2E8F0 40%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                     </div>
 
@@ -2585,762 +2586,465 @@
 
 <script>
 // =============================================================================
-// SIMPLE DIRECT SLIDER HANDLERS - GUARANTEED TO WORK
+// CALCULATOR - CLEAN BULLETPROOF IMPLEMENTATION
 // =============================================================================
 
+// Calculator state
+var calcState = {
+    avgDealSize: 6000,
+    salesCycle: 45,
+    winRate: 20,
+    callsPerDay: 6
+};
+
+// Update slider background fill
+function updateSliderBg(sliderId, min, max, color) {
+    var slider = document.getElementById(sliderId);
+    if (!slider) return;
+    
+    var value = parseFloat(slider.value);
+    var percentage = ((value - min) / (max - min)) * 100;
+    slider.style.background = 'linear-gradient(to right, ' + color + ' 0%, ' + color + ' ' + percentage + '%, #E2E8F0 ' + percentage + '%, #E2E8F0 100%)';
+}
+
+// Slider event handlers
 function handleDealSizeChange(value) {
     var val = parseFloat(value);
+    calcState.avgDealSize = val * 1000;
     document.getElementById('dealSizeValue').textContent = '$' + val + 'K';
-    window.Calculator.update('avgDealSize', val * 1000);
     updateSliderBg('sliderDealSize', 1, 50, '#10B981');
+    calculateAndDisplay();
 }
 
 function handleSalesCycleChange(value) {
     var val = parseFloat(value);
+    calcState.salesCycle = val;
     document.getElementById('salesCycleValue').textContent = val + 'd';
-    window.Calculator.update('salesCycle', val);
     updateSliderBg('sliderSalesCycle', 7, 120, '#06B6D4');
+    calculateAndDisplay();
 }
 
 function handleWinRateChange(value) {
     var val = parseFloat(value);
+    calcState.winRate = val;
     document.getElementById('winRateValue').textContent = val + '%';
-    window.Calculator.update('winRate', val);
     updateSliderBg('sliderWinRate', 5, 100, '#8B5CF6');
+    calculateAndDisplay();
 }
 
 function handleCallsPerDayChange(value) {
     var val = parseFloat(value);
+    calcState.callsPerDay = val;
     document.getElementById('callsPerDayValue').textContent = val + '/day';
-    window.Calculator.update('callsPerDay', val);
     updateSliderBg('sliderCallsPerDay', 1, 30, '#F59E0B');
+    calculateAndDisplay();
 }
 
-function updateSliderBg(id, min, max, color) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    var val = parseFloat(el.value);
-    var pct = ((val - min) / (max - min)) * 100;
-    el.style.background = 'linear-gradient(to right, ' + color + ' 0%, ' + color + ' ' + pct + '%, #E2E8F0 ' + pct + '%, #E2E8F0 100%)';
-}
-
-// =============================================================================
-// REACTIVE CALCULATOR - FRESH IMPLEMENTATION
-// =============================================================================
-
-window.Calculator = {
-    // State
-    state: {
-        avgDealSize: 6000,
-        salesCycle: 45,
-        winRate: 20,
-        callsPerDay: 6
-    },
+// Main calculation and display function
+function calculateAndDisplay() {
+    var s = calcState;
     
-    // Results
-    results: {
-        m1Revenue: 0,
-        m2Revenue: 0,
-        m3Revenue: 0,
-        m1Pipeline: 0,
-        m2Pipeline: 0,
-        m3Pipeline: 0
-    },
+    // Constants
+    var workDays = 20;
+    var conversionRate = 0.12;
     
-    // Update state and recalculate
-    update: function(key, value) {
-        try {
-            console.log('UPDATE CALLED - Key:', key, 'Value:', value);
-            
-            // Validate value is a number
-            if (isNaN(value) || !isFinite(value)) {
-                console.warn('Invalid value for', key, ':', value);
-                return;
-            }
-            
-            console.log('Before update - State:', JSON.stringify(this.state));
-            this.state[key] = value;
-            console.log('After update - State:', JSON.stringify(this.state));
-            console.log('Calling calculate...');
-            this.calculate();
-            console.log('Calculate completed');
-            console.log('Calling display...');
-            this.display();
-            console.log('Display completed');
-            console.log('Calculator updated successfully');
-        } catch(e) {
-            console.error('Error in Calculator.update:', e);
-            console.error('Stack:', e.stack);
-        }
-    },
+    // Productivity ramp (conservative)
+    var prod1 = 0.30;
+    var prod2 = 0.50;
+    var prod3 = 0.70;
     
-    // Calculate results
-    calculate: function() {
-        try {
-            const s = this.state;
-            
-            // Conservative productivity ramp
-            const prod1 = 0.30;
-            const prod2 = 0.50;
-            const prod3 = 0.70;
-            
-            const workDays = 20;
-            const convRate = 0.12;
-            
-            // Month 1
-            const m1Calls = s.callsPerDay * workDays * prod1;
-            const m1Opps = m1Calls * convRate;
-            const m1Deals = m1Opps * (s.winRate / 100);
-            
-            // Month 2
-            const m2Calls = s.callsPerDay * workDays * prod2;
-            const m2Opps = m2Calls * convRate;
-            const m2Deals = m2Opps * (s.winRate / 100);
-            
-            // Month 3
-            const m3Calls = s.callsPerDay * workDays * prod3;
-            const m3Opps = m3Calls * convRate;
-            const m3Deals = m3Opps * (s.winRate / 100);
-            
-            // Revenue
-            const m1Rev = m1Deals * s.avgDealSize;
-            const m2Rev = m2Deals * s.avgDealSize;
-            const m3Rev = m3Deals * s.avgDealSize;
-            
-            // Pipeline
-            const m1Pipe = m1Opps * s.avgDealSize;
-            const m2Pipe = m2Opps * s.avgDealSize;
-            const m3Pipe = m3Opps * s.avgDealSize;
-        
-        // Sales cycle adjustment
-        const cycleMonths = s.salesCycle / 30;
-        let closed1 = 0, closed2 = 0, closed3 = 0;
-        
-        if (cycleMonths <= 1.5) {
-            closed1 = m1Rev;
-            closed2 = m2Rev;
-            closed3 = m3Rev;
-        } else if (cycleMonths <= 2.5) {
-            closed1 = m1Rev * 0.3;
-            closed2 = m1Rev * 0.7 + m2Rev * 0.3;
-            closed3 = m2Rev * 0.7;
-        } else {
-            closed1 = 0;
-            closed2 = m1Rev * 0.4;
-            closed3 = m1Rev * 0.6 + m2Rev * 0.3;
-        }
-        
-        this.results = {
-            m1Revenue: closed1,
-            m2Revenue: closed2,
-            m3Revenue: closed3,
-            m1Pipeline: m1Pipe,
-            m2Pipeline: m2Pipe,
-            m3Pipeline: m3Pipe,
-            m1Deals: m1Deals,
-            m2Deals: m2Deals,
-            m3Deals: m3Deals,
-            m1Opps: m1Opps,
-            m2Opps: m2Opps,
-            m3Opps: m3Opps,
-            totalRevenue: closed1 + closed2 + closed3,
-            totalPipeline: m1Pipe + m2Pipe + m3Pipe,
-            totalDeals: (closed1 + closed2 + closed3) / s.avgDealSize,
-            pipelineDeals: (m1Pipe + m2Pipe + m3Pipe) / s.avgDealSize
-        };
-        
-        console.log('Results calculated:', this.results);
-        } catch(e) {
-            console.error('Error in Calculator.calculate:', e);
-        }
-    },
+    // Month 1 calculations
+    var m1Calls = s.callsPerDay * workDays * prod1;
+    var m1Opps = m1Calls * conversionRate;
+    var m1Deals = m1Opps * (s.winRate / 100);
+    var m1Revenue = m1Deals * s.avgDealSize;
+    var m1Pipeline = m1Opps * s.avgDealSize;
     
-    // Update display
-    display: function() {
-        try {
-            console.log('DISPLAY CALLED');
-            const fmt = (n) => '$' + Math.round(n / 1000) + 'K';
-            const r = this.results;
-            const s = this.state;
-            
-            console.log('Display - Formatting values:');
-            console.log('  avgDealSize:', s.avgDealSize, '-> display as:', '$' + Math.round(s.avgDealSize * 1000 / 1000) + 'K');
-            console.log('  salesCycle:', s.salesCycle, '-> display as:', s.salesCycle + 'd');
-            console.log('  winRate:', s.winRate, '-> display as:', s.winRate + '%');
-            console.log('  callsPerDay:', s.callsPerDay, '-> display as:', s.callsPerDay + '/day');
-            
-            // Update input displays - NEW ELEMENT IDS FOR SLIDERS
-            this.setText('dealSizeValue', '$' + (s.avgDealSize / 1000) + 'K');
-            this.setText('salesCycleValue', s.salesCycle + 'd');
-            this.setText('winRateValue', s.winRate + '%');
-            this.setText('callsPerDayValue', s.callsPerDay + '/day');
-            
-            // Update main results
-            this.setText('closedRevenue', fmt(r.totalRevenue));
-            this.setText('totalPipeline', fmt(r.totalPipeline));
-            this.setText('closedDeals', Math.round(r.totalDeals));
-            this.setText('pipelineDeals', Math.round(r.pipelineDeals));
-            
-            // Update month breakdowns
-            this.setText('month1Revenue', fmt(r.m1Revenue));
-            this.setText('month1Pipeline', fmt(r.m1Pipeline));
-            this.setText('month2Revenue', fmt(r.m2Revenue));
-            this.setText('month2Pipeline', fmt(r.m2Pipeline));
-            this.setText('month3Revenue', fmt(r.m3Revenue));
-            this.setText('month3Pipeline', fmt(r.m3Pipeline));
-            
-            // Update 90-day plan cards
-            this.setText('planM1Rev', fmt(r.m1Revenue));
-            this.setText('planM1Pipe', fmt(r.m1Pipeline));
-            this.setText('planM1Deals', '(' + Math.round(r.m1Deals * 0.4) + '-' + Math.round(r.m1Deals * 0.6) + ' deals)');
-            this.setText('planM1Opps', '(' + Math.round(r.m1Opps * 0.7) + '-' + Math.round(r.m1Opps) + ' opps)');
-            
-            this.setText('planM2Rev', fmt(r.m2Revenue));
-            this.setText('planM2Pipe', fmt(r.m2Pipeline));
-            this.setText('planM2Deals', '(' + Math.round(r.m2Deals * 0.6) + '-' + Math.round(r.m2Deals * 1.2) + ' deals)');
-            this.setText('planM2Opps', '(' + Math.round(r.m2Opps * 0.7) + '-' + Math.round(r.m2Opps) + ' opps)');
-            
-            this.setText('planM3Rev', fmt(r.m3Revenue));
-            this.setText('planM3Pipe', fmt(r.m3Pipeline));
-            this.setText('planM3Deals', '(' + Math.round(r.m3Deals * 0.8) + '-' + Math.round(r.m3Deals * 1.3) + ' deals)');
-            this.setText('planM3Opps', '(' + Math.round(r.m3Opps * 0.8) + '-' + Math.round(r.m3Opps * 1.2) + ' opps)');
-            
-            // Update sales cycle display
-            this.setText('planCycleDays1', Math.round(s.salesCycle / 2) + '-' + Math.round(s.salesCycle));
-            
-            // Update slider backgrounds (call global function, not method)
-            if (typeof updateSliderBg === 'function') {
-                updateSliderBg('sliderDealSize', 1, 50, '#10B981');
-                updateSliderBg('sliderSalesCycle', 7, 120, '#06B6D4');
-                updateSliderBg('sliderWinRate', 5, 100, '#8B5CF6');
-                updateSliderBg('sliderCallsPerDay', 1, 30, '#F59E0B');
-            }
-            
-            // Update chart
-            this.updateChart();
-            
-            // Update CTA section values
-            this.setText('ctaRevenue', fmt(r.totalRevenue));
-            this.setText('ctaPipeline', fmt(r.totalPipeline));
-            
-            console.log('Display updated successfully');
-        } catch(e) {
-            console.error('Error in Calculator.display:', e);
-        }
-    },
+    // Month 2 calculations
+    var m2Calls = s.callsPerDay * workDays * prod2;
+    var m2Opps = m2Calls * conversionRate;
+    var m2Deals = m2Opps * (s.winRate / 100);
+    var m2Revenue = m2Deals * s.avgDealSize;
+    var m2Pipeline = m2Opps * s.avgDealSize;
     
-    // Helper to set text content
-    setText: function(id, text) {
-        try {
-            const el = document.getElementById(id);
-            console.log('setText - Looking for element:', id, 'Found:', el !== null, 'Setting to:', text);
-            if (el) {
-                el.textContent = text;
-                console.log('setText - Successfully set', id, 'to', text);
-            } else {
-                console.warn('setText - Element not found:', id);
-            }
-        } catch(e) {
-            console.error('Error setting text for', id, ':', e);
-        }
-    },
+    // Month 3 calculations
+    var m3Calls = s.callsPerDay * workDays * prod3;
+    var m3Opps = m3Calls * conversionRate;
+    var m3Deals = m3Opps * (s.winRate / 100);
+    var m3Revenue = m3Deals * s.avgDealSize;
+    var m3Pipeline = m3Opps * s.avgDealSize;
     
-    // Update slider background
-    updateSliderBg: function(id, min, max) {
-        try {
-            const el = document.getElementById(id);
-            if (!el) return;
-            let val = parseFloat(el.value);
-            if (isNaN(val)) return;
-            const pct = ((val - min) / (max - min)) * 100;
-            el.style.background = 'linear-gradient(to right, #10B981 0%, #10B981 ' + pct + '%, #E2E8F0 ' + pct + '%, #E2E8F0 100%)';
-        } catch(e) {
-            console.error('Error updating slider background for', id, ':', e);
-        }
-    },
+    // Sales cycle adjustments (revenue timing)
+    var cycleMonths = s.salesCycle / 30;
+    var closed1, closed2, closed3;
     
-    // Update chart
-    updateChart: function() {
-        try {
-            const r = this.results;
-            const fmt = (n) => '$' + Math.round(n / 1000) + 'K';
-            
-            // Cumulative values
-            const cumRev1 = r.m1Revenue;
-            const cumRev2 = r.m1Revenue + r.m2Revenue;
-            const cumRev3 = r.m1Revenue + r.m2Revenue + r.m3Revenue;
-            
-            const cumPipe1 = r.m1Pipeline;
-            const cumPipe2 = r.m1Pipeline + r.m2Pipeline;
-            const cumPipe3 = r.m1Pipeline + r.m2Pipeline + r.m3Pipeline;
-            
-            // Find max
-            const maxVal = Math.max(cumRev1, cumRev2, cumRev3, cumPipe1, cumPipe2, cumPipe3, 1);
-            const chartMax = maxVal * 1.15;
-            
-            // Update Y-axis
-            this.setText('chartY6', fmt(chartMax));
-            this.setText('chartY5', fmt(chartMax * 0.8));
-            this.setText('chartY4', fmt(chartMax * 0.6));
-            this.setText('chartY3', fmt(chartMax * 0.4));
-            this.setText('chartY2', fmt(chartMax * 0.2));
-            this.setText('chartY1', '$0');
-            
-            // Calculate positions
-            const yPos = (val) => 320 - ((val / chartMax) * 270);
-            
-            const revY1 = yPos(cumRev1);
-            const revY2 = yPos(cumRev2);
-            const revY3 = yPos(cumRev3);
-            
-            const pipeY1 = yPos(cumPipe1);
-            const pipeY2 = yPos(cumPipe2);
-            const pipeY3 = yPos(cumPipe3);
-            
-            // Update revenue line
-            const revLine = document.getElementById('revenueLine');
-            if (revLine) revLine.setAttribute('d', 'M 250 ' + revY1 + ' L 465 ' + revY2 + ' L 680 ' + revY3);
-            
-            // Update revenue points
-            this.setAttr('revPoint1', 'cy', revY1);
-            this.setAttr('revPoint2', 'cy', revY2);
-            this.setAttr('revPoint3', 'cy', revY3);
-            
-            // Update pipeline line
-            const pipeLine = document.getElementById('pipelineLine');
-            if (pipeLine) pipeLine.setAttribute('d', 'M 250 ' + pipeY1 + ' L 465 ' + pipeY2 + ' L 680 ' + pipeY3);
-            
-            // Update pipeline points
-            this.setAttr('pipePoint1', 'cy', pipeY1);
-            this.setAttr('pipePoint2', 'cy', pipeY2);
-            this.setAttr('pipePoint3', 'cy', pipeY3);
-            
-            // Update labels
-            this.setText('revLabel1', fmt(cumRev1));
-            this.setText('revLabel2', fmt(cumRev2));
-            this.setText('revLabel3', fmt(cumRev3));
-            this.setText('pipeLabel1', fmt(cumPipe1));
-            this.setText('pipeLabel2', fmt(cumPipe2));
-            this.setText('pipeLabel3', fmt(cumPipe3));
-            
-            this.setAttr('revLabel1', 'y', Math.max(30, revY1 - 15));
-            this.setAttr('revLabel2', 'y', Math.max(30, revY2 - 15));
-            this.setAttr('revLabel3', 'y', Math.max(30, revY3 - 15));
-            this.setAttr('pipeLabel1', 'y', Math.min(350, pipeY1 + 25));
-            this.setAttr('pipeLabel2', 'y', Math.min(350, pipeY2 + 25));
-            this.setAttr('pipeLabel3', 'y', Math.min(350, pipeY3 + 25));
-            
-            console.log('Chart updated successfully');
-        } catch(e) {
-            console.error('Error in Calculator.updateChart:', e);
-        }
-    },
-    
-    // Helper to set attribute
-    setAttr: function(id, attr, value) {
-        try {
-            const el = document.getElementById(id);
-            if (el) {
-                el.setAttribute(attr, value);
-            }
-        } catch(e) {
-            console.error('Error setting attribute for', id, ':', e);
-        }
+    if (cycleMonths <= 1.5) {
+        // Short cycle - close same month
+        closed1 = m1Revenue;
+        closed2 = m2Revenue;
+        closed3 = m3Revenue;
+    } else if (cycleMonths <= 2.5) {
+        // Medium cycle - split across months
+        closed1 = m1Revenue * 0.3;
+        closed2 = m1Revenue * 0.7 + m2Revenue * 0.3;
+        closed3 = m2Revenue * 0.7 + m3Revenue * 0.3;
+    } else {
+        // Long cycle - delayed closes
+        closed1 = 0;
+        closed2 = m1Revenue * 0.4;
+        closed3 = m1Revenue * 0.6 + m2Revenue * 0.3;
     }
-};
+    
+    // Total metrics
+    var totalRevenue = closed1 + closed2 + closed3;
+    var totalPipeline = m1Pipeline + m2Pipeline + m3Pipeline;
+    var totalDeals = totalRevenue / s.avgDealSize;
+    var pipelineDeals = totalPipeline / s.avgDealSize;
+    
+    // Format currency
+    function fmt(num) {
+        return '$' + Math.round(num / 1000) + 'K';
+    }
+    
+    // Update main metrics
+    setText('closedRevenue', fmt(totalRevenue));
+    setText('totalPipeline', fmt(totalPipeline));
+    setText('closedDeals', Math.round(totalDeals));
+    setText('pipelineDeals', Math.round(pipelineDeals));
+    
+    // Update month breakdowns
+    setText('month1Revenue', fmt(closed1));
+    setText('month1Pipeline', fmt(m1Pipeline));
+    setText('month2Revenue', fmt(closed2));
+    setText('month2Pipeline', fmt(m2Pipeline));
+    setText('month3Revenue', fmt(closed3));
+    setText('month3Pipeline', fmt(m3Pipeline));
+    
+    // Update 90-day plan cards
+    setText('planM1Rev', fmt(closed1));
+    setText('planM1Pipe', fmt(m1Pipeline));
+    setText('planM1Deals', '(' + Math.round(m1Deals * 0.4) + '-' + Math.round(m1Deals * 0.6) + ' deals)');
+    setText('planM1Opps', '(' + Math.round(m1Opps * 0.7) + '-' + Math.round(m1Opps) + ' opps)');
+    
+    setText('planM2Rev', fmt(closed2));
+    setText('planM2Pipe', fmt(m2Pipeline));
+    setText('planM2Deals', '(' + Math.round(m2Deals * 0.6) + '-' + Math.round(m2Deals * 1.2) + ' deals)');
+    setText('planM2Opps', '(' + Math.round(m2Opps * 0.7) + '-' + Math.round(m2Opps) + ' opps)');
+    
+    setText('planM3Rev', fmt(closed3));
+    setText('planM3Pipe', fmt(m3Pipeline));
+    setText('planM3Deals', '(' + Math.round(m3Deals * 0.8) + '-' + Math.round(m3Deals * 1.3) + ' deals)');
+    setText('planM3Opps', '(' + Math.round(m3Opps * 0.8) + '-' + Math.round(m3Opps * 1.2) + ' opps)');
+    
+    // Update cycle days display
+    setText('planCycleDays1', Math.round(s.salesCycle / 2) + '-' + Math.round(s.salesCycle));
+    
+    // Update CTA section
+    setText('ctaRevenue', fmt(totalRevenue));
+    setText('ctaPipeline', fmt(totalPipeline));
+    
+    // Update revenue chart
+    updateChart(closed1, closed2, closed3, m1Pipeline, m2Pipeline, m3Pipeline);
+}
 
-console.log('Calculator object created:', window.Calculator !== undefined);
+// Helper to set text content safely
+function setText(id, value) {
+    var el = document.getElementById(id);
+    if (el) {
+        el.textContent = value;
+    }
+}
+
+// Update revenue chart
+function updateChart(m1Rev, m2Rev, m3Rev, m1Pipe, m2Pipe, m3Pipe) {
+    // Cumulative values
+    var cumRev1 = m1Rev;
+    var cumRev2 = m1Rev + m2Rev;
+    var cumRev3 = m1Rev + m2Rev + m3Rev;
+    
+    var cumPipe1 = m1Pipe;
+    var cumPipe2 = m1Pipe + m2Pipe;
+    var cumPipe3 = m1Pipe + m2Pipe + m3Pipe;
+    
+    // Find max value for scaling
+    var maxVal = Math.max(cumRev1, cumRev2, cumRev3, cumPipe1, cumPipe2, cumPipe3, 1);
+    var chartMax = maxVal * 1.15;
+    
+    // Format currency
+    function fmt(num) {
+        return '$' + Math.round(num / 1000) + 'K';
+    }
+    
+    // Update Y-axis
+    setText('chartY6', fmt(chartMax));
+    setText('chartY5', fmt(chartMax * 0.8));
+    setText('chartY4', fmt(chartMax * 0.6));
+    setText('chartY3', fmt(chartMax * 0.4));
+    setText('chartY2', fmt(chartMax * 0.2));
+    setText('chartY1', '$0');
+    
+    // Calculate Y positions (chart is 270px tall, starting at y=50)
+    function yPos(val) {
+        return 320 - ((val / chartMax) * 270);
+    }
+    
+    var revY1 = yPos(cumRev1);
+    var revY2 = yPos(cumRev2);
+    var revY3 = yPos(cumRev3);
+    
+    var pipeY1 = yPos(cumPipe1);
+    var pipeY2 = yPos(cumPipe2);
+    var pipeY3 = yPos(cumPipe3);
+    
+    // Update revenue line
+    var revLine = document.getElementById('revenueLine');
+    if (revLine) {
+        revLine.setAttribute('d', 'M 250 ' + revY1 + ' L 465 ' + revY2 + ' L 680 ' + revY3);
+    }
+    
+    // Update revenue points
+    setAttr('revPoint1', 'cy', revY1);
+    setAttr('revPoint2', 'cy', revY2);
+    setAttr('revPoint3', 'cy', revY3);
+    
+    // Update pipeline line
+    var pipeLine = document.getElementById('pipelineLine');
+    if (pipeLine) {
+        pipeLine.setAttribute('d', 'M 250 ' + pipeY1 + ' L 465 ' + pipeY2 + ' L 680 ' + pipeY3);
+    }
+    
+    // Update pipeline points
+    setAttr('pipePoint1', 'cy', pipeY1);
+    setAttr('pipePoint2', 'cy', pipeY2);
+    setAttr('pipePoint3', 'cy', pipeY3);
+    
+    // Update labels
+    setText('revLabel1', fmt(cumRev1));
+    setText('revLabel2', fmt(cumRev2));
+    setText('revLabel3', fmt(cumRev3));
+    setText('pipeLabel1', fmt(cumPipe1));
+    setText('pipeLabel2', fmt(cumPipe2));
+    setText('pipeLabel3', fmt(cumPipe3));
+    
+    // Position labels
+    setAttr('revLabel1', 'y', Math.max(30, revY1 - 15));
+    setAttr('revLabel2', 'y', Math.max(30, revY2 - 15));
+    setAttr('revLabel3', 'y', Math.max(30, revY3 - 15));
+    setAttr('pipeLabel1', 'y', Math.min(350, pipeY1 + 25));
+    setAttr('pipeLabel2', 'y', Math.min(350, pipeY2 + 25));
+    setAttr('pipeLabel3', 'y', Math.min(350, pipeY3 + 25));
+}
+
+// Helper to set attribute
+function setAttr(id, attr, value) {
+    var el = document.getElementById(id);
+    if (el) {
+        el.setAttribute(attr, value);
+    }
+}
 
 // =============================================================================
 // SPRINT COST COMPARISON
 // =============================================================================
 
-window.Sprint = {
-    update: function(value) {
-        try {
-            console.log('Sprint slider changed:', value);
-            const salary = value * 1000;
-            
-            // Validate salary
-            if (!isFinite(salary) || salary <= 0) {
-                console.warn('Invalid salary value:', salary);
-                return;
-            }
-            
-            // Traditional
-            const tradSalary = salary;
-            const tradRecruit = salary * 0.20;
-            const tradLost = 30000 * 6;
-            const tradCEO = 80000;
-            const tradSub = tradSalary + tradRecruit + tradLost + tradCEO;
-            const tradRisk = tradSub * 0.73 * 0.40;
-            const tradTotal = tradSub + tradRisk;
-            
-            // Sprint
-            const sprintCost = 15000;
-            const sprintSalary = salary * 0.70;
-            const sprintRecruit = sprintSalary * 0.20;
-            const sprintLost = 30000 * 2;
-            const sprintCEO = 16000;
-            const sprintSub = sprintCost + sprintSalary + sprintRecruit + sprintLost + sprintCEO;
-            const sprintRisk = sprintSub * 0.22 * 0.40;
-            const sprintTotal = sprintSub + sprintRisk;
-            
-            const savings = tradTotal - sprintTotal;
-            const savingsPct = Math.round((savings / tradTotal) * 100);
-            
-            const fmt = (n) => '$' + Math.round(n).toLocaleString();
-            
-            this.setText('aeCompDisplay', fmt(salary));
-            this.setText('tradSalary', fmt(tradSalary));
-            this.setText('tradRecruiting', fmt(tradRecruit));
-            this.setText('tradFailureRisk', fmt(tradRisk));
-            this.setText('tradTotal', fmt(tradTotal));
-            this.setText('sprintAESalary', fmt(sprintSalary));
-            this.setText('sprintRecruiting', fmt(sprintRecruit));
-            this.setText('sprintFailureRisk', fmt(sprintRisk));
-            this.setText('sprintTotal', fmt(sprintTotal));
-            this.setText('totalSavings', fmt(savings));
-            this.setText('savingsPercent', savingsPct + '% lower total risk');
-            
-            // Update slider bg
-            const el = document.getElementById('aeComp');
-            if (el) {
-                const pct = ((value - 80) / (180 - 80)) * 100;
-                el.style.background = 'linear-gradient(to right, #10B981 0%, #10B981 ' + pct + '%, #E2E8F0 ' + pct + '%, #E2E8F0 100%)';
-            }
-            
-            console.log('Sprint update complete');
-        } catch(e) {
-            console.error('Error in Sprint.update:', e);
+var sprintAeSalary = 120000;
+
+function handleAeCompChange(value) {
+    var val = parseFloat(value);
+    sprintAeSalary = val * 1000;
+    document.getElementById('aeSalaryValue').textContent = '$' + val + 'K';
+    updateSliderBg('sliderAeComp', 80, 180, '#10B981');
+    updateSprintComparison();
+}
+
+function updateSprintComparison() {
+    var salary = sprintAeSalary;
+    
+    // Traditional hiring costs
+    var tradSalary = salary;
+    var tradRecruiting = salary * 0.20;
+    var tradLostRevenue = 30000 * 6;
+    var tradCEOTime = 80000;
+    var tradSubtotal = tradSalary + tradRecruiting + tradLostRevenue + tradCEOTime;
+    var tradRisk = tradSubtotal * 0.73 * 0.40;
+    var tradTotal = tradSubtotal + tradRisk;
+    
+    // Sprint method costs
+    var sprintCost = 15000;
+    var sprintSalary = salary * 0.70;
+    var sprintRecruiting = sprintSalary * 0.20;
+    var sprintLostRevenue = 30000 * 2;
+    var sprintCEOTime = 16000;
+    var sprintSubtotal = sprintCost + sprintSalary + sprintRecruiting + sprintLostRevenue + sprintCEOTime;
+    var sprintRisk = sprintSubtotal * 0.22 * 0.40;
+    var sprintTotal = sprintSubtotal + sprintRisk;
+    
+    // Savings
+    var savings = tradTotal - sprintTotal;
+    var savingsPct = (savings / tradTotal) * 100;
+    
+    // Format currency
+    function fmt(num) {
+        return '$' + Math.round(num / 1000) + 'K';
+    }
+    
+    // Update traditional costs
+    setText('tradSalary', fmt(tradSalary));
+    setText('tradRecruiting', fmt(tradRecruiting));
+    setText('tradLostRev', fmt(tradLostRevenue));
+    setText('tradCEO', fmt(tradCEOTime));
+    setText('tradSubtotal', fmt(tradSubtotal));
+    setText('tradRisk', fmt(tradRisk));
+    setText('tradTotal', fmt(tradTotal));
+    
+    // Update sprint costs
+    setText('sprintCost', '$15K');
+    setText('sprintSalary', fmt(sprintSalary));
+    setText('sprintRecruiting', fmt(sprintRecruiting));
+    setText('sprintLostRev', fmt(sprintLostRevenue));
+    setText('sprintCEO', fmt(sprintCEOTime));
+    setText('sprintSubtotal', fmt(sprintSubtotal));
+    setText('sprintRisk', fmt(sprintRisk));
+    setText('sprintTotal', fmt(sprintTotal));
+    
+    // Update savings
+    setText('sprintSavings', fmt(savings));
+    setText('sprintSavingsPct', Math.round(savingsPct) + '%');
+}
+
+// Sprint duration selector
+var selectedSprintDuration = 30;
+
+function selectSprintDuration(days) {
+    selectedSprintDuration = days;
+    
+    // Update button states
+    var buttons = document.querySelectorAll('[onclick^="selectSprintDuration"]');
+    for (var i = 0; i < buttons.length; i++) {
+        var btn = buttons[i];
+        if (btn.textContent.indexOf(days + ' Days') !== -1) {
+            btn.style.background = 'linear-gradient(135deg, #10B981 0%, #059669 100%)';
+            btn.style.color = 'white';
+        } else {
+            btn.style.background = 'white';
+            btn.style.color = '#64748B';
         }
-    },
-    
-    setText: function(id, text) {
-        try {
-            const el = document.getElementById(id);
-            if (el) {
-                el.textContent = text;
-            } else {
-                console.warn('Element not found:', id);
-            }
-        } catch(e) {
-            console.error('Error setting text for', id, ':', e);
-        }
-    }
-
-};
-
-console.log('Sprint object created:', window.Sprint !== undefined);
-
-// =============================================================================
-// SLIDER EVENT HANDLERS - WITH DEBUGGING
-// =============================================================================
-
-// Don't attach handlers here - they're inline in HTML now
-console.log('Slider handler functions defined as inline oninput handlers');
-
-window.selectSprintDuration = function(days) {
-    console.log('=== SPRINT DURATION SELECTED ===', days);
-    
-    // Update button styles
-    document.getElementById('sprintBtn30').style.background = days === 30 ? '#F0FDF4' : 'white';
-    document.getElementById('sprintBtn30').style.borderColor = days === 30 ? '#10B981' : '#E2E8F0';
-    document.getElementById('sprintBtn30').style.color = days === 30 ? '#10B981' : '#64748B';
-    
-    document.getElementById('sprintBtn60').style.background = days === 60 ? '#F0FDF4' : 'white';
-    document.getElementById('sprintBtn60').style.borderColor = days === 60 ? '#10B981' : '#E2E8F0';
-    document.getElementById('sprintBtn60').style.color = days === 60 ? '#10B981' : '#64748B';
-    
-    document.getElementById('sprintBtn90').style.background = days === 90 ? '#F0FDF4' : 'white';
-    document.getElementById('sprintBtn90').style.borderColor = days === 90 ? '#10B981' : '#E2E8F0';
-    document.getElementById('sprintBtn90').style.color = days === 90 ? '#10B981' : '#64748B';
-    
-    // Update section title
-    let durationText = '';
-    let daysText = '';
-    switch(days) {
-        case 30:
-            durationText = '30-Day';
-            daysText = 'Days 1-30';
-            break;
-        case 60:
-            durationText = '60-Day';
-            daysText = 'Days 1-60';
-            break;
-        case 90:
-            durationText = '90-Day';
-            daysText = 'Days 1-90';
-            break;
     }
     
-    document.getElementById('sprintDurationText').textContent = durationText;
-    document.getElementById('sprintDeliverableDays').textContent = daysText;
+    // Update sprint details based on duration
+    var costPerDay = selectedSprintDuration === 14 ? 1071 : 
+                     selectedSprintDuration === 30 ? 500 : 395;
     
-    // Show/hide deliverable weeks
-    document.getElementById('week5Container').style.display = days >= 60 ? 'block' : 'none';
-    document.getElementById('week6Container').style.display = days >= 60 ? 'block' : 'none';
-    document.getElementById('week7Container').style.display = days >= 90 ? 'block' : 'none';
-    document.getElementById('week8Container').style.display = days >= 90 ? 'block' : 'none';
-    
-    // Update path forward section
-    let pathForwardText = '';
-    let optionATimeline = '';
-    let optionBTimeline = '';
-    
-    switch(days) {
-        case 30:
-            pathForwardText = 'After 30 Days, Choose Your Path:';
-            optionATimeline = 'Week 8-10';
-            optionBTimeline = 'Week 8-10';
-            break;
-        case 60:
-            pathForwardText = 'After 60 Days, Choose Your Path:';
-            optionATimeline = 'Week 10-12';
-            optionBTimeline = 'Week 10-12';
-            document.getElementById('optionAText').textContent = 'I transition into full-time quota-carrying role with deep expertise built over 2 months. Begin closing deals immediately with strong foundation and momentum.';
-            document.getElementById('optionBText').textContent = 'Hire a junior AE. I\'ve built comprehensive playbooks and work alongside them for another 4 weeks, ensuring they hit the ground running.';
-            break;
-        case 90:
-            pathForwardText = 'After 90 Days, Choose Your Path:';
-            optionATimeline = 'Week 1-2 (Month 4)';
-            optionBTimeline = 'Week 1-2 (Month 4)';
-            document.getElementById('optionAText').textContent = 'I\'ve built a complete sales operation from scratch and am hitting quota. Transition to managing your sales team or expand to new products/markets.';
-            document.getElementById('optionBText').textContent = 'Hire an experienced AE to scale. I transition to VP Sales role or advisory, managing the team and ensuring consistent execution.';
-            break;
-    }
-    
-    document.getElementById('pathForwardTitle').textContent = pathForwardText;
-    document.getElementById('optionATimeline').textContent = optionATimeline;
-    document.getElementById('optionBTimeline').textContent = optionBTimeline;
-};
-
-console.log('All handlers defined. Checking:');
-console.log('- handleDealSize:', typeof window.handleDealSize);
-console.log('- handleSalesCycle:', typeof window.handleSalesCycle);
-console.log('- handleWinRate:', typeof window.handleWinRate);
-console.log('- handleCallsPerDay:', typeof window.handleCallsPerDay);
-console.log('- handleSprintSlider:', typeof window.handleSprintSlider);
-console.log('- selectSprintDuration:', typeof window.selectSprintDuration);
-
-// =============================================================================
-// INITIALIZATION
-// =============================================================================
-
-console.log('Script loaded, waiting for DOM...');
-
-window.initializeApp = function() {
-    console.log('=== INITIALIZING APP ===');
-    
-    // Show debug indicator
-    const debugIndicator = document.getElementById('debugIndicator');
-    const debugStatus = document.getElementById('debugStatus');
-    if (debugIndicator) {
-        debugIndicator.style.display = 'block';
-        if (debugStatus) debugStatus.textContent = 'Initializing...';
-    }
-    
-    console.log('Checking function availability:');
-    console.log('  Calculator:', typeof window.Calculator);
-    console.log('  Sprint:', typeof window.Sprint);
-    
-    try {
-        // CRITICAL: Initialize calculator with initial values
-        console.log('Initializing Calculator with defaults...');
-        window.Calculator.calculate();
-        console.log('✓ Calculator.calculate() completed');
-        console.log('Results:', window.Calculator.results);
-        
-        window.Calculator.display();
-        console.log('✓ Calculator.display() completed');
-        
-        if (debugStatus) debugStatus.textContent = 'Active ✓';
-        if (debugIndicator) debugIndicator.style.background = '#F0FDF4';
-        if (debugIndicator) debugIndicator.style.borderColor = '#10B981';
-        if (debugIndicator) debugIndicator.style.color = '#065F46';
-        
-        console.log('✓ Calculator initialized and displayed');
-    } catch(e) {
-        console.error('✗ Error initializing Calculator:', e, e.stack);
-        if (debugStatus) debugStatus.textContent = 'ERROR: ' + e.message;
-    }
-    
-    try {
-        // Initialize sprint slider
-        if (window.Sprint) {
-            window.Sprint.update(120);
-            console.log('✓ Sprint slider initialized');
-        }
-    } catch(e) {
-        console.error('✗ Error initializing Sprint:', e);
-    }
-    
-    try {
-        // Set default sprint duration
-        if (typeof selectSprintDuration === 'function') {
-            selectSprintDuration(30);
-            console.log('✓ Sprint duration set to 30 days');
-        }
-    } catch(e) {
-        console.error('Error setting sprint duration:', e);
-    }
-    
-    // Slider handlers are now inline in HTML - no need to attach via JS
-    console.log('✓ Slider handlers defined inline in HTML');
-    
-    try {
-        // Initialize navigation scroll tracking
-        initNavigationTracking();
-        console.log('✓ Navigation tracking initialized');
-    } catch(e) {
-        console.error('Error initializing navigation:', e);
-    }
-    
-    try {
-        // Initialize expandable sections
-        initExpandableSections();
-        console.log('✓ Expandable sections initialized');
-    } catch(e) {
-        console.error('Error initializing expandable sections:', e);
-    }
-    
-    // Hide debug indicator after 3 seconds if successful
-    if (debugStatus && debugStatus.textContent === 'Active ✓') {
-        setTimeout(function() {
-            if (debugIndicator) debugIndicator.style.display = 'none';
-        }, 3000);
-    }
-    
-    console.log('=== INITIALIZATION COMPLETE ===');
-};
-
-// =============================================================================
-// NAVIGATION SCROLL TRACKING
-// =============================================================================
-
-function initNavigationTracking() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    
-    // Update active link on scroll
-    function updateActiveLink() {
-        let current = '';
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (pageYOffset >= sectionTop - 200) {
-                current = section.getAttribute('id');
-            }
-        });
-        
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').slice(1) === current) {
-                link.classList.add('active');
-            }
-        });
-    }
-    
-    // Smooth scroll on click
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').slice(1);
-            const targetSection = document.getElementById(targetId);
-            
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 20;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-    
-    // Throttled scroll listener
-    let ticking = false;
-    window.addEventListener('scroll', function() {
-        if (!ticking) {
-            window.requestAnimationFrame(function() {
-                updateActiveLink();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
-    
-    // Initial call
-    updateActiveLink();
-    console.log('✓ Navigation tracking initialized');
+    setText('sprintCostPerDay', '$' + costPerDay + '/day');
+    setText('sprintTotalCost', '$' + (costPerDay * selectedSprintDuration / 1000) + 'K');
 }
 
 // =============================================================================
-// EXPANDABLE SECTIONS
+// NAVIGATION & UI
 // =============================================================================
 
-function initExpandableSections() {
-    // Find all elements with data-expandable attribute
-    const expandableSections = document.querySelectorAll('[data-expandable]');
+function initNavigationTracking() {
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('nav a[href^="#"]');
     
-    expandableSections.forEach(section => {
-        const header = section.querySelector('[data-toggle]');
-        const content = section.querySelector('[data-content]');
+    // Update active link on scroll
+    function updateActiveLink() {
+        var current = '';
+        
+        for (var i = 0; i < sections.length; i++) {
+            var section = sections[i];
+            var sectionTop = section.offsetTop;
+            var sectionHeight = section.clientHeight;
+            
+            if (window.pageYOffset >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        }
+        
+        for (var j = 0; j < navLinks.length; j++) {
+            var link = navLinks[j];
+            link.classList.remove('active');
+            
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        }
+    }
+    
+    window.addEventListener('scroll', updateActiveLink);
+    updateActiveLink();
+}
+
+function initExpandableSections() {
+    var expandableSections = document.querySelectorAll('[data-expandable]');
+    
+    for (var i = 0; i < expandableSections.length; i++) {
+        var section = expandableSections[i];
+        var header = section.querySelector('[data-toggle]');
+        var content = section.querySelector('[data-content]');
         
         if (header && content) {
-            // Add toggle class to header
             header.classList.add('section-toggle');
             content.classList.add('section-content');
             
-            // Set initial state
-            const isExpanded = section.getAttribute('data-expanded') === 'true';
+            var isExpanded = section.getAttribute('data-expanded') === 'true';
             if (isExpanded) {
                 header.classList.add('expanded');
                 content.classList.add('expanded');
             }
             
-            // Add click listener
             header.addEventListener('click', function() {
-                const isCurrentlyExpanded = header.classList.contains('expanded');
+                var hdr = this;
+                var sec = hdr.closest('[data-expandable]');
+                var cnt = sec.querySelector('[data-content]');
                 
-                // Toggle classes
-                header.classList.toggle('expanded');
-                content.classList.toggle('expanded');
+                hdr.classList.toggle('expanded');
+                cnt.classList.toggle('expanded');
                 
-                // Update attribute
-                section.setAttribute('data-expanded', !isCurrentlyExpanded);
+                var nowExpanded = hdr.classList.contains('expanded');
+                sec.setAttribute('data-expanded', nowExpanded);
                 
-                // Scroll into view if expandifunction() {
-    console.log('DOMContentLoaded event fired');
-    window.initializeApp();
-});
-
-// Also run immediately if DOM is already loaded
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    console.log('DOM already ready, initializing in 50ms...');
-    setTimeout(function() {
-        window.initializeApp();
-    }, 50);
-} else {
-    console.log('Waiting for DOM to be ready...'
+                if (nowExpanded) {
+                    setTimeout(function() {
+                        hdr.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 300);
+                }
             });
         }
-    });
+    }
+}
+
+// =============================================================================
+// INITIALIZATION
+// =============================================================================
+
+function initializeApp() {
+    console.log('Initializing application...');
     
-    console.log(`✓ Initialized ${expandableSections.length} expandable sections`);
+    // Run initial calculations
+    calculateAndDisplay();
+    updateSprintComparison();
+    
+    // Initialize sliders backgrounds
+    updateSliderBg('sliderDealSize', 1, 50, '#10B981');
+    updateSliderBg('sliderSalesCycle', 7, 120, '#06B6D4');
+    updateSliderBg('sliderWinRate', 5, 100, '#8B5CF6');
+    updateSliderBg('sliderCallsPerDay', 1, 30, '#F59E0B');
+    updateSliderBg('sliderAeComp', 80, 180, '#10B981');
+    
+    // Initialize UI
+    initNavigationTracking();
+    initExpandableSections();
+    selectSprintDuration(30);
+    
+    console.log('Application initialized successfully');
 }
-};
 
-// Run initialization on page load
-document.addEventListener('DOMContentLoaded', window.initializeApp);
-
-// Also run immediately if DOM is already loaded
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    console.log('DOM already ready, initializing immediately...');
-    setTimeout(window.initializeApp, 100);
+// Run on DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+    initializeApp();
 }
-
-</script>
 </body>
 </html>
