@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/reffie_proposal_FINAL.html"
+    }
+  ]
+}
