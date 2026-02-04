@@ -2282,6 +2282,142 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Tag Team Sprint Cost Calculator -->
+                    <div style="background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); border: 3px solid #F59E0B; border-radius: 16px; padding: 2.5rem; margin-top: 3rem;">
+                        <h4 style="color: #78350F; font-weight: 700; margin-bottom: 0.5rem; font-size: 1.5rem; text-align: center;">Tag Team Sprint Cost Calculator</h4>
+                        <p style="color: #92400E; text-align: center; margin-bottom: 2rem;">See what you get for your investment - full breakdown by duration</p>
+                        
+                        <!-- Duration Selector -->
+                        <div style="margin-bottom: 2rem;">
+                            <div style="text-align: center; margin-bottom: 1rem;">
+                                <label style="color: #78350F; font-weight: 600; font-size: 1.1rem; display: block; margin-bottom: 1rem;">Select Sprint Duration:</label>
+                                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                                    <button onclick="selectSprintDuration(30)" style="padding: 1rem 2rem; background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);">
+                                        30 Days - $15K
+                                    </button>
+                                    <button onclick="selectSprintDuration(60)" style="padding: 1rem 2rem; background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
+                                        60 Days - $28K
+                                    </button>
+                                    <button onclick="selectSprintDuration(90)" style="padding: 1rem 2rem; background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
+                                        90 Days - $42K
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cost Breakdown Display -->
+                        <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem;">
+                                <!-- Cost Per Day -->
+                                <div style="text-align: center; padding: 1.5rem; background: #F0FDF4; border-radius: 12px;">
+                                    <div style="color: #065F46; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Cost Per Day</div>
+                                    <div id="sprintCostPerDay" style="color: #10B981; font-size: 2rem; font-weight: 900;">$500</div>
+                                    <div style="color: #047857; font-size: 0.85rem; margin-top: 0.5rem;">Full team dedication</div>
+                                </div>
+
+                                <!-- Duration -->
+                                <div style="text-align: center; padding: 1.5rem; background: #EFF6FF; border-radius: 12px;">
+                                    <div style="color: #1E3A8A; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Sprint Duration</div>
+                                    <div id="sprintDuration" style="color: #3B82F6; font-size: 2rem; font-weight: 900;">30 Days</div>
+                                    <div style="color: #2563EB; font-size: 0.85rem; margin-top: 0.5rem;">Full-time focus</div>
+                                </div>
+
+                                <!-- Total Investment -->
+                                <div style="text-align: center; padding: 1.5rem; background: #FEF3C7; border-radius: 12px;">
+                                    <div style="color: #78350F; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Total Investment</div>
+                                    <div id="sprintTotalCost" style="color: #F59E0B; font-size: 2rem; font-weight: 900;">$15K</div>
+                                    <div style="color: #92400E; font-size: 0.85rem; margin-top: 0.5rem;">One-time payment</div>
+                                </div>
+                            </div>
+
+                            <!-- What's Included -->
+                            <div style="background: #F8FAFC; padding: 2rem; border-radius: 12px; border-left: 4px solid #10B981;">
+                                <h5 style="color: #1E293B; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.1rem;">Your Tag Team Includes:</h5>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                                    <div>
+                                        <div style="display: flex; align-items: start; gap: 0.75rem; margin-bottom: 1rem;">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
+                                                <polyline points="20 6 9 17 4 12"/>
+                                            </svg>
+                                            <div>
+                                                <div style="color: #1E293B; font-weight: 600; margin-bottom: 0.25rem;">2 Sales Experts</div>
+                                                <div style="color: #64748B; font-size: 0.9rem;">Tag team approach - you get two perspectives</div>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; align-items: start; gap: 0.75rem; margin-bottom: 1rem;">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
+                                                <polyline points="20 6 9 17 4 12"/>
+                                            </svg>
+                                            <div>
+                                                <div style="color: #1E293B; font-weight: 600; margin-bottom: 0.25rem;">Active Deal Closing</div>
+                                                <div style="color: #64748B; font-size: 0.9rem;">We close deals while building systems</div>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
+                                                <polyline points="20 6 9 17 4 12"/>
+                                            </svg>
+                                            <div>
+                                                <div style="color: #1E293B; font-weight: 600; margin-bottom: 0.25rem;">Complete Playbooks</div>
+                                                <div style="color: #64748B; font-size: 0.9rem;">Battle cards, scripts, objection handling</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div style="display: flex; align-items: start; gap: 0.75rem; margin-bottom: 1rem;">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
+                                                <polyline points="20 6 9 17 4 12"/>
+                                            </svg>
+                                            <div>
+                                                <div style="color: #1E293B; font-weight: 600; margin-bottom: 0.25rem;">Weekly Strategy Sessions</div>
+                                                <div style="color: #64748B; font-size: 0.9rem;">Course corrections & optimization</div>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; align-items: start; gap: 0.75rem; margin-bottom: 1rem;">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
+                                                <polyline points="20 6 9 17 4 12"/>
+                                            </svg>
+                                            <div>
+                                                <div style="color: #1E293B; font-weight: 600; margin-bottom: 0.25rem;">System Documentation</div>
+                                                <div style="color: #64748B; font-size: 0.9rem;">Everything documented for next hire</div>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; align-items: start; gap: 0.75rem;">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
+                                                <polyline points="20 6 9 17 4 12"/>
+                                            </svg>
+                                            <div>
+                                                <div style="color: #1E293B; font-weight: 600; margin-bottom: 0.25rem;">Hiring & Onboarding</div>
+                                                <div style="color: #64748B; font-size: 0.9rem;" id="sprintHiringNote">Foundation in 30 days</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ROI Comparison -->
+                            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #DCFCE7 0%, #BBF7D0 100%); border-radius: 12px; border: 2px solid #10B981;">
+                                <div style="text-align: center;">
+                                    <div style="color: #065F46; font-weight: 700; margin-bottom: 1rem; font-size: 1.1rem;">vs. Traditional First AE Hire</div>
+                                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+                                        <div>
+                                            <div style="color: #10B981; font-size: 1.8rem; font-weight: 900;" id="sprintSavings">$105K+</div>
+                                            <div style="color: #047857; font-size: 0.9rem;">Cost savings (6 months)</div>
+                                        </div>
+                                        <div>
+                                            <div style="color: #10B981; font-size: 1.8rem; font-weight: 900;" id="sprintTimeToRev">4-6 weeks</div>
+                                            <div style="color: #047857; font-size: 0.9rem;">Time to first revenue</div>
+                                        </div>
+                                        <div>
+                                            <div style="color: #10B981; font-size: 1.8rem; font-weight: 900;">0%</div>
+                                            <div style="color: #047857; font-size: 0.9rem;">Wrong hire risk</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -2914,29 +3050,41 @@ function updateSprintComparison() {
 
 // Sprint duration selector
 var selectedSprintDuration = 30;
+var sprintPricing = {
+    30: { total: 15000, perDay: 500, savings: '105K+', timeToRev: '4-6 weeks', hiringNote: 'Foundation in 30 days' },
+    60: { total: 28000, perDay: 467, savings: '92K+', timeToRev: '3-4 weeks', hiringNote: 'Full hiring guide in 60 days' },
+    90: { total: 42000, perDay: 467, savings: '78K+', timeToRev: '2-3 weeks', hiringNote: 'Complete onboarding blueprint' }
+};
 
 function selectSprintDuration(days) {
     selectedSprintDuration = days;
+    var pricing = sprintPricing[days];
     
-    // Update button states
+    // Update button states - find buttons and highlight the selected one
     var buttons = document.querySelectorAll('[onclick^="selectSprintDuration"]');
     for (var i = 0; i < buttons.length; i++) {
         var btn = buttons[i];
-        if (btn.textContent.indexOf(days + ' Days') !== -1) {
-            btn.style.background = 'linear-gradient(135deg, #10B981 0%, #059669 100%)';
-            btn.style.color = 'white';
+        var btnText = btn.textContent;
+        
+        // Check if this button matches the selected duration
+        if ((days === 30 && btnText.indexOf('30 Days') !== -1) ||
+            (days === 60 && btnText.indexOf('60 Days') !== -1) ||
+            (days === 90 && btnText.indexOf('90 Days') !== -1)) {
+            btn.style.transform = 'scale(1.05)';
+            btn.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
         } else {
-            btn.style.background = 'white';
-            btn.style.color = '#64748B';
+            btn.style.transform = 'scale(1)';
+            btn.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
         }
     }
     
-    // Update sprint details based on duration
-    var costPerDay = selectedSprintDuration === 14 ? 1071 : 
-                     selectedSprintDuration === 30 ? 500 : 395;
-    
-    setText('sprintCostPerDay', '$' + costPerDay + '/day');
-    setText('sprintTotalCost', '$' + (costPerDay * selectedSprintDuration / 1000) + 'K');
+    // Update calculator display
+    setText('sprintCostPerDay', '$' + pricing.perDay);
+    setText('sprintDuration', days + ' Days');
+    setText('sprintTotalCost', '$' + (pricing.total / 1000) + 'K');
+    setText('sprintSavings', '$' + pricing.savings);
+    setText('sprintTimeToRev', pricing.timeToRev);
+    setText('sprintHiringNote', pricing.hiringNote);
 }
 
 // =============================================================================
