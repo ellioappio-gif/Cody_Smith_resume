@@ -94,54 +94,72 @@
             var totalPipeDeals = Math.round(totalPipe / dealSize);
             
             update('closedRevenue', k(totalRev));
-            update('pipelineCreated', k(totalPipe));
-            update('dealsClosedCount', totalDeals);
-            update('dealsInPipelineCount', totalPipeDeals);
-            update('closedRev1', k(closed1));
-            update('pipeline1', k(m1Pipe));
-            update('closedRev2', k(closed2));
-            update('pipeline2', k(m2Pipe));
-            update('closedRev3', k(closed3));
-            update('pipeline3', k(m3Pipe));
-            update('dealsClosedRange1', Math.max(0, Math.round(closed1 / dealSize)));
-            update('dealsClosedRange2', Math.max(0, Math.round(closed2 / dealSize)));
-            update('dealsClosedRange3', Math.max(0, Math.round(closed3 / dealSize)));
-            update('pipelineRange1', Math.max(0, Math.round(m1Pipe / dealSize)));
-            update('pipelineRange2', Math.max(0, Math.round(m2Pipe / dealSize)));
-            update('pipelineRange3', Math.max(0, Math.round(m3Pipe / dealSize)));
+            update('totalPipeline', k(totalPipe));
+            update('closedDeals', totalDeals);
+            update('pipelineDeals', totalPipeDeals);
             
-            window.updateChart();
+            update('month1Revenue', k(closed1));
+            update('month2Revenue', k(closed2));
+            update('month3Revenue', k(closed3));
+            update('planM1Rev', k(closed1));
+            update('planM2Rev', k(closed2));
+            update('planM3Rev', k(closed3));
+            update('planM1Pipe', k(m1Pipe));
+            update('planM2Pipe', k(m2Pipe));
+            update('planM3Pipe', k(m3Pipe));
+            update('planM1Deals', '(' + Math.round(m1Deals * 0.4) + '-' + Math.round(m1Deals * 0.6) + ' deals)');
+            update('planM2Deals', '(' + Math.round(m2Deals * 0.6) + '-' + Math.round(m2Deals * 1.2) + ' deals)');
+            update('planM3Deals', '(' + Math.round(m3Deals * 0.8) + '-' + Math.round(m3Deals * 1.3) + ' deals)');
+            update('planM1Opps', '(' + Math.round(m1Opps * 0.7) + '-' + Math.round(m1Opps) + ' opps)');
+            update('planM2Opps', '(' + Math.round(m2Opps * 0.7) + '-' + Math.round(m2Opps) + ' opps)');
+            update('planM3Opps', '(' + Math.round(m3Opps * 0.8) + '-' + Math.round(m3Opps * 1.2) + ' opps)');
+            update('planCycleDays1', Math.round(cycle / 2) + '-' + Math.round(cycle));
+            update('ctaRevenue', k(totalRev));
+            update('ctaPipeline', k(totalPipe));
+            
+            window.updateChart(closed1, closed2, closed3, m1Pipe, m2Pipe, m3Pipe);
         };
         
         // Make updateChart global  
-        window.updateChart = function() {
-            var cumR1 = calc.dealSize * 1000 * Math.round(document.getElementById('closedRev1').textContent.replace(/[$K]/g,''));
-            var cumR2 = cumR1 + calc.dealSize * 1000 * Math.round(document.getElementById('closedRev2').textContent.replace(/[$K]/g,''));
-            var cumR3 = cumR2 + calc.dealSize * 1000 * Math.round(document.getElementById('closedRev3').textContent.replace(/[$K]/g,''));
+        window.updateChart = function(r1, r2, r3, p1, p2, p3) {
+            var cumR1 = r1;
+            var cumR2 = r1 + r2;
+            var cumR3 = r1 + r2 + r3;
+            var cumP1 = p1;
+            var cumP2 = p1 + p2;
+            var cumP3 = p1 + p2 + p3;
             
-            var pipe1Val = document.getElementById('pipeline1').textContent.replace(/[$K]/g,'');
-            var pipe2Val = document.getElementById('pipeline2').textContent.replace(/[$K]/g,'');
-            var pipe3Val = document.getElementById('pipeline3').textContent.replace(/[$K]/g,'');
-            var cumP1 = parseFloat(pipe1Val) * 1000;
-            var cumP2 = cumP1 + parseFloat(pipe2Val) * 1000;
-            var cumP3 = cumP2 + parseFloat(pipe3Val) * 1000;
+            var max = Math.max(cumR1, cumR2, cumR3, cumP1, cumP2, cumP3, 1) * 1.15;
             
-            var maxVal = Math.max(cumR3, cumP3);
-            var ry1 = 370 - (cumR1 / maxVal * 320);
-            var ry2 = 370 - (cumR2 / maxVal * 320);
-            var ry3 = 370 - (cumR3 / maxVal * 320);
-            var py1 = 370 - (cumP1 / maxVal * 320);
-            var py2 = 370 - (cumP2 / maxVal * 320);
-            var py3 = 370 - (cumP3 / maxVal * 320);
+            update('chartY6', k(max));
+            update('chartY5', k(max * 0.8));
+            update('chartY4', k(max * 0.6));
+            update('chartY3', k(max * 0.4));
+            update('chartY2', k(max * 0.2));
+            update('chartY1', '$0');
             
-            setAttr('revLine', 'points', '100,' + ry1 + ' 300,' + ry2 + ' 500,' + ry3);
-            setAttr('pipeLine', 'points', '100,' + py1 + ' 300,' + py2 + ' 500,' + py3);
+            var y = function(v) { return 320 - ((v / max) * 270); };
+            
+            var ry1 = y(cumR1), ry2 = y(cumR2), ry3 = y(cumR3);
+            var py1 = y(cumP1), py2 = y(cumP2), py3 = y(cumP3);
+            
+            setAttr('revenueLine', 'points', '150,' + ry1 + ' 315,' + ry2 + ' 480,' + ry3);
+            setAttr('revPoint1', 'cy', ry1);
+            setAttr('revPoint2', 'cy', ry2);
+            setAttr('revPoint3', 'cy', ry3);
+            
+            setAttr('pipelineLine', 'points', '150,' + py1 + ' 315,' + py2 + ' 480,' + py3);
+            setAttr('pipePoint1', 'cy', py1);
+            setAttr('pipePoint2', 'cy', py2);
+            setAttr('pipePoint3', 'cy', py3);
+            
             update('revLabel1', k(cumR1));
             update('revLabel2', k(cumR2));
             update('revLabel3', k(cumR3));
             update('pipeLabel1', k(cumP1));
             update('pipeLabel2', k(cumP2));
             update('pipeLabel3', k(cumP3));
+            
             setAttr('revLabel1', 'y', Math.max(30, ry1 - 15));
             setAttr('revLabel2', 'y', Math.max(30, ry2 - 15));
             setAttr('revLabel3', 'y', Math.max(30, ry3 - 15));
@@ -156,39 +174,27 @@
             var salary = aeSalary;
             var recruiting = salary * 0.20;
             var lostRev = 180000;
-            var ceoTime = 80000;
-            var subtotal = salary + recruiting + lostRev + ceoTime;
-            var risk = subtotal * 0.73;
-            var total = subtotal + risk;
+            var failureRisk = (salary + recruiting + lostRev + 80000) * 0.73;
+            var tradTotal = salary + recruiting + lostRev + 80000 + failureRisk;
             
-            var sSal = 84000;
-            var sRec = sSal * 0.20;
-            var sLost = 60000;
-            var sCEO = 16000;
-            var sSub = 15000 + sSal + sRec + sLost + sCEO;
-            var sRisk = sSub * 0.22;
-            var sTotal = sSub + sRisk;
+            var sprintAE = salary * 0.70;
+            var sprintRec = sprintAE * 0.20;
+            var sprintLost = 60000;
+            var sprintRisk = (15000 + sprintAE + sprintRec + sprintLost + 16000) * 0.22;
+            var sprintTotal = 15000 + sprintAE + sprintRec + sprintLost + 16000 + sprintRisk;
             
-            var savings = total - sTotal;
-            var savingsPct = (savings / total) * 100;
+            var savings = tradTotal - sprintTotal;
             
             update('tradSalary', k(salary));
             update('tradRecruiting', k(recruiting));
             update('tradLostRev', k(lostRev));
-            update('tradCEO', k(ceoTime));
-            update('tradSubtotal', k(subtotal));
-            update('tradRisk', k(risk));
-            update('tradTotal', k(total));
-            update('sprintCost', '$15K');
-            update('sprintSalary', k(sSal));
-            update('sprintRecruiting', k(sRec));
-            update('sprintLostRev', k(sLost));
-            update('sprintCEO', k(sCEO));
-            update('sprintSubtotal', k(sSub));
-            update('sprintRisk', k(sRisk));
-            update('sprintTotal', k(sTotal));
+            update('tradFailureRisk', k(failureRisk));
+            update('tradTotal', k(tradTotal));
+            update('sprintAESalary', k(sprintAE));
+            update('sprintRecruiting', k(sprintRec));
+            update('sprintFailureRisk', k(sprintRisk));
+            update('sprintTotal', k(sprintTotal));
             update('sprintSavings', k(savings));
-            update('sprintSavingsPct', Math.round(savingsPct) + '%');
         };
         
         // GLOBAL HANDLER FUNCTIONS
@@ -3103,19 +3109,29 @@ function init() {
     console.log('Document ready state:', document.readyState);
     
     console.log('Attaching event listeners...');
-    window.attachListeners();
+    if (typeof window.attachListeners === 'function') {
+        window.attachListeners();
+    }
     
     console.log('Running initial calculations...');
-    window.runCalc();
-    window.runAeCalc();
-    window.pickSprint(30);
+    if (typeof window.runCalc === 'function') {
+        window.runCalc();
+    }
+    if (typeof window.runAeCalc === 'function') {
+        window.runAeCalc();
+    }
+    if (typeof window.pickSprint === 'function') {
+        window.pickSprint(30);
+    }
     
     console.log('Updating slider backgrounds...');
-    window.updateSlider('sliderDealSize', 1, 50, 6);
-    window.updateSlider('sliderSalesCycle', 7, 120, 45);
-    window.updateSlider('sliderWinRate', 5, 100, 20);
-    window.updateSlider('sliderCallsPerDay', 1, 30, 6);
-    window.updateSlider('sliderAeComp', 80, 180, 120);
+    if (typeof window.updateSlider === 'function') {
+        window.updateSlider('sliderDealSize', 1, 50, 6);
+        window.updateSlider('sliderSalesCycle', 7, 120, 45);
+        window.updateSlider('sliderWinRate', 5, 100, 20);
+        window.updateSlider('sliderCallsPerDay', 1, 30, 6);
+        window.updateSlider('sliderAeComp', 80, 180, 120);
+    }
     
     console.log('Initializing nav and expand...');
     initNav();
