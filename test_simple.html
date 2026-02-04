@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Test Calculator</h1>
+<input type="range" id="test" min="1" max="50" value="6" oninput="testFunc(this.value)">
+<div id="output">Not run yet</div>
+
+<script>
+function testFunc(val) {
+    console.log('testFunc called with:', val);
+    document.getElementById('output').textContent = 'Value: ' + val;
+}
+console.log('Script loaded');
+</script>
+</body>
+</html>
