@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test - Reactive Calculator</title>
+</head>
+<body>
+    <h1>Test Calculator</h1>
+    
+    <div>
+        <label>Deal Size: <span id="dealDisplay">$6K</span></label><br>
+        <input type="range" id="dealSlider" min="1" max="50" value="6" 
+               oninput="updateDeal(this.value)" style="width: 300px">
+    </div>
+    
+    <div style="margin-top: 20px;">
+        <h2>Results:</h2>
+        <p>Closed Revenue: <span id="result">$0</span></p>
+    </div>
+    
+    <script>
+        function updateDeal(value) {
+            console.log('Slider moved to:', value);
+            document.getElementById('dealDisplay').textContent = '$' + value + 'K';
+            
+            let revenue = value * 1000 * 7; // Simple calc
+            document.getElementById('result').textContent = '$' + (revenue/1000).toFixed(0) + 'K';
+        }
+        
+        // Initial update
+        updateDeal(6);
+    </script>
+</body>
+</html>

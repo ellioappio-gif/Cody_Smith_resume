@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Calculator</title>
+</head>
+<body>
+    <h1>Debug</h1>
+    <div id="avgDealSizeDisplay">Initial: $6K</div>
+    <button onclick="window.testUpdate()">Test Update</button>
+    <input type="range" id="avgDealSize" min="1" max="50" value="6" step="0.5" oninput="console.log('Slider moved to:', this.value); window.handleDealSize(this.value)">
+    
+    <script>
+    console.log('=== Script Loaded ===');
+    
+    window.Calculator = {
+        state: { avgDealSize: 6000 },
+        display: function() {
+            console.log('Display called, avgDealSize =', this.state.avgDealSize);
+            const el = document.getElementById('avgDealSizeDisplay');
+            if (el) {
+                const newText = '$' + (this.state.avgDealSize / 1000) + 'K';
+                console.log('Setting text to:', newText);
+                el.textContent = newText;
+                console.log('Text is now:', el.textContent);
+            } else {
+                console.error('Element not found!');
+            }
+        },
+        update: function(key, value) {
+            console.log('Update called:', key, '=', value);
+            this.state[key] = value;
+            this.display();
+        }
+    };
+    
+    window.handleDealSize = function(value) {
+        console.log('Handler called with:', value);
+        const numValue = parseFloat(value) * 1000;
+        console.log('Converted to:', numValue);
+        window.Calculator.update('avgDealSize', numValue);
+    };
+    
+    window.testUpdate = function() {
+        console.log('Test update button pressed');
+        window.Calculator.update('avgDealSize', 10000);
+    };
+    
+    // Test initial display
+    console.log('Testing initial display...');
+    window.Calculator.display();
+    </script>
+</body>
+</html>

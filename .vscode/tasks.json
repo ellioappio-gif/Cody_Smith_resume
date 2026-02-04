@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Open Proposal",
+			"type": "shell",
+			"command": "open",
+			"args": [
+				"reffie_proposal_FINAL.html"
+			],
+			"group": "build"
+		}
+	]
+}
