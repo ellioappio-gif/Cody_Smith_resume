@@ -5,18 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cody Smith | Growth Lead for Reffie</title>
     
-    <!-- CALCULATOR FUNCTIONS - MUST BE IN HEAD BEFORE INLINE HANDLERS -->
+    <!-- CALCULATOR SCRIPT - IN HEAD SO FUNCTIONS EXIST BEFORE HTML -->
     <script>
-        // Define all calculator functions IMMEDIATELY so inline oninput handlers can find them
-        console.log('🎯 Defining global calculator functions in HEAD');
+        console.log('🎯 Calculator script loading in HEAD');
         
         // State objects
-        var calc = {
-            dealSize: 6,
-            cycle: 45,
-            winRate: 20,
-            callsDay: 6
-        };
+        var calc = { dealSize: 6, cycle: 45, winRate: 20, callsDay: 6 };
         var aeSalary = 120000;
         var sprintData = {
             30: { cost: 15000, perDay: 500, save: '56K+', time: '4-6 weeks', note: 'Foundation in 30 days' },
@@ -24,15 +18,237 @@
             90: { cost: 42000, perDay: 467, save: '78K+', time: '2-3 weeks', note: 'Complete onboarding blueprint' }
         };
         
-        // Placeholder functions - will be properly implemented when main script loads
-        window.onDealSize = function(val) { console.log('onDealSize stub called:', val); };
-        window.onCycle = function(val) { console.log('onCycle stub called:', val); };
-        window.onWinRate = function(val) { console.log('onWinRate stub called:', val); };
-        window.onCallsDay = function(val) { console.log('onCallsDay stub called:', val); };
-        window.onAeSalary = function(val) { console.log('onAeSalary stub called:', val); };
-        window.pickSprint = function(days) { console.log('pickSprint stub called:', days); };
+        // Helper to safely get/update elements
+        function update(id, txt) {
+            var el = document.getElementById(id);
+            if (el) el.textContent = txt;
+        }
         
-        console.log('✅ Stub functions defined, full implementations will load with main script');
+        function setAttr(id, attr, val) {
+            var el = document.getElementById(id);
+            if (el) el.setAttribute(attr, val);
+        }
+        
+        function k(num) {
+            return '$' + Math.round(num / 1000) + 'K';
+        }
+        
+        function updateSlider(id, min, max, val) {
+            var slider = document.getElementById(id);
+            if (!slider) return;
+            var pct = ((val - min) / (max - min)) * 100;
+            var color = id === 'sliderDealSize' ? '#10B981' :
+                        id === 'sliderSalesCycle' ? '#06B6D4' :
+                        id === 'sliderWinRate' ? '#8B5CF6' : '#F59E0B';
+            slider.style.background = 'linear-gradient(to right, ' + color + ' 0%, ' + color + ' ' + pct + '%, #E2E8F0 ' + pct + '%, #E2E8F0 100%)';
+        }
+        
+        // Main calculation function
+        function runCalc() {
+            var dealSize = calc.dealSize * 1000;
+            var cycle = calc.cycle;
+            var winRate = calc.winRate / 100;
+            var callsDay = calc.callsDay;
+            
+            var m1Calls = callsDay * 20 * 0.30;
+            var m1Opps = m1Calls * 0.12;
+            var m1Deals = m1Opps * winRate;
+            var m1Rev = m1Deals * dealSize;
+            var m1Pipe = m1Opps * dealSize;
+            
+            var m2Calls = callsDay * 20 * 0.50;
+            var m2Opps = m2Calls * 0.12;
+            var m2Deals = m2Opps * winRate;
+            var m2Rev = m2Deals * dealSize;
+            var m2Pipe = m2Opps * dealSize;
+            
+            var m3Calls = callsDay * 20 * 0.70;
+            var m3Opps = m3Calls * 0.12;
+            var m3Deals = m3Opps * winRate;
+            var m3Rev = m3Deals * dealSize;
+            var m3Pipe = m3Opps * dealSize;
+            
+            var cycleMonths = cycle / 30;
+            var closed1, closed2, closed3;
+            
+            if (cycleMonths <= 1.5) {
+                closed1 = m1Rev; closed2 = m2Rev; closed3 = m3Rev;
+            } else if (cycleMonths <= 2.5) {
+                closed1 = m1Rev * 0.3;
+                closed2 = m1Rev * 0.7 + m2Rev * 0.3;
+                closed3 = m2Rev * 0.7 + m3Rev * 0.3;
+            } else {
+                closed1 = 0;
+                closed2 = m1Rev * 0.4;
+                closed3 = m1Rev * 0.6 + m2Rev * 0.3;
+            }
+            
+            var totalRev = closed1 + closed2 + closed3;
+            var totalPipe = m1Pipe + m2Pipe + m3Pipe;
+            var totalDeals = Math.round((closed1 + closed2 + closed3) / dealSize);
+            var totalPipeDeals = Math.round(totalPipe / dealSize);
+            
+            update('closedRevenue', k(totalRev));
+            update('pipelineCreated', k(totalPipe));
+            update('dealsClosedCount', totalDeals);
+            update('dealsInPipelineCount', totalPipeDeals);
+            update('closedRev1', k(closed1));
+            update('pipeline1', k(m1Pipe));
+            update('closedRev2', k(closed2));
+            update('pipeline2', k(m2Pipe));
+            update('closedRev3', k(closed3));
+            update('pipeline3', k(m3Pipe));
+            update('dealsClosedRange1', Math.max(0, Math.round(closed1 / dealSize)));
+            update('dealsClosedRange2', Math.max(0, Math.round(closed2 / dealSize)));
+            update('dealsClosedRange3', Math.max(0, Math.round(closed3 / dealSize));
+            update('pipelineRange1', Math.max(0, Math.round(m1Pipe / dealSize)));
+            update('pipelineRange2', Math.max(0, Math.round(m2Pipe / dealSize)));
+            update('pipelineRange3', Math.max(0, Math.round(m3Pipe / dealSize)));
+            
+            updateChart();
+        }
+        
+        function updateChart() {
+            var cumR1 = calc.dealSize * 1000 * Math.round(document.getElementById('closedRev1').textContent.replace(/[$K]/g,''));
+            var cumR2 = cumR1 + calc.dealSize * 1000 * Math.round(document.getElementById('closedRev2').textContent.replace(/[$K]/g,''));
+            var cumR3 = cumR2 + calc.dealSize * 1000 * Math.round(document.getElementById('closedRev3').textContent.replace(/[$K]/g,''));
+            
+            var pipe1Val = document.getElementById('pipeline1').textContent.replace(/[$K]/g,'');
+            var pipe2Val = document.getElementById('pipeline2').textContent.replace(/[$K]/g,'');
+            var pipe3Val = document.getElementById('pipeline3').textContent.replace(/[$K]/g,'');
+            var cumP1 = parseFloat(pipe1Val) * 1000;
+            var cumP2 = cumP1 + parseFloat(pipe2Val) * 1000;
+            var cumP3 = cumP2 + parseFloat(pipe3Val) * 1000;
+            
+            var maxVal = Math.max(cumR3, cumP3);
+            var ry1 = 370 - (cumR1 / maxVal * 320);
+            var ry2 = 370 - (cumR2 / maxVal * 320);
+            var ry3 = 370 - (cumR3 / maxVal * 320);
+            var py1 = 370 - (cumP1 / maxVal * 320);
+            var py2 = 370 - (cumP2 / maxVal * 320);
+            var py3 = 370 - (cumP3 / maxVal * 320);
+            
+            setAttr('revLine', 'points', '100,' + ry1 + ' 300,' + ry2 + ' 500,' + ry3);
+            setAttr('pipeLine', 'points', '100,' + py1 + ' 300,' + py2 + ' 500,' + py3);
+            update('revLabel1', k(cumR1));
+            update('revLabel2', k(cumR2));
+            update('revLabel3', k(cumR3));
+            update('pipeLabel1', k(cumP1));
+            update('pipeLabel2', k(cumP2));
+            update('pipeLabel3', k(cumP3));
+            setAttr('revLabel1', 'y', Math.max(30, ry1 - 15));
+            setAttr('revLabel2', 'y', Math.max(30, ry2 - 15));
+            setAttr('revLabel3', 'y', Math.max(30, ry3 - 15));
+            setAttr('pipeLabel1', 'y', Math.min(350, py1 + 25));
+            setAttr('pipeLabel2', 'y', Math.min(350, py2 + 25));
+            setAttr('pipeLabel3', 'y', Math.min(350, py3 + 25));
+        }
+        
+        function runAeCalc() {
+            var salary = aeSalary;
+            var recruiting = salary * 0.20;
+            var lostRev = 180000;
+            var ceoTime = 80000;
+            var subtotal = salary + recruiting + lostRev + ceoTime;
+            var risk = subtotal * 0.73;
+            var total = subtotal + risk;
+            
+            var sSal = 84000;
+            var sRec = sSal * 0.20;
+            var sLost = 60000;
+            var sCEO = 16000;
+            var sSub = 15000 + sSal + sRec + sLost + sCEO;
+            var sRisk = sSub * 0.22;
+            var sTotal = sSub + sRisk;
+            
+            var savings = total - sTotal;
+            var savingsPct = (savings / total) * 100;
+            
+            update('tradSalary', k(salary));
+            update('tradRecruiting', k(recruiting));
+            update('tradLostRev', k(lostRev));
+            update('tradCEO', k(ceoTime));
+            update('tradSubtotal', k(subtotal));
+            update('tradRisk', k(risk));
+            update('tradTotal', k(total));
+            update('sprintCost', '$15K');
+            update('sprintSalary', k(sSal));
+            update('sprintRecruiting', k(sRec));
+            update('sprintLostRev', k(sLost));
+            update('sprintCEO', k(sCEO));
+            update('sprintSubtotal', k(sSub));
+            update('sprintRisk', k(sRisk));
+            update('sprintTotal', k(sTotal));
+            update('sprintSavings', k(savings));
+            update('sprintSavingsPct', Math.round(savingsPct) + '%');
+        }
+        
+        // GLOBAL HANDLER FUNCTIONS
+        window.onDealSize = function(val) {
+            console.log('✅ onDealSize:', val);
+            calc.dealSize = parseFloat(val);
+            update('dealSizeValue', '$' + val + 'K');
+            updateSlider('sliderDealSize', 1, 50, val);
+            runCalc();
+        };
+        
+        window.onCycle = function(val) {
+            console.log('✅ onCycle:', val);
+            calc.cycle = parseFloat(val);
+            update('salesCycleValue', val + 'd');
+            updateSlider('sliderSalesCycle', 7, 120, val);
+            runCalc();
+        };
+        
+        window.onWinRate = function(val) {
+            console.log('✅ onWinRate:', val);
+            calc.winRate = parseFloat(val);
+            update('winRateValue', val + '%');
+            updateSlider('sliderWinRate', 5, 100, val);
+            runCalc();
+        };
+        
+        window.onCallsDay = function(val) {
+            console.log('✅ onCallsDay:', val);
+            calc.callsDay = parseFloat(val);
+            update('callsPerDayValue', val + '/day');
+            updateSlider('sliderCallsPerDay', 1, 30, val);
+            runCalc();
+        };
+        
+        window.onAeSalary = function(val) {
+            console.log('✅ onAeSalary:', val);
+            aeSalary = parseFloat(val) * 1000;
+            update('aeSalaryValue', '$' + val + 'K');
+            updateSlider('sliderAeComp', 80, 180, val);
+            runAeCalc();
+        };
+        
+        window.pickSprint = function(days) {
+            console.log('✅ pickSprint:', days);
+            var d = sprintData[days];
+            var btns = document.querySelectorAll('[onclick^="pickSprint"]');
+            for (var i = 0; i < btns.length; i++) {
+                var btn = btns[i];
+                if ((days === 30 && btn.textContent.indexOf('30 Days') > -1) ||
+                    (days === 60 && btn.textContent.indexOf('60 Days') > -1) ||
+                    (days === 90 && btn.textContent.indexOf('90 Days') > -1)) {
+                    btn.style.transform = 'scale(1.05)';
+                    btn.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
+                } else {
+                    btn.style.transform = 'scale(1)';
+                    btn.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                }
+            }
+            update('sprintCostPerDay', '$' + d.perDay);
+            update('sprintDuration', days + ' Days');
+            update('sprintTotalCost', '$' + (d.cost / 1000) + 'K');
+            update('sprintSavings', '$' + d.save);
+            update('sprintTimeToRev', d.time);
+            update('sprintHiringNote', d.note);
+        };
+        
+        console.log('✅ All calculator functions defined');
     </script>
     
     <!-- DEBUG INDICATOR -->
