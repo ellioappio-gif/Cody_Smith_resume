@@ -248,51 +248,6 @@
             update('sprintHiringNote', d.note);
         };
         
-        // ATTACH EVENT LISTENERS (runs immediately, but listeners fire after DOM loads)
-        function attachListeners() {
-            console.log('📎 Attaching event listeners to sliders and buttons...');
-            
-            // Attach slider listeners
-            var dealSlider = document.getElementById('sliderDealSize');
-            var cycleSlider = document.getElementById('sliderSalesCycle');
-            var winRateSlider = document.getElementById('sliderWinRate');
-            var callsSlider = document.getElementById('sliderCallsPerDay');
-            var aeSlider = document.getElementById('sliderAeComp');
-            
-            if (dealSlider) {
-                dealSlider.addEventListener('input', function() { window.onDealSize(this.value); });
-                console.log('✅ Deal size slider attached');
-            }
-            if (cycleSlider) {
-                cycleSlider.addEventListener('input', function() { window.onCycle(this.value); });
-                console.log('✅ Cycle slider attached');
-            }
-            if (winRateSlider) {
-                winRateSlider.addEventListener('input', function() { window.onWinRate(this.value); });
-                console.log('✅ Win rate slider attached');
-            }
-            if (callsSlider) {
-                callsSlider.addEventListener('input', function() { window.onCallsDay(this.value); });
-                console.log('✅ Calls slider attached');
-            }
-            if (aeSlider) {
-                aeSlider.addEventListener('input', function() { window.onAeSalary(this.value); });
-                console.log('✅ AE salary slider attached');
-            }
-            
-            // Attach sprint button listeners
-            var sprintBtns = document.querySelectorAll('[data-sprint-days]');
-            for (var i = 0; i < sprintBtns.length; i++) {
-                (function(btn) {
-                    var days = parseInt(btn.getAttribute('data-sprint-days'), 10);
-                    btn.addEventListener('click', function() {
-                        window.pickSprint(days);
-                    });
-                })(sprintBtns[i]);
-            }
-            console.log('✅ Sprint buttons attached:', sprintBtns.length);
-        }
-        
         console.log('✅ All calculator functions defined');
     </script>
     
@@ -1095,6 +1050,7 @@
                                         <span id="dealSizeValue" style="color: #10B981; font-weight: 700; font-size: 1.3rem;">$6K</span>
                                     </div>
                                     <input type="range" id="sliderDealSize" min="1" max="50" value="6" step="0.5" 
+                                        oninput="onDealSize(this.value)"
                                         style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #10B981 0%, #10B981 12%, #E2E8F0 12%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                                 </div>
 
@@ -1107,7 +1063,7 @@
                                         <span id="salesCycleValue" style="color: #06B6D4; font-weight: 700; font-size: 1.3rem;">45d</span>
                                     </div>
                                     <input type="range" id="sliderSalesCycle" min="7" max="120" value="45" step="1" 
-                                        
+                                        oninput="onCycle(this.value)"
                                         style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #06B6D4 0%, #06B6D4 32%, #E2E8F0 32%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                                 </div>
 
@@ -1120,7 +1076,7 @@
                                         <span id="winRateValue" style="color: #8B5CF6; font-weight: 700; font-size: 1.3rem;">20%</span>
                                     </div>
                                     <input type="range" id="sliderWinRate" min="5" max="100" value="20" step="5" 
-                                        
+                                        oninput="onWinRate(this.value)"
                                         style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #8B5CF6 0%, #8B5CF6 18%, #E2E8F0 18%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                                 </div>
 
@@ -1133,7 +1089,7 @@
                                         <span id="callsPerDayValue" style="color: #F59E0B; font-weight: 700; font-size: 1.3rem;">6/day</span>
                                     </div>
                                     <input type="range" id="sliderCallsPerDay" min="1" max="30" value="6" step="1" 
-                                        
+                                        oninput="onCallsDay(this.value)"
                                         style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #F59E0B 0%, #F59E0B 19%, #E2E8F0 19%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                                 </div>
                             </div>
@@ -2107,15 +2063,15 @@
                 <div style="text-align: center; margin-bottom: 2rem;">
                     <h3 style="color: #1E293B; font-size: 1.3rem; margin-bottom: 1.5rem;">Select Your Sprint Duration</h3>
                     <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                        <button id="sprintBtn30" data-sprint-days="30" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #10B981; background: #F0FDF4; color: #10B981; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
+                        <button id="sprintBtn30" onclick="pickSprint(30)" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #10B981; background: #F0FDF4; color: #10B981; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
                             <div style="font-size: 1.3rem; font-weight: 800;">30 Days</div>
                             <div style="font-size: 0.85rem;">Foundation</div>
                         </button>
-                        <button id="sprintBtn60" data-sprint-days="60" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #E2E8F0; background: white; color: #64748B; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
+                        <button id="sprintBtn60" onclick="pickSprint(60)" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #E2E8F0; background: white; color: #64748B; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
                             <div style="font-size: 1.3rem; font-weight: 800;">60 Days</div>
                             <div style="font-size: 0.85rem;">Extended</div>
                         </button>
-                        <button id="sprintBtn90" data-sprint-days="90" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #E2E8F0; background: white; color: #64748B; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
+                        <button id="sprintBtn90" onclick="pickSprint(90)" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #E2E8F0; background: white; color: #64748B; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
                             <div style="font-size: 1.3rem; font-weight: 800;">90 Days</div>
                             <div style="font-size: 0.85rem;">Full Ramp</div>
                         </button>
@@ -2583,13 +2539,13 @@
                             <div style="text-align: center; margin-bottom: 1rem;">
                                 <label style="color: #78350F; font-weight: 600; font-size: 1.1rem; display: block; margin-bottom: 1rem;">Select Sprint Duration:</label>
                                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                                    <button  style="padding: 1rem 2rem; background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);">
+                                    <button onclick="pickSprint(30)" style="padding: 1rem 2rem; background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);">
                                         30 Days - $15K
                                     </button>
-                                    <button  style="padding: 1rem 2rem; background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
+                                    <button onclick="pickSprint(60)" style="padding: 1rem 2rem; background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
                                         60 Days - $28K
                                     </button>
-                                    <button  style="padding: 1rem 2rem; background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
+                                    <button onclick="pickSprint(90)" style="padding: 1rem 2rem; background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
                                         90 Days - $42K
                                     </button>
                                 </div>
@@ -2724,7 +2680,7 @@
                             <span id="aeSalaryValue" style="color: #10B981; font-weight: 700; font-size: 1.3rem;">$120K</span>
                         </div>
                         <input type="range" id="sliderAeComp" min="80" max="180" value="120" step="10"
-                            
+                            oninput="onAeSalary(this.value)"
                             style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #10B981 0%, #10B981 40%, #E2E8F0 40%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                     </div>
 
@@ -3348,27 +3304,23 @@ function initExpand() {
 
 // INIT
 function init() {
-    console.log('🎬 INIT STARTING...');
-    
-    console.log('📎 Attaching event listeners...');
-    attachListeners();
-    
-    console.log('🧮 Running initial calculations...');
+    console.log('INIT STARTING...');
+    console.log('Running calculations...');
     runCalc();
     runAeCalc();
     pickSprint(30);
     
-    console.log('🎨 Updating slider backgrounds...');
+    console.log('Updating slider backgrounds...');
     updateSlider('sliderDealSize', 1, 50, 6);
     updateSlider('sliderSalesCycle', 7, 120, 45);
     updateSlider('sliderWinRate', 5, 100, 20);
     updateSlider('sliderCallsPerDay', 1, 30, 6);
     updateSlider('sliderAeComp', 80, 180, 120);
     
-    console.log('🧭 Initializing nav and expand...');
+    console.log('Initializing nav and expand...');
     initNav();
     initExpand();
-    console.log('✅ INIT COMPLETE! Calculators ready.');
+    console.log('INIT COMPLETE!');
 }
 
 console.log('Script loaded. Document state:', document.readyState);
