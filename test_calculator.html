@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator Test</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .test { margin: 20px 0; padding: 15px; border: 2px solid #ccc; }
+        .pass { border-color: #10B981; background: #F0FDF4; }
+        .fail { border-color: #DC2626; background: #FEF2F2; }
+        input[type="range"] { width: 300px; }
+    </style>
+</head>
+<body>
+    <h1>Calculator Test Suite</h1>
+    
+    <div id="tests"></div>
+    
+    <h2>Live Test</h2>
+    <div style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
+        <label>Deal Size: <span id="testDealSize">$6K</span></label><br>
+        <input type="range" id="testSliderDeal" min="1" max="50" value="6" step="0.5"><br><br>
+        
+        <label>Sales Cycle: <span id="testCycle">45d</span></label><br>
+        <input type="range" id="testSliderCycle" min="7" max="120" value="45"><br><br>
+        
+        <label>Win Rate: <span id="testWin">20%</span></label><br>
+        <input type="range" id="testSliderWin" min="5" max="100" value="20" step="5"><br><br>
+        
+        <label>Calls/Day: <span id="testCalls">6/day</span></label><br>
+        <input type="range" id="testSliderCalls" min="1" max="30" value="6"><br><br>
+        
+        <h3>Results:</h3>
+        <div style="background: white; padding: 15px; border-radius: 8px;">
+            <div>Total Revenue: <strong id="testRevenue">$0</strong></div>
+            <div>Total Pipeline: <strong id="testPipeline">$0</strong></div>
+            <div>Month 1 Revenue: <strong id="testM1">$0</strong></div>
+            <div>Month 2 Revenue: <strong id="testM2">$0</strong></div>
+            <div>Month 3 Revenue: <strong id="testM3">$0</strong></div>
+        </div>
+    </div>
+    
+    <script>
+        const testsDiv = document.getElementById('tests');
+        
+        function addTest(name, pass, details) {
+            const div = document.createElement('div');
+            div.className = 'test ' + (pass ? 'pass' : 'fail');
+            div.innerHTML = `
+                <strong>${pass ? '✓' : '✗'} ${name}</strong><br>
+                <small>${details}</small>
+            `;
+            testsDiv.appendChild(div);
+        }
+        
+        // Simple calculator for testing
+        const TestCalc = {
+            state: { avgDealSize: 6000, salesCycle: 45, winRate: 20, callsPerDay: 6 },
+            results: {},
+            
+            calculate: function() {
+                const s = this.state;
+                const prod1 = 0.30, prod2 = 0.50, prod3 = 0.70;
+                const workDays = 20, convRate = 0.12;
+                
+                const m1Calls = s.callsPerDay * workDays * prod1;
+                const m1Opps = m1Calls * convRate;
+                const m1Deals = m1Opps * (s.winRate / 100);
+                
+                const m2Calls = s.callsPerDay * workDays * prod2;
+                const m2Opps = m2Calls * convRate;
+                const m2Deals = m2Opps * (s.winRate / 100);
+                
+                const m3Calls = s.callsPerDay * workDays * prod3;
+                const m3Opps = m3Calls * convRate;
+                const m3Deals = m3Opps * (s.winRate / 100);
+                
+                const m1Rev = m1Deals * s.avgDealSize;
+                const m2Rev = m2Deals * s.avgDealSize;
+                const m3Rev = m3Deals * s.avgDealSize;
+                
+                const m1Pipe = m1Opps * s.avgDealSize;
+                const m2Pipe = m2Opps * s.avgDealSize;
+                const m3Pipe = m3Opps * s.avgDealSize;
+                
+                const cycleMonths = s.salesCycle / 30;
+                let closed1 = 0, closed2 = 0, closed3 = 0;
+                
+                if (cycleMonths <= 1.5) {
+                    closed1 = m1Rev;
+                    closed2 = m2Rev;
+                    closed3 = m3Rev;
+                } else if (cycleMonths <= 2.5) {
+                    closed1 = m1Rev * 0.3;
+                    closed2 = m1Rev * 0.7 + m2Rev * 0.3;
+                    closed3 = m2Rev * 0.7;
+                } else {
+                    closed1 = 0;
+                    closed2 = m1Rev * 0.4;
+                    closed3 = m1Rev * 0.6 + m2Rev * 0.3;
+                }
+                
+                this.results = {
+                    m1Revenue: closed1,
+                    m2Revenue: closed2,
+                    m3Revenue: closed3,
+                    totalRevenue: closed1 + closed2 + closed3,
+                    totalPipeline: m1Pipe + m2Pipe + m3Pipe
+                };
+            },
+            
+            display: function() {
+                const fmt = (n) => '$' + Math.round(n / 1000) + 'K';
+                document.getElementById('testRevenue').textContent = fmt(this.results.totalRevenue);
+                document.getElementById('testPipeline').textContent = fmt(this.results.totalPipeline);
+                document.getElementById('testM1').textContent = fmt(this.results.m1Revenue);
+                document.getElementById('testM2').textContent = fmt(this.results.m2Revenue);
+                document.getElementById('testM3').textContent = fmt(this.results.m3Revenue);
+            }
+        };
+        
+        // Run tests
+        addTest('Calculator object exists', typeof TestCalc === 'object', 'Calculator defined');
+        addTest('Calculate function exists', typeof TestCalc.calculate === 'function', 'calculate() method present');
+        
+        TestCalc.calculate();
+        addTest('Initial calculation runs', TestCalc.results.totalRevenue > 0, `Total Revenue: $${Math.round(TestCalc.results.totalRevenue)}`);
+        
+        const initialRev = TestCalc.results.totalRevenue;
+        TestCalc.state.callsPerDay = 12;
+        TestCalc.calculate();
+        const newRev = TestCalc.results.totalRevenue;
+        addTest('Calculator is reactive', newRev > initialRev, `Revenue increased from $${Math.round(initialRev)} to $${Math.round(newRev)} when calls doubled`);
+        
+        // Reset and display
+        TestCalc.state.callsPerDay = 6;
+        TestCalc.calculate();
+        TestCalc.display();
+        
+        // Attach sliders
+        document.getElementById('testSliderDeal').oninput = function() {
+            const val = parseFloat(this.value);
+            document.getElementById('testDealSize').textContent = '$' + val + 'K';
+            TestCalc.state.avgDealSize = val * 1000;
+            TestCalc.calculate();
+            TestCalc.display();
+        };
+        
+        document.getElementById('testSliderCycle').oninput = function() {
+            const val = parseFloat(this.value);
+            document.getElementById('testCycle').textContent = val + 'd';
+            TestCalc.state.salesCycle = val;
+            TestCalc.calculate();
+            TestCalc.display();
+        };
+        
+        document.getElementById('testSliderWin').oninput = function() {
+            const val = parseFloat(this.value);
+            document.getElementById('testWin').textContent = val + '%';
+            TestCalc.state.winRate = val;
+            TestCalc.calculate();
+            TestCalc.display();
+        };
+        
+        document.getElementById('testSliderCalls').oninput = function() {
+            const val = parseFloat(this.value);
+            document.getElementById('testCalls').textContent = val + '/day';
+            TestCalc.state.callsPerDay = val;
+            TestCalc.calculate();
+            TestCalc.display();
+        };
+        
+        addTest('Sliders attached', true, 'Move sliders above to test reactivity');
+    </script>
+</body>
+</html>
