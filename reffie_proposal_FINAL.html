@@ -241,19 +241,27 @@
         window.pickSprint = function(days) {
             console.log('pickSprint:', days);
             var d = sprintData[days];
-            var btns = document.querySelectorAll('[onclick^="pickSprint"]');
+            
+            // Update button states using data-sprint-days attribute
+            var btns = document.querySelectorAll('[data-sprint-days]');
             for (var i = 0; i < btns.length; i++) {
                 var btn = btns[i];
-                if ((days === 30 && btn.textContent.indexOf('30 Days') > -1) ||
-                    (days === 60 && btn.textContent.indexOf('60 Days') > -1) ||
-                    (days === 90 && btn.textContent.indexOf('90 Days') > -1)) {
+                var btnDays = parseInt(btn.getAttribute('data-sprint-days'), 10);
+                if (btnDays === days) {
                     btn.style.transform = 'scale(1.05)';
                     btn.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
+                    btn.style.background = '#F0FDF4';
+                    btn.style.borderColor = '#10B981';
+                    btn.style.color = '#10B981';
                 } else {
                     btn.style.transform = 'scale(1)';
                     btn.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                    btn.style.background = 'white';
+                    btn.style.borderColor = '#E2E8F0';
+                    btn.style.color = '#64748B';
                 }
             }
+            
             update('sprintCostPerDay', '$' + d.perDay);
             update('sprintDuration', days + ' Days');
             update('sprintTotalCost', '$' + (d.cost / 1000) + 'K');
