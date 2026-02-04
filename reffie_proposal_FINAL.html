@@ -2736,38 +2736,38 @@ var calc = {
     callsDay: 6       // calls per day
 };
 
-// SLIDER HANDLERS
-function onDealSize(val) {
-    console.log('onDealSize called:', val);
+// SLIDER HANDLERS - EXPLICITLY GLOBAL
+window.onDealSize = function(val) {
+    console.log('✅ onDealSize called:', val);
     calc.dealSize = parseFloat(val);
     document.getElementById('dealSizeValue').textContent = '$' + val + 'K';
     updateSlider('sliderDealSize', 1, 50, val);
     runCalc();
-}
+};
 
-function onCycle(val) {
-    console.log('onCycle called:', val);
+window.onCycle = function(val) {
+    console.log('✅ onCycle called:', val);
     calc.cycle = parseFloat(val);
     document.getElementById('salesCycleValue').textContent = val + 'd';
     updateSlider('sliderSalesCycle', 7, 120, val);
     runCalc();
-}
+};
 
-function onWinRate(val) {
-    console.log('onWinRate called:', val);
+window.onWinRate = function(val) {
+    console.log('✅ onWinRate called:', val);
     calc.winRate = parseFloat(val);
     document.getElementById('winRateValue').textContent = val + '%';
     updateSlider('sliderWinRate', 5, 100, val);
     runCalc();
-}
+};
 
-function onCallsDay(val) {
-    console.log('onCallsDay called:', val);
+window.onCallsDay = function(val) {
+    console.log('✅ onCallsDay called:', val);
     calc.callsDay = parseFloat(val);
     document.getElementById('callsPerDayValue').textContent = val + '/day';
     updateSlider('sliderCallsPerDay', 1, 30, val);
     runCalc();
-}
+};
 
 // UPDATE SLIDER BACKGROUND
 function updateSlider(id, min, max, val) {
@@ -2909,12 +2909,13 @@ function updateChart(r1, r2, r3, p1, p2, p3) {
 // AE SALARY CALCULATOR
 var aeSalary = 120000;
 
-function onAeSalary(val) {
+window.onAeSalary = function(val) {
+    console.log('✅ onAeSalary called:', val);
     aeSalary = parseFloat(val) * 1000;
     document.getElementById('aeSalaryValue').textContent = '$' + val + 'K';
     updateSlider('sliderAeComp', 80, 180, val);
     runAeCalc();
-}
+};
 
 function runAeCalc() {
     var salary = aeSalary;
@@ -2969,7 +2970,8 @@ var sprintData = {
     90: { cost: 42000, perDay: 467, save: '78K+', time: '2-3 weeks', note: 'Complete onboarding blueprint' }
 };
 
-function pickSprint(days) {
+window.pickSprint = function(days) {
+    console.log('✅ pickSprint called:', days);
     var d = sprintData[days];
     
     // Highlight button
@@ -2993,7 +2995,7 @@ function pickSprint(days) {
     update('sprintSavings', '$' + d.save);
     update('sprintTimeToRev', d.time);
     update('sprintHiringNote', d.note);
-}
+};
 
 // HELPERS
 function update(id, txt) {
