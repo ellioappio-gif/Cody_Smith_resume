@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator Debug Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+        .output {
+            background: #e8f5e9;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Calculator Debug Test</h1>
+    
+    <div class="test-section">
+        <h2>Test 1: Console Logging</h2>
+        <p>Open browser console (F12) and check for messages</p>
+        <div id="consoleTest" class="output">Waiting for test...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: Revenue Calculator</h2>
+        <label>Deal Size: <span id="dealSizeDisplay">$6K</span></label>
+        <input type="range" id="testSlider" min="1" max="50" value="6" step="0.5" 
+            oninput="testSliderChange(this.value)">
+        
+        <div class="output">
+            <div>Calculated Revenue: <span id="revenueDisplay">$0</span></div>
+            <div>Pipeline: <span id="pipelineDisplay">$0</span></div>
+            <div>Deals Closed: <span id="dealsDisplay">0</span></div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Function Scope Check</h2>
+        <button onclick="checkGlobalScope()">Check if functions are global</button>
+        <div id="scopeTest" class="output">Click button to test</div>
+    </div>
+
+    <script>
+        // Test 1: Console logging
+        console.log('🚀 TEST SCRIPT LOADED');
+        console.log('Document state:', document.readyState);
+        document.getElementById('consoleTest').textContent = 'Script loaded! Check console for messages.';
+
+        // Test 2: Revenue calculator
+        var calc = {
+            dealSize: 6,
+            cycle: 45,
+            winRate: 20,
+            callsDay: 6
+        };
+
+        function testSliderChange(val) {
+            console.log('🎯 testSliderChange called with value:', val);
+            calc.dealSize = parseFloat(val);
+            document.getElementById('dealSizeDisplay').textContent = '$' + val + 'K';
+            runTestCalc();
+        }
+
+        function runTestCalc() {
+            console.log('📊 runTestCalc called with state:', calc);
+            
+            // Same calculation logic as main site
+            var dealSize = calc.dealSize * 1000;
+            var cycle = calc.cycle;
+            var winRate = calc.winRate / 100;
+            var callsDay = calc.callsDay;
+            
+            var dailyOpps = callsDay * 0.5;
+            var quarterOpps = dailyOpps * 65;
+            var dealsWon = Math.round(quarterOpps * winRate);
+            var revenue = dealsWon * dealSize;
+            var pipeline = quarterOpps * dealSize;
+            
+            console.log('Calculated:', {
+                revenue: revenue,
+                pipeline: pipeline,
+                deals: dealsWon
+            });
+            
+            document.getElementById('revenueDisplay').textContent = '$' + Math.round(revenue / 1000) + 'K';
+            document.getElementById('pipelineDisplay').textContent = '$' + Math.round(pipeline / 1000) + 'K';
+            document.getElementById('dealsDisplay').textContent = dealsWon;
+        }
+
+        // Test 3: Global scope check
+        function checkGlobalScope() {
+            console.log('🔍 Checking global scope...');
+            var results = [];
+            
+            results.push('testSliderChange: ' + (typeof window.testSliderChange));
+            results.push('runTestCalc: ' + (typeof window.runTestCalc));
+            results.push('checkGlobalScope: ' + (typeof window.checkGlobalScope));
+            
+            console.log('Global functions:', results);
+            document.getElementById('scopeTest').innerHTML = results.join('<br>');
+        }
+
+        // Run initial calculation
+        console.log('🏃 Running initial calculation...');
+        runTestCalc();
+        console.log('✅ Test initialization complete');
+    </script>
+</body>
+</html>
