@@ -804,7 +804,7 @@
                                         <span id="dealSizeValue" style="color: #10B981; font-weight: 700; font-size: 1.3rem;">$6K</span>
                                     </div>
                                     <input type="range" id="sliderDealSize" min="1" max="50" value="6" step="0.5" 
-                                        oninput="handleDealSizeChange(this.value)"
+                                        oninput="onDealSize(this.value)"
                                         style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #10B981 0%, #10B981 12%, #E2E8F0 12%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                                 </div>
 
@@ -817,7 +817,7 @@
                                         <span id="salesCycleValue" style="color: #06B6D4; font-weight: 700; font-size: 1.3rem;">45d</span>
                                     </div>
                                     <input type="range" id="sliderSalesCycle" min="7" max="120" value="45" step="1" 
-                                        oninput="handleSalesCycleChange(this.value)"
+                                        oninput="onCycle(this.value)"
                                         style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #06B6D4 0%, #06B6D4 32%, #E2E8F0 32%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                                 </div>
 
@@ -830,7 +830,7 @@
                                         <span id="winRateValue" style="color: #8B5CF6; font-weight: 700; font-size: 1.3rem;">20%</span>
                                     </div>
                                     <input type="range" id="sliderWinRate" min="5" max="100" value="20" step="5" 
-                                        oninput="handleWinRateChange(this.value)"
+                                        oninput="onWinRate(this.value)"
                                         style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #8B5CF6 0%, #8B5CF6 18%, #E2E8F0 18%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                                 </div>
 
@@ -843,7 +843,7 @@
                                         <span id="callsPerDayValue" style="color: #F59E0B; font-weight: 700; font-size: 1.3rem;">6/day</span>
                                     </div>
                                     <input type="range" id="sliderCallsPerDay" min="1" max="30" value="6" step="1" 
-                                        oninput="handleCallsPerDayChange(this.value)"
+                                        oninput="onCallsDay(this.value)"
                                         style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #F59E0B 0%, #F59E0B 19%, #E2E8F0 19%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                                 </div>
                             </div>
@@ -1817,15 +1817,15 @@
                 <div style="text-align: center; margin-bottom: 2rem;">
                     <h3 style="color: #1E293B; font-size: 1.3rem; margin-bottom: 1.5rem;">Select Your Sprint Duration</h3>
                     <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                        <button id="sprintBtn30" onclick="selectSprintDuration(30)" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #10B981; background: #F0FDF4; color: #10B981; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
+                        <button id="sprintBtn30" onclick="pickSprint(30)" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #10B981; background: #F0FDF4; color: #10B981; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
                             <div style="font-size: 1.3rem; font-weight: 800;">30 Days</div>
                             <div style="font-size: 0.85rem;">Foundation</div>
                         </button>
-                        <button id="sprintBtn60" onclick="selectSprintDuration(60)" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #E2E8F0; background: white; color: #64748B; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
+                        <button id="sprintBtn60" onclick="pickSprint(60)" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #E2E8F0; background: white; color: #64748B; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
                             <div style="font-size: 1.3rem; font-weight: 800;">60 Days</div>
                             <div style="font-size: 0.85rem;">Extended</div>
                         </button>
-                        <button id="sprintBtn90" onclick="selectSprintDuration(90)" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #E2E8F0; background: white; color: #64748B; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
+                        <button id="sprintBtn90" onclick="pickSprint(90)" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #E2E8F0; background: white; color: #64748B; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
                             <div style="font-size: 1.3rem; font-weight: 800;">90 Days</div>
                             <div style="font-size: 0.85rem;">Full Ramp</div>
                         </button>
@@ -2293,13 +2293,13 @@
                             <div style="text-align: center; margin-bottom: 1rem;">
                                 <label style="color: #78350F; font-weight: 600; font-size: 1.1rem; display: block; margin-bottom: 1rem;">Select Sprint Duration:</label>
                                 <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                                    <button onclick="selectSprintDuration(30)" style="padding: 1rem 2rem; background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);">
+                                    <button onclick="pickSprint(30)" style="padding: 1rem 2rem; background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);">
                                         30 Days - $15K
                                     </button>
-                                    <button onclick="selectSprintDuration(60)" style="padding: 1rem 2rem; background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
+                                    <button onclick="pickSprint(60)" style="padding: 1rem 2rem; background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
                                         60 Days - $28K
                                     </button>
-                                    <button onclick="selectSprintDuration(90)" style="padding: 1rem 2rem; background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
+                                    <button onclick="pickSprint(90)" style="padding: 1rem 2rem; background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
                                         90 Days - $42K
                                     </button>
                                 </div>
@@ -2434,7 +2434,7 @@
                             <span id="aeSalaryValue" style="color: #10B981; font-weight: 700; font-size: 1.3rem;">$120K</span>
                         </div>
                         <input type="range" id="sliderAeComp" min="80" max="180" value="120" step="10"
-                            oninput="handleAeCompChange(this.value)"
+                            oninput="onAeSalary(this.value)"
                             style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #10B981 0%, #10B981 40%, #E2E8F0 40%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                     </div>
 
@@ -2721,358 +2721,252 @@
 
 
 <script>
-// =============================================================================
-// CALCULATOR - CLEAN BULLETPROOF IMPLEMENTATION
-// =============================================================================
-
-// Calculator state
-var calcState = {
-    avgDealSize: 6000,
-    salesCycle: 45,
-    winRate: 20,
-    callsPerDay: 6
+// REVENUE CALCULATOR STATE
+var calc = {
+    dealSize: 6,      // in thousands
+    cycle: 45,        // days
+    winRate: 20,      // percent
+    callsDay: 6       // calls per day
 };
 
-// Update slider background fill
-function updateSliderBg(sliderId, min, max, color) {
-    var slider = document.getElementById(sliderId);
-    if (!slider) return;
-    
-    var value = parseFloat(slider.value);
-    var percentage = ((value - min) / (max - min)) * 100;
-    slider.style.background = 'linear-gradient(to right, ' + color + ' 0%, ' + color + ' ' + percentage + '%, #E2E8F0 ' + percentage + '%, #E2E8F0 100%)';
-}
-
-// Slider event handlers
-function handleDealSizeChange(value) {
-    var val = parseFloat(value);
-    calcState.avgDealSize = val * 1000;
+// SLIDER HANDLERS
+function onDealSize(val) {
+    calc.dealSize = parseFloat(val);
     document.getElementById('dealSizeValue').textContent = '$' + val + 'K';
-    updateSliderBg('sliderDealSize', 1, 50, '#10B981');
-    calculateAndDisplay();
+    updateSlider('sliderDealSize', 1, 50, val);
+    runCalc();
 }
 
-function handleSalesCycleChange(value) {
-    var val = parseFloat(value);
-    calcState.salesCycle = val;
+function onCycle(val) {
+    calc.cycle = parseFloat(val);
     document.getElementById('salesCycleValue').textContent = val + 'd';
-    updateSliderBg('sliderSalesCycle', 7, 120, '#06B6D4');
-    calculateAndDisplay();
+    updateSlider('sliderSalesCycle', 7, 120, val);
+    runCalc();
 }
 
-function handleWinRateChange(value) {
-    var val = parseFloat(value);
-    calcState.winRate = val;
+function onWinRate(val) {
+    calc.winRate = parseFloat(val);
     document.getElementById('winRateValue').textContent = val + '%';
-    updateSliderBg('sliderWinRate', 5, 100, '#8B5CF6');
-    calculateAndDisplay();
+    updateSlider('sliderWinRate', 5, 100, val);
+    runCalc();
 }
 
-function handleCallsPerDayChange(value) {
-    var val = parseFloat(value);
-    calcState.callsPerDay = val;
+function onCallsDay(val) {
+    calc.callsDay = parseFloat(val);
     document.getElementById('callsPerDayValue').textContent = val + '/day';
-    updateSliderBg('sliderCallsPerDay', 1, 30, '#F59E0B');
-    calculateAndDisplay();
+    updateSlider('sliderCallsPerDay', 1, 30, val);
+    runCalc();
 }
 
-// Main calculation and display function
-function calculateAndDisplay() {
-    var s = calcState;
+// UPDATE SLIDER BACKGROUND
+function updateSlider(id, min, max, val) {
+    var slider = document.getElementById(id);
+    if (!slider) return;
+    var pct = ((val - min) / (max - min)) * 100;
+    var color = id === 'sliderDealSize' ? '#10B981' :
+                id === 'sliderSalesCycle' ? '#06B6D4' :
+                id === 'sliderWinRate' ? '#8B5CF6' : '#F59E0B';
+    slider.style.background = 'linear-gradient(to right, ' + color + ' 0%, ' + color + ' ' + pct + '%, #E2E8F0 ' + pct + '%, #E2E8F0 100%)';
+}
+
+// MAIN CALCULATION
+function runCalc() {
+    var dealSize = calc.dealSize * 1000;
+    var cycle = calc.cycle;
+    var winRate = calc.winRate / 100;
+    var callsDay = calc.callsDay;
     
-    // Constants
-    var workDays = 20;
-    var conversionRate = 0.12;
+    // Month calcs
+    var m1Calls = callsDay * 20 * 0.30;
+    var m1Opps = m1Calls * 0.12;
+    var m1Deals = m1Opps * winRate;
+    var m1Rev = m1Deals * dealSize;
+    var m1Pipe = m1Opps * dealSize;
     
-    // Productivity ramp (conservative)
-    var prod1 = 0.30;
-    var prod2 = 0.50;
-    var prod3 = 0.70;
+    var m2Calls = callsDay * 20 * 0.50;
+    var m2Opps = m2Calls * 0.12;
+    var m2Deals = m2Opps * winRate;
+    var m2Rev = m2Deals * dealSize;
+    var m2Pipe = m2Opps * dealSize;
     
-    // Month 1 calculations
-    var m1Calls = s.callsPerDay * workDays * prod1;
-    var m1Opps = m1Calls * conversionRate;
-    var m1Deals = m1Opps * (s.winRate / 100);
-    var m1Revenue = m1Deals * s.avgDealSize;
-    var m1Pipeline = m1Opps * s.avgDealSize;
+    var m3Calls = callsDay * 20 * 0.70;
+    var m3Opps = m3Calls * 0.12;
+    var m3Deals = m3Opps * winRate;
+    var m3Rev = m3Deals * dealSize;
+    var m3Pipe = m3Opps * dealSize;
     
-    // Month 2 calculations
-    var m2Calls = s.callsPerDay * workDays * prod2;
-    var m2Opps = m2Calls * conversionRate;
-    var m2Deals = m2Opps * (s.winRate / 100);
-    var m2Revenue = m2Deals * s.avgDealSize;
-    var m2Pipeline = m2Opps * s.avgDealSize;
-    
-    // Month 3 calculations
-    var m3Calls = s.callsPerDay * workDays * prod3;
-    var m3Opps = m3Calls * conversionRate;
-    var m3Deals = m3Opps * (s.winRate / 100);
-    var m3Revenue = m3Deals * s.avgDealSize;
-    var m3Pipeline = m3Opps * s.avgDealSize;
-    
-    // Sales cycle adjustments (revenue timing)
-    var cycleMonths = s.salesCycle / 30;
+    // Cycle adjustment
+    var cycleMonths = cycle / 30;
     var closed1, closed2, closed3;
     
     if (cycleMonths <= 1.5) {
-        // Short cycle - close same month
-        closed1 = m1Revenue;
-        closed2 = m2Revenue;
-        closed3 = m3Revenue;
+        closed1 = m1Rev;
+        closed2 = m2Rev;
+        closed3 = m3Rev;
     } else if (cycleMonths <= 2.5) {
-        // Medium cycle - split across months
-        closed1 = m1Revenue * 0.3;
-        closed2 = m1Revenue * 0.7 + m2Revenue * 0.3;
-        closed3 = m2Revenue * 0.7 + m3Revenue * 0.3;
+        closed1 = m1Rev * 0.3;
+        closed2 = m1Rev * 0.7 + m2Rev * 0.3;
+        closed3 = m2Rev * 0.7 + m3Rev * 0.3;
     } else {
-        // Long cycle - delayed closes
         closed1 = 0;
-        closed2 = m1Revenue * 0.4;
-        closed3 = m1Revenue * 0.6 + m2Revenue * 0.3;
+        closed2 = m1Rev * 0.4;
+        closed3 = m1Rev * 0.6 + m2Rev * 0.3;
     }
     
-    // Total metrics
-    var totalRevenue = closed1 + closed2 + closed3;
-    var totalPipeline = m1Pipeline + m2Pipeline + m3Pipeline;
-    var totalDeals = totalRevenue / s.avgDealSize;
-    var pipelineDeals = totalPipeline / s.avgDealSize;
+    var totalRev = closed1 + closed2 + closed3;
+    var totalPipe = m1Pipe + m2Pipe + m3Pipe;
     
-    // Format currency
-    function fmt(num) {
-        return '$' + Math.round(num / 1000) + 'K';
-    }
+    // Update display
+    update('closedRevenue', k(totalRev));
+    update('totalPipeline', k(totalPipe));
+    update('closedDeals', Math.round(totalRev / dealSize));
+    update('pipelineDeals', Math.round(totalPipe / dealSize));
     
-    // Update main metrics
-    setText('closedRevenue', fmt(totalRevenue));
-    setText('totalPipeline', fmt(totalPipeline));
-    setText('closedDeals', Math.round(totalDeals));
-    setText('pipelineDeals', Math.round(pipelineDeals));
+    update('month1Revenue', k(closed1));
+    update('month1Pipeline', k(m1Pipe));
+    update('month2Revenue', k(closed2));
+    update('month2Pipeline', k(m2Pipe));
+    update('month3Revenue', k(closed3));
+    update('month3Pipeline', k(m3Pipe));
     
-    // Update month breakdowns
-    setText('month1Revenue', fmt(closed1));
-    setText('month1Pipeline', fmt(m1Pipeline));
-    setText('month2Revenue', fmt(closed2));
-    setText('month2Pipeline', fmt(m2Pipeline));
-    setText('month3Revenue', fmt(closed3));
-    setText('month3Pipeline', fmt(m3Pipeline));
+    update('planM1Rev', k(closed1));
+    update('planM1Pipe', k(m1Pipe));
+    update('planM1Deals', '(' + Math.round(m1Deals * 0.4) + '-' + Math.round(m1Deals * 0.6) + ' deals)');
+    update('planM1Opps', '(' + Math.round(m1Opps * 0.7) + '-' + Math.round(m1Opps) + ' opps)');
     
-    // Update 90-day plan cards
-    setText('planM1Rev', fmt(closed1));
-    setText('planM1Pipe', fmt(m1Pipeline));
-    setText('planM1Deals', '(' + Math.round(m1Deals * 0.4) + '-' + Math.round(m1Deals * 0.6) + ' deals)');
-    setText('planM1Opps', '(' + Math.round(m1Opps * 0.7) + '-' + Math.round(m1Opps) + ' opps)');
+    update('planM2Rev', k(closed2));
+    update('planM2Pipe', k(m2Pipe));
+    update('planM2Deals', '(' + Math.round(m2Deals * 0.6) + '-' + Math.round(m2Deals * 1.2) + ' deals)');
+    update('planM2Opps', '(' + Math.round(m2Opps * 0.7) + '-' + Math.round(m2Opps) + ' opps)');
     
-    setText('planM2Rev', fmt(closed2));
-    setText('planM2Pipe', fmt(m2Pipeline));
-    setText('planM2Deals', '(' + Math.round(m2Deals * 0.6) + '-' + Math.round(m2Deals * 1.2) + ' deals)');
-    setText('planM2Opps', '(' + Math.round(m2Opps * 0.7) + '-' + Math.round(m2Opps) + ' opps)');
+    update('planM3Rev', k(closed3));
+    update('planM3Pipe', k(m3Pipeline));
+    update('planM3Deals', '(' + Math.round(m3Deals * 0.8) + '-' + Math.round(m3Deals * 1.3) + ' deals)');
+    update('planM3Opps', '(' + Math.round(m3Opps * 0.8) + '-' + Math.round(m3Opps * 1.2) + ' opps)');
     
-    setText('planM3Rev', fmt(closed3));
-    setText('planM3Pipe', fmt(m3Pipeline));
-    setText('planM3Deals', '(' + Math.round(m3Deals * 0.8) + '-' + Math.round(m3Deals * 1.3) + ' deals)');
-    setText('planM3Opps', '(' + Math.round(m3Opps * 0.8) + '-' + Math.round(m3Opps * 1.2) + ' opps)');
+    update('planCycleDays1', Math.round(cycle / 2) + '-' + Math.round(cycle));
+    update('ctaRevenue', k(totalRev));
+    update('ctaPipeline', k(totalPipe));
     
-    // Update cycle days display
-    setText('planCycleDays1', Math.round(s.salesCycle / 2) + '-' + Math.round(s.salesCycle));
-    
-    // Update CTA section
-    setText('ctaRevenue', fmt(totalRevenue));
-    setText('ctaPipeline', fmt(totalPipeline));
-    
-    // Update revenue chart
-    updateChart(closed1, closed2, closed3, m1Pipeline, m2Pipeline, m3Pipeline);
+    updateChart(closed1, closed2, closed3, m1Pipe, m2Pipe, m3Pipe);
 }
 
-// Helper to set text content safely
-function setText(id, value) {
-    var el = document.getElementById(id);
-    if (el) {
-        el.textContent = value;
-    }
+// UPDATE CHART
+function updateChart(r1, r2, r3, p1, p2, p3) {
+    var cumR1 = r1, cumR2 = r1 + r2, cumR3 = r1 + r2 + r3;
+    var cumP1 = p1, cumP2 = p1 + p2, cumP3 = p1 + p2 + p3;
+    var max = Math.max(cumR1, cumR2, cumR3, cumP1, cumP2, cumP3, 1) * 1.15;
+    
+    update('chartY6', k(max));
+    update('chartY5', k(max * 0.8));
+    update('chartY4', k(max * 0.6));
+    update('chartY3', k(max * 0.4));
+    update('chartY2', k(max * 0.2));
+    update('chartY1', '$0');
+    
+    var y = function(v) { return 320 - ((v / max) * 270); };
+    
+    var ry1 = y(cumR1), ry2 = y(cumR2), ry3 = y(cumR3);
+    var py1 = y(cumP1), py2 = y(cumP2), py3 = y(cumP3);
+    
+    setAttr('revenueLine', 'd', 'M 250 ' + ry1 + ' L 465 ' + ry2 + ' L 680 ' + ry3);
+    setAttr('revPoint1', 'cy', ry1);
+    setAttr('revPoint2', 'cy', ry2);
+    setAttr('revPoint3', 'cy', ry3);
+    
+    setAttr('pipelineLine', 'd', 'M 250 ' + py1 + ' L 465 ' + py2 + ' L 680 ' + py3);
+    setAttr('pipePoint1', 'cy', py1);
+    setAttr('pipePoint2', 'cy', py2);
+    setAttr('pipePoint3', 'cy', py3);
+    
+    update('revLabel1', k(cumR1));
+    update('revLabel2', k(cumR2));
+    update('revLabel3', k(cumR3));
+    update('pipeLabel1', k(cumP1));
+    update('pipeLabel2', k(cumP2));
+    update('pipeLabel3', k(cumP3));
+    
+    setAttr('revLabel1', 'y', Math.max(30, ry1 - 15));
+    setAttr('revLabel2', 'y', Math.max(30, ry2 - 15));
+    setAttr('revLabel3', 'y', Math.max(30, ry3 - 15));
+    setAttr('pipeLabel1', 'y', Math.min(350, py1 + 25));
+    setAttr('pipeLabel2', 'y', Math.min(350, py2 + 25));
+    setAttr('pipeLabel3', 'y', Math.min(350, py3 + 25));
 }
 
-// Update revenue chart
-function updateChart(m1Rev, m2Rev, m3Rev, m1Pipe, m2Pipe, m3Pipe) {
-    // Cumulative values
-    var cumRev1 = m1Rev;
-    var cumRev2 = m1Rev + m2Rev;
-    var cumRev3 = m1Rev + m2Rev + m3Rev;
-    
-    var cumPipe1 = m1Pipe;
-    var cumPipe2 = m1Pipe + m2Pipe;
-    var cumPipe3 = m1Pipe + m2Pipe + m3Pipe;
-    
-    // Find max value for scaling
-    var maxVal = Math.max(cumRev1, cumRev2, cumRev3, cumPipe1, cumPipe2, cumPipe3, 1);
-    var chartMax = maxVal * 1.15;
-    
-    // Format currency
-    function fmt(num) {
-        return '$' + Math.round(num / 1000) + 'K';
-    }
-    
-    // Update Y-axis
-    setText('chartY6', fmt(chartMax));
-    setText('chartY5', fmt(chartMax * 0.8));
-    setText('chartY4', fmt(chartMax * 0.6));
-    setText('chartY3', fmt(chartMax * 0.4));
-    setText('chartY2', fmt(chartMax * 0.2));
-    setText('chartY1', '$0');
-    
-    // Calculate Y positions (chart is 270px tall, starting at y=50)
-    function yPos(val) {
-        return 320 - ((val / chartMax) * 270);
-    }
-    
-    var revY1 = yPos(cumRev1);
-    var revY2 = yPos(cumRev2);
-    var revY3 = yPos(cumRev3);
-    
-    var pipeY1 = yPos(cumPipe1);
-    var pipeY2 = yPos(cumPipe2);
-    var pipeY3 = yPos(cumPipe3);
-    
-    // Update revenue line
-    var revLine = document.getElementById('revenueLine');
-    if (revLine) {
-        revLine.setAttribute('d', 'M 250 ' + revY1 + ' L 465 ' + revY2 + ' L 680 ' + revY3);
-    }
-    
-    // Update revenue points
-    setAttr('revPoint1', 'cy', revY1);
-    setAttr('revPoint2', 'cy', revY2);
-    setAttr('revPoint3', 'cy', revY3);
-    
-    // Update pipeline line
-    var pipeLine = document.getElementById('pipelineLine');
-    if (pipeLine) {
-        pipeLine.setAttribute('d', 'M 250 ' + pipeY1 + ' L 465 ' + pipeY2 + ' L 680 ' + pipeY3);
-    }
-    
-    // Update pipeline points
-    setAttr('pipePoint1', 'cy', pipeY1);
-    setAttr('pipePoint2', 'cy', pipeY2);
-    setAttr('pipePoint3', 'cy', pipeY3);
-    
-    // Update labels
-    setText('revLabel1', fmt(cumRev1));
-    setText('revLabel2', fmt(cumRev2));
-    setText('revLabel3', fmt(cumRev3));
-    setText('pipeLabel1', fmt(cumPipe1));
-    setText('pipeLabel2', fmt(cumPipe2));
-    setText('pipeLabel3', fmt(cumPipe3));
-    
-    // Position labels
-    setAttr('revLabel1', 'y', Math.max(30, revY1 - 15));
-    setAttr('revLabel2', 'y', Math.max(30, revY2 - 15));
-    setAttr('revLabel3', 'y', Math.max(30, revY3 - 15));
-    setAttr('pipeLabel1', 'y', Math.min(350, pipeY1 + 25));
-    setAttr('pipeLabel2', 'y', Math.min(350, pipeY2 + 25));
-    setAttr('pipeLabel3', 'y', Math.min(350, pipeY3 + 25));
-}
+// AE SALARY CALCULATOR
+var aeSalary = 120000;
 
-// Helper to set attribute
-function setAttr(id, attr, value) {
-    var el = document.getElementById(id);
-    if (el) {
-        el.setAttribute(attr, value);
-    }
-}
-
-// =============================================================================
-// SPRINT COST COMPARISON
-// =============================================================================
-
-var sprintAeSalary = 120000;
-
-function handleAeCompChange(value) {
-    var val = parseFloat(value);
-    sprintAeSalary = val * 1000;
+function onAeSalary(val) {
+    aeSalary = parseFloat(val) * 1000;
     document.getElementById('aeSalaryValue').textContent = '$' + val + 'K';
-    updateSliderBg('sliderAeComp', 80, 180, '#10B981');
-    updateSprintComparison();
+    updateSlider('sliderAeComp', 80, 180, val);
+    runAeCalc();
 }
 
-function updateSprintComparison() {
-    var salary = sprintAeSalary;
+function runAeCalc() {
+    var salary = aeSalary;
     
-    // Traditional hiring costs
-    var tradSalary = salary;
-    var tradRecruiting = salary * 0.20;
-    var tradLostRevenue = 30000 * 6;
-    var tradCEOTime = 80000;
-    var tradSubtotal = tradSalary + tradRecruiting + tradLostRevenue + tradCEOTime;
-    var tradRisk = tradSubtotal * 0.73 * 0.40;
-    var tradTotal = tradSubtotal + tradRisk;
+    // Traditional
+    var tSal = salary;
+    var tRec = salary * 0.20;
+    var tLost = 30000 * 6;
+    var tCEO = 80000;
+    var tSub = tSal + tRec + tLost + tCEO;
+    var tRisk = tSub * 0.73 * 0.40;
+    var tTotal = tSub + tRisk;
     
-    // Sprint method costs
-    var sprintCost = 15000;
-    var sprintSalary = salary * 0.70;
-    var sprintRecruiting = sprintSalary * 0.20;
-    var sprintLostRevenue = 30000 * 2;
-    var sprintCEOTime = 16000;
-    var sprintSubtotal = sprintCost + sprintSalary + sprintRecruiting + sprintLostRevenue + sprintCEOTime;
-    var sprintRisk = sprintSubtotal * 0.22 * 0.40;
-    var sprintTotal = sprintSubtotal + sprintRisk;
+    // Sprint
+    var sCost = 15000;
+    var sSal = salary * 0.70;
+    var sRec = sSal * 0.20;
+    var sLost = 30000 * 2;
+    var sCEO = 16000;
+    var sSub = sCost + sSal + sRec + sLost + sCEO;
+    var sRisk = sSub * 0.22 * 0.40;
+    var sTotal = sSub + sRisk;
     
-    // Savings
-    var savings = tradTotal - sprintTotal;
-    var savingsPct = (savings / tradTotal) * 100;
+    var savings = tTotal - sTotal;
+    var savingsPct = (savings / tTotal) * 100;
     
-    // Format currency
-    function fmt(num) {
-        return '$' + Math.round(num / 1000) + 'K';
-    }
+    update('tradSalary', k(tSal));
+    update('tradRecruiting', k(tRec));
+    update('tradLostRev', k(tLost));
+    update('tradCEO', k(tCEO));
+    update('tradSubtotal', k(tSub));
+    update('tradRisk', k(tRisk));
+    update('tradTotal', k(tTotal));
     
-    // Update traditional costs
-    setText('tradSalary', fmt(tradSalary));
-    setText('tradRecruiting', fmt(tradRecruiting));
-    setText('tradLostRev', fmt(tradLostRevenue));
-    setText('tradCEO', fmt(tradCEOTime));
-    setText('tradSubtotal', fmt(tradSubtotal));
-    setText('tradRisk', fmt(tradRisk));
-    setText('tradTotal', fmt(tradTotal));
+    update('sprintCost', '$15K');
+    update('sprintSalary', k(sSal));
+    update('sprintRecruiting', k(sRec));
+    update('sprintLostRev', k(sLost));
+    update('sprintCEO', k(sCEO));
+    update('sprintSubtotal', k(sSub));
+    update('sprintRisk', k(sRisk));
+    update('sprintTotal', k(sTotal));
     
-    // Update sprint costs
-    setText('sprintCost', '$15K');
-    setText('sprintSalary', fmt(sprintSalary));
-    setText('sprintRecruiting', fmt(sprintRecruiting));
-    setText('sprintLostRev', fmt(sprintLostRevenue));
-    setText('sprintCEO', fmt(sprintCEOTime));
-    setText('sprintSubtotal', fmt(sprintSubtotal));
-    setText('sprintRisk', fmt(sprintRisk));
-    setText('sprintTotal', fmt(sprintTotal));
-    
-    // Update savings
-    setText('sprintSavings', fmt(savings));
-    setText('sprintSavingsPct', Math.round(savingsPct) + '%');
+    update('sprintSavings', k(savings));
+    update('sprintSavingsPct', Math.round(savingsPct) + '%');
 }
 
-// Sprint duration selector
-var selectedSprintDuration = 30;
-var sprintPricing = {
-    30: { total: 15000, perDay: 500, savings: '105K+', timeToRev: '4-6 weeks', hiringNote: 'Foundation in 30 days' },
-    60: { total: 28000, perDay: 467, savings: '92K+', timeToRev: '3-4 weeks', hiringNote: 'Full hiring guide in 60 days' },
-    90: { total: 42000, perDay: 467, savings: '78K+', timeToRev: '2-3 weeks', hiringNote: 'Complete onboarding blueprint' }
+// SPRINT DURATION CALCULATOR
+var sprintData = {
+    30: { cost: 15000, perDay: 500, save: '105K+', time: '4-6 weeks', note: 'Foundation in 30 days' },
+    60: { cost: 28000, perDay: 467, save: '92K+', time: '3-4 weeks', note: 'Full hiring guide in 60 days' },
+    90: { cost: 42000, perDay: 467, save: '78K+', time: '2-3 weeks', note: 'Complete onboarding blueprint' }
 };
 
-function selectSprintDuration(days) {
-    console.log('selectSprintDuration called with:', days);
-    selectedSprintDuration = days;
-    var pricing = sprintPricing[days];
-    console.log('Pricing data:', pricing);
+function pickSprint(days) {
+    var d = sprintData[days];
     
-    // Update button states - find buttons and highlight the selected one
-    var buttons = document.querySelectorAll('[onclick^="selectSprintDuration"]');
-    console.log('Found buttons:', buttons.length);
-    for (var i = 0; i < buttons.length; i++) {
-        var btn = buttons[i];
-        var btnText = btn.textContent;
-        
-        // Check if this button matches the selected duration
-        if ((days === 30 && btnText.indexOf('30 Days') !== -1) ||
-            (days === 60 && btnText.indexOf('60 Days') !== -1) ||
-            (days === 90 && btnText.indexOf('90 Days') !== -1)) {
+    // Highlight button
+    var btns = document.querySelectorAll('[onclick^="pickSprint"]');
+    for (var i = 0; i < btns.length; i++) {
+        var btn = btns[i];
+        if ((days === 30 && btn.textContent.indexOf('30 Days') > -1) ||
+            (days === 60 && btn.textContent.indexOf('60 Days') > -1) ||
+            (days === 90 && btn.textContent.indexOf('90 Days') > -1)) {
             btn.style.transform = 'scale(1.05)';
             btn.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
         } else {
@@ -3081,102 +2975,83 @@ function selectSprintDuration(days) {
         }
     }
     
-    // Update calculator display
-    console.log('Updating display elements...');
-    var costPerDayEl = document.getElementById('sprintCostPerDay');
-    var durationEl = document.getElementById('sprintDuration');
-    var totalCostEl = document.getElementById('sprintTotalCost');
-    var savingsEl = document.getElementById('sprintSavings');
-    var timeToRevEl = document.getElementById('sprintTimeToRev');
-    var hiringNoteEl = document.getElementById('sprintHiringNote');
-    
-    console.log('Elements found:', {
-        costPerDay: !!costPerDayEl,
-        duration: !!durationEl,
-        totalCost: !!totalCostEl,
-        savings: !!savingsEl,
-        timeToRev: !!timeToRevEl,
-        hiringNote: !!hiringNoteEl
-    });
-    
-    if (costPerDayEl) costPerDayEl.textContent = '$' + pricing.perDay;
-    if (durationEl) durationEl.textContent = days + ' Days';
-    if (totalCostEl) totalCostEl.textContent = '$' + (pricing.total / 1000) + 'K';
-    if (savingsEl) savingsEl.textContent = '$' + pricing.savings;
-    if (timeToRevEl) timeToRevEl.textContent = pricing.timeToRev;
-    if (hiringNoteEl) hiringNoteEl.textContent = pricing.hiringNote;
-    
-    console.log('Display updated successfully');
+    update('sprintCostPerDay', '$' + d.perDay);
+    update('sprintDuration', days + ' Days');
+    update('sprintTotalCost', '$' + (d.cost / 1000) + 'K');
+    update('sprintSavings', '$' + d.save);
+    update('sprintTimeToRev', d.time);
+    update('sprintHiringNote', d.note);
 }
 
-// =============================================================================
-// NAVIGATION & UI
-// =============================================================================
+// HELPERS
+function update(id, txt) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = txt;
+}
 
-function initNavigationTracking() {
+function setAttr(id, attr, val) {
+    var el = document.getElementById(id);
+    if (el) el.setAttribute(attr, val);
+}
+
+function k(num) {
+    return '$' + Math.round(num / 1000) + 'K';
+}
+
+// NAV
+function initNav() {
     var sections = document.querySelectorAll('section[id]');
-    var navLinks = document.querySelectorAll('nav a[href^="#"]');
+    var links = document.querySelectorAll('nav a[href^="#"]');
     
-    // Update active link on scroll
-    function updateActiveLink() {
-        var current = '';
-        
+    function updateNav() {
+        var cur = '';
         for (var i = 0; i < sections.length; i++) {
-            var section = sections[i];
-            var sectionTop = section.offsetTop;
-            var sectionHeight = section.clientHeight;
-            
-            if (window.pageYOffset >= sectionTop - 100) {
-                current = section.getAttribute('id');
+            if (window.pageYOffset >= sections[i].offsetTop - 100) {
+                cur = sections[i].getAttribute('id');
             }
         }
-        
-        for (var j = 0; j < navLinks.length; j++) {
-            var link = navLinks[j];
-            link.classList.remove('active');
-            
-            if (link.getAttribute('href') === '#' + current) {
-                link.classList.add('active');
+        for (var j = 0; j < links.length; j++) {
+            links[j].classList.remove('active');
+            if (links[j].getAttribute('href') === '#' + cur) {
+                links[j].classList.add('active');
             }
         }
     }
     
-    window.addEventListener('scroll', updateActiveLink);
-    updateActiveLink();
+    window.addEventListener('scroll', updateNav);
+    updateNav();
 }
 
-function initExpandableSections() {
-    var expandableSections = document.querySelectorAll('[data-expandable]');
+// EXPANDABLE
+function initExpand() {
+    var sections = document.querySelectorAll('[data-expandable]');
     
-    for (var i = 0; i < expandableSections.length; i++) {
-        var section = expandableSections[i];
-        var header = section.querySelector('[data-toggle]');
-        var content = section.querySelector('[data-content]');
+    for (var i = 0; i < sections.length; i++) {
+        var sec = sections[i];
+        var hdr = sec.querySelector('[data-toggle]');
+        var cnt = sec.querySelector('[data-content]');
         
-        if (header && content) {
-            header.classList.add('section-toggle');
-            content.classList.add('section-content');
+        if (hdr && cnt) {
+            hdr.classList.add('section-toggle');
+            cnt.classList.add('section-content');
             
-            var isExpanded = section.getAttribute('data-expanded') === 'true';
-            if (isExpanded) {
-                header.classList.add('expanded');
-                content.classList.add('expanded');
+            if (sec.getAttribute('data-expanded') === 'true') {
+                hdr.classList.add('expanded');
+                cnt.classList.add('expanded');
             }
             
-            header.addEventListener('click', function() {
-                var hdr = this;
-                var sec = hdr.closest('[data-expandable]');
-                var cnt = sec.querySelector('[data-content]');
+            hdr.addEventListener('click', function() {
+                var h = this;
+                var s = h.closest('[data-expandable]');
+                var c = s.querySelector('[data-content]');
                 
-                hdr.classList.toggle('expanded');
-                cnt.classList.toggle('expanded');
+                h.classList.toggle('expanded');
+                c.classList.toggle('expanded');
+                s.setAttribute('data-expanded', h.classList.contains('expanded'));
                 
-                var nowExpanded = hdr.classList.contains('expanded');
-                sec.setAttribute('data-expanded', nowExpanded);
-                
-                if (nowExpanded) {
+                if (h.classList.contains('expanded')) {
                     setTimeout(function() {
-                        hdr.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        h.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }, 300);
                 }
             });
@@ -3184,37 +3059,27 @@ function initExpandableSections() {
     }
 }
 
-// =============================================================================
-// INITIALIZATION
-// =============================================================================
-
-function initializeApp() {
-    console.log('Initializing application...');
+// INIT
+function init() {
+    runCalc();
+    runAeCalc();
+    pickSprint(30);
     
-    // Run initial calculations
-    calculateAndDisplay();
-    updateSprintComparison();
+    updateSlider('sliderDealSize', 1, 50, 6);
+    updateSlider('sliderSalesCycle', 7, 120, 45);
+    updateSlider('sliderWinRate', 5, 100, 20);
+    updateSlider('sliderCallsPerDay', 1, 30, 6);
+    updateSlider('sliderAeComp', 80, 180, 120);
     
-    // Initialize sliders backgrounds
-    updateSliderBg('sliderDealSize', 1, 50, '#10B981');
-    updateSliderBg('sliderSalesCycle', 7, 120, '#06B6D4');
-    updateSliderBg('sliderWinRate', 5, 100, '#8B5CF6');
-    updateSliderBg('sliderCallsPerDay', 1, 30, '#F59E0B');
-    updateSliderBg('sliderAeComp', 80, 180, '#10B981');
-    
-    // Initialize UI
-    initNavigationTracking();
-    initExpandableSections();
-    selectSprintDuration(30);
-    
-    console.log('Application initialized successfully');
+    initNav();
+    initExpand();
 }
 
-// Run on DOM ready
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeApp);
+    document.addEventListener('DOMContentLoaded', init);
 } else {
-    initializeApp();
+    init();
 }
+</script>
 </body>
 </html>
