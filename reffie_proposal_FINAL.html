@@ -5,6 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cody Smith | Growth Lead for Reffie</title>
     
+    <!-- CALCULATOR FUNCTIONS - MUST BE IN HEAD BEFORE INLINE HANDLERS -->
+    <script>
+        // Define all calculator functions IMMEDIATELY so inline oninput handlers can find them
+        console.log('🎯 Defining global calculator functions in HEAD');
+        
+        // State objects
+        var calc = {
+            dealSize: 6,
+            cycle: 45,
+            winRate: 20,
+            callsDay: 6
+        };
+        var aeSalary = 120000;
+        var sprintData = {
+            30: { cost: 15000, perDay: 500, save: '56K+', time: '4-6 weeks', note: 'Foundation in 30 days' },
+            60: { cost: 28000, perDay: 467, save: '68K+', time: '2-4 weeks', note: 'First deals closing by week 10' },
+            90: { cost: 42000, perDay: 467, save: '78K+', time: '2-3 weeks', note: 'Complete onboarding blueprint' }
+        };
+        
+        // Placeholder functions - will be properly implemented when main script loads
+        window.onDealSize = function(val) { console.log('onDealSize stub called:', val); };
+        window.onCycle = function(val) { console.log('onCycle stub called:', val); };
+        window.onWinRate = function(val) { console.log('onWinRate stub called:', val); };
+        window.onCallsDay = function(val) { console.log('onCallsDay stub called:', val); };
+        window.onAeSalary = function(val) { console.log('onAeSalary stub called:', val); };
+        window.pickSprint = function(days) { console.log('pickSprint stub called:', days); };
+        
+        console.log('✅ Stub functions defined, full implementations will load with main script');
+    </script>
+    
     <!-- DEBUG INDICATOR -->
     <div id="debugIndicator" style="position: fixed; top: 10px; right: 10px; background: #FEF2F2; border: 2px solid #DC2626; color: #991B1B; padding: 8px 12px; border-radius: 6px; font-family: monospace; font-size: 11px; z-index: 10000; display: none;">
         Calculator: <span id="debugStatus">Loading...</span>
@@ -2721,22 +2751,13 @@
 
 
 <script>
-// IMMEDIATE TEST - THIS SHOULD FIRE FIRST
-alert('🚀 SCRIPT IS LOADING! Check console now.');
 console.log('============================================');
-console.log('🚀 CALCULATOR SCRIPT STARTING TO LOAD');
+console.log('🚀 MAIN CALCULATOR SCRIPT LOADING');
 console.log('Time:', new Date().toISOString());
+console.log('Replacing stub functions with full implementations...');
 console.log('============================================');
 
-// REVENUE CALCULATOR STATE
-var calc = {
-    dealSize: 6,      // in thousands
-    cycle: 45,        // days
-    winRate: 20,      // percent
-    callsDay: 6       // calls per day
-};
-
-// SLIDER HANDLERS - EXPLICITLY GLOBAL
+// SLIDER HANDLERS - REPLACE STUBS WITH FULL IMPLEMENTATIONS
 window.onDealSize = function(val) {
     console.log('✅ onDealSize called:', val);
     calc.dealSize = parseFloat(val);
@@ -2906,9 +2927,7 @@ function updateChart(r1, r2, r3, p1, p2, p3) {
     setAttr('pipeLabel3', 'y', Math.min(350, py3 + 25));
 }
 
-// AE SALARY CALCULATOR
-var aeSalary = 120000;
-
+// AE SALARY CALCULATOR - Update implementation
 window.onAeSalary = function(val) {
     console.log('✅ onAeSalary called:', val);
     aeSalary = parseFloat(val) * 1000;
@@ -2963,13 +2982,7 @@ function runAeCalc() {
     update('sprintSavingsPct', Math.round(savingsPct) + '%');
 }
 
-// SPRINT DURATION CALCULATOR
-var sprintData = {
-    30: { cost: 15000, perDay: 500, save: '105K+', time: '4-6 weeks', note: 'Foundation in 30 days' },
-    60: { cost: 28000, perDay: 467, save: '92K+', time: '3-4 weeks', note: 'Full hiring guide in 60 days' },
-    90: { cost: 42000, perDay: 467, save: '78K+', time: '2-3 weeks', note: 'Complete onboarding blueprint' }
-};
-
+// SPRINT DURATION CALCULATOR - Update implementation
 window.pickSprint = function(days) {
     console.log('✅ pickSprint called:', days);
     var d = sprintData[days];
