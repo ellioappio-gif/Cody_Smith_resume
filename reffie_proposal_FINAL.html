@@ -7,6 +7,8 @@
     
     <!-- CALCULATOR SCRIPT -->
     <script>
+        console.log('=== CALCULATOR SCRIPT LOADING ===');
+        
         // STATE AND DATA
         var calc = { dealSize: 6, cycle: 45, winRate: 20, callsDay: 6 };
         var aeSalary = 120000;
@@ -15,6 +17,8 @@
             60: { cost: 28000, perDay: 467, save: '68K+', time: '2-4 weeks', note: 'First deals closing by week 10' },
             90: { cost: 42000, perDay: 467, save: '78K+', time: '2-3 weeks', note: 'Complete onboarding blueprint' }
         };
+        
+        console.log('State initialized:', calc);
         
         // UTILITIES
         function update(id, txt) {
