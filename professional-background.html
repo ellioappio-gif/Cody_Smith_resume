@@ -25,10 +25,62 @@
             padding: 0 2rem;
         }
 
+        /* Header with picture */
+        .hero-header {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%);
+            margin-bottom: 3rem;
+        }
+
+        .profile-picture {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #10B981;
+            margin: 0 auto 2rem;
+            display: block;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+        }
+
+        .profile-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1E293B;
+            margin: 1rem 0;
+        }
+
+        .profile-title {
+            font-size: 1.2rem;
+            color: #10B981;
+            font-weight: 600;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+            color: #64748B;
+            font-size: 1rem;
+        }
+
+        .contact-links a {
+            color: #64748B;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-links a:hover {
+            color: #10B981;
+        }
+
         /* Section headers */
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin: 4rem 0 3rem;
         }
 
         .section-label {
@@ -38,36 +90,70 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             margin-bottom: 1rem;
+            display: block;
         }
 
         .section-title {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
             color: #1E293B;
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
         }
 
         .content-section {
-            padding: 4rem 0;
+            padding: 2rem 0;
+        }
+
+        /* Summary box */
+        .summary-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 4rem;
+            border-top: 4px solid #10B981;
+        }
+
+        .summary-box p {
+            color: #434243;
+            line-height: 1.9;
+            font-size: 1.05rem;
         }
 
         /* Charts */
         .chart-container {
             background: white;
-            padding: 2rem;
+            padding: 3rem 2rem;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            margin: 2rem 0;
+            margin: 3rem 0;
+        }
+
+        .chart-container h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1E293B;
+            font-size: 1.5rem;
+            font-weight: 700;
         }
 
         /* Work cards */
         .work-card {
             background: white;
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             margin-bottom: 2rem;
-            border-left: 4px solid #10B981;
+            border-left: 5px solid #10B981;
+            transition: box-shadow 0.3s;
+        }
+
+        .work-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
         }
 
         .work-card.alt {
@@ -85,54 +171,94 @@
         .work-header {
             display: flex;
             justify-content: space-between;
-            align-items: start;
+            align-items: flex-start;
             margin-bottom: 1.5rem;
+            gap: 2rem;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 0.9rem;
+            text-align: center;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .company-logo.saleslabx {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+        }
+
+        .company-logo.shmoody {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+
+        .company-logo.agility {
+            background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+        }
+
+        .company-logo.kreat {
+            background: linear-gradient(135deg, #6EE7B7 0%, #34D399 100%);
+        }
+
+        .work-info {
+            flex: 1;
         }
 
         .work-header-left h4 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: #1E293B;
-            margin: 0;
+            margin: 0 0 0.5rem;
         }
 
         .work-header-left p {
             font-weight: 600;
-            font-size: 1.1rem;
-            margin: 0.25rem 0 0 0;
+            font-size: 1rem;
+            margin: 0.25rem 0;
         }
 
         .work-header-right {
             text-align: right;
             color: #64748B;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .work-header-right p {
-            margin: 0;
+            margin: 0.25rem 0;
             font-weight: 600;
         }
 
         .current-badge {
             margin-top: 0.5rem;
-            padding: 0.25rem 0.75rem;
+            padding: 0.35rem 0.85rem;
             background: #D1FAE5;
             color: #059669;
             border-radius: 12px;
-            font-size: 0.875rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 700;
             display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .work-list {
             color: #434243;
-            line-height: 1.8;
+            line-height: 1.9;
             padding-left: 0;
             list-style: none;
             margin: 0;
         }
 
         .work-list li {
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             position: relative;
             padding-left: 1.5rem;
         }
@@ -147,6 +273,7 @@
             left: 0;
             font-weight: 700;
             color: #10B981;
+            font-size: 1.2rem;
         }
 
         .work-card.alt .work-list li::before {
@@ -161,62 +288,19 @@
             color: #6EE7B7;
         }
 
-        /* Summary box */
-        .summary-box {
-            background: white;
-            padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            margin-bottom: 3rem;
-        }
-
-        .summary-box h3 {
-            color: #10B981;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .summary-box p {
-            color: #434243;
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-
-        /* Contact info */
-        .contact-info {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .contact-info h2 {
+        .role-subheader {
             color: #1E293B;
-            font-size: 2rem;
             font-weight: 700;
-            margin: 0 0 0.5rem 0;
-        }
-
-        .contact-info .title {
-            color: #10B981;
+            margin: 1.5rem 0 0.75rem;
             font-size: 1.1rem;
+        }
+
+        .role-label {
+            color: #10B981;
             font-weight: 600;
-            margin: 0 0 1rem 0;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            color: #64748B;
-            font-size: 1rem;
-        }
-
-        .contact-links a {
-            color: #64748B;
-            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            display: block;
         }
 
         /* Skills section */
@@ -224,13 +308,20 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .skill-group {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .skill-group h3 {
             color: #10B981;
             font-size: 1.25rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             font-weight: 700;
         }
 
@@ -241,8 +332,13 @@
 
         .skill-group li {
             color: #434243;
-            padding: 0.5rem 0;
-            line-height: 1.8;
+            padding: 0.6rem 0;
+            line-height: 1.7;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .skill-group li:last-child {
+            border-bottom: none;
         }
 
         /* Education section */
@@ -250,13 +346,20 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 2rem;
+            margin-bottom: 4rem;
         }
 
         .education-item {
             background: white;
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-top: 4px solid #10B981;
+            transition: box-shadow 0.3s;
+        }
+
+        .education-item:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
         }
 
         .education-item h4 {
@@ -266,22 +369,33 @@
             font-weight: 700;
         }
 
-        .education-item p {
+        .education-item .school {
             color: #10B981;
             font-weight: 600;
-            margin: 0.25rem 0;
+            font-size: 0.95rem;
+            margin: 0.5rem 0;
         }
 
         .education-item .degree {
             color: #64748B;
             font-size: 0.95rem;
-            margin-top: 0.5rem;
+            margin-top: 1rem;
+            line-height: 1.7;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
+            .profile-picture {
+                width: 140px;
+                height: 140px;
+            }
+
+            .profile-name {
+                font-size: 1.8rem;
+            }
+
             .section-title {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
 
             .skills-section {
@@ -300,65 +414,65 @@
                 text-align: left;
                 margin-top: 1rem;
             }
+
+            .contact-links {
+                gap: 1.5rem;
+            }
         }
 
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
         }
-
-        /* Button hover effects */
-        button {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        button:active {
-            transform: translateY(0);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
     </style>
 </head>
 <body>
+    <!-- Profile Header -->
+    <div class="hero-header">
+        <div class="container">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAABkCAYAAABkMZrxAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAhGVYSWZNTQAqAAAACAABh2kABAAAAAEAAAAaAAABo0EBDwAAAOABAADQAAAApgEAABAAAAABAAAAGAAAAAFEb0dJTVAAoAAAAIAAAAAEAAAAkQAAAAATAAAAtAAAAIgAAAC1AAIBQAAAhgAAADABAABwAAAAwAAAAAEgEYAAEAAAAOAQAAGAEAAHABAABwAQAAUGFpbnQgTmV0IEZyYW1ld29yayAAAAAA+IhYbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" alt="Cody Smith" class="profile-picture">
+            <h1 class="profile-name">Cody Smith</h1>
+            <p class="profile-title">SaaS Account Executive | Bilingual: English and Spanish</p>
+            <div class="contact-links">
+                <span>📍 Austin, TX</span>
+                <a href="tel:+12026950244">📞 (202) 695-0244</a>
+                <a href="mailto:cody@example.com">📧 cody@example.com</a>
+            </div>
+        </div>
+    </div>
+
     <section class="content-section">
         <div class="container">
-            <div class="section-header">
-                <div class="section-label">PROFESSIONAL BACKGROUND</div>
-            </div>
-
-            <!-- Contact Information -->
-            <div class="contact-info">
-                <h2>Cody Smith</h2>
-                <p class="title">SaaS Account Executive | Bilingual: English and Spanish</p>
-                <div class="contact-links">
-                    <span>Austin, TX</span>
-                    <a href="tel:+12026950244">(202) 695-0244</a>
-                    <a href="mailto:cody@example.com">cody@example.com</a>
-                </div>
-            </div>
-
             <!-- Professional Summary -->
-            <div class="summary-box">
-                <h3>
+            <div class="section-header">
+                <span class="section-label">About</span>
+                <h2 class="section-title">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                         <circle cx="12" cy="7" r="4"/>
                     </svg>
                     Professional Summary
-                </h3>
+                </h2>
+            </div>
+
+            <div class="summary-box">
                 <p>
                     Dynamic SaaS Account Executive with a history of extreme quota overachievement, including highs of <strong style="color: #10B981;">230%</strong> and sustained performance above <strong style="color: #10B981;">130%</strong> across SMB, Mid-Market, and Enterprise segments. Expertise in full-cycle sales, building outbound pipeline from scratch, and closing multi-year agreements with an average deal size exceeding <strong style="color: #10B981;">$400K</strong>. Proven ability to deliver value-focused demos, optimize Salesforce workflows, and collaborate cross-functionally (Marketing, Product, RevOps) to refine GTM strategy and consistently exceed revenue goals. Fast-ramping, proactive, and highly adaptable in high-growth environments.
                 </p>
             </div>
 
             <!-- Quota Attainment Chart -->
+            <div class="section-header">
+                <h2 class="section-title">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="2" x2="12" y2="22"/>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                    Quota Attainment History
+                </h2>
+            </div>
+
             <div class="chart-container">
-                <h3 style="text-align: center; margin-bottom: 2rem; color: #1E293B;">Quota Attainment History</h3>
                 <svg viewBox="0 0 700 300" style="width: 100%; height: 300px;">
                     <!-- Grid -->
                     <line x1="80" y1="250" x2="650" y2="250" stroke="#E2E8F0" stroke-width="2" />
@@ -374,7 +488,7 @@
                     <text x="35" y="105" fill="#64748B" font-size="13">200%</text>
                     <text x="35" y="55" fill="#64748B" font-size="13">250%</text>
                     
-                    <!-- Quota line at 100% -->
+                    <!-- Quota line -->
                     <line x1="80" y1="200" x2="650" y2="200" stroke="#10B981" stroke-width="2" stroke-dasharray="5,5" />
                     <text x="655" y="205" fill="#10B981" font-size="12" font-weight="600">Quota</text>
                     
@@ -405,189 +519,194 @@
             </div>
 
             <!-- Work Experience -->
-            <div style="margin-bottom: 3rem;">
-                <h3 style="color: #10B981; font-size: 1.75rem; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem;">
+            <div class="section-header">
+                <h2 class="section-title">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
                         <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
                     </svg>
                     Work Experience
-                </h3>
+                </h2>
+            </div>
 
-                <!-- SalesLabX -->
-                <div class="work-card">
-                    <div class="work-header">
-                        <div class="work-header-left">
-                            <h4>Senior Account Executive</h4>
-                            <p style="color: #10B981;">SalesLabX</p>
-                        </div>
-                        <div class="work-header-right">
-                            <p>May 2025 – Present</p>
-                            <p>Austin, TX</p>
-                            <div class="current-badge">CURRENT</div>
-                        </div>
+            <!-- SalesLabX -->
+            <div class="work-card">
+                <div class="work-header">
+                    <div class="company-logo saleslabx">SLX</div>
+                    <div class="work-info">
+                        <h4 class="work-header-left">Senior Account Executive</h4>
+                        <p style="color: #10B981; font-weight: 600; margin-top: 0.25rem;">SalesLabX</p>
                     </div>
+                    <div class="work-header-right">
+                        <p>May 2025 – Present</p>
+                        <p>Austin, TX</p>
+                        <div class="current-badge">Current</div>
+                    </div>
+                </div>
+                <ul class="work-list">
+                    <li>Currently performing at <strong style="color: #10B981;">125% of quota</strong> in a full-cycle mid market and enterprise role</li>
+                    <li>Manage an average deal size of <strong style="color: #10B981;">$400K+</strong>, running discovery, demos, proposals, and closing</li>
+                    <li>Generate pipeline through consistent outbound prospecting and improve pipeline quality through collaboration with Marketing, Success, and RevOps</li>
+                    <li>Support the planning and execution of webinars, which significantly increased inbound lead flow</li>
+                    <li>Collaborate with Marketing on new product initiatives guided by customer needs</li>
+                    <li>Build personalized value-based proposals that accelerate sales cycles</li>
+                </ul>
+            </div>
+
+            <!-- Shmoody -->
+            <div class="work-card alt">
+                <div class="work-header">
+                    <div class="company-logo shmoody">SMD</div>
+                    <div class="work-info">
+                        <h4 class="work-header-left">Founding Account Executive</h4>
+                        <p style="color: #059669; font-weight: 600; margin-top: 0.25rem;">Shmoody</p>
+                    </div>
+                    <div class="work-header-right">
+                        <p>Jan 2024 – May 2025</p>
+                        <p>Austin, TX</p>
+                    </div>
+                </div>
+                <ul class="work-list">
+                    <li>Achieved <strong style="color: #059669;">115% quota</strong>, building the full B2B sales motion from the ground up</li>
+                    <li>Created and delivered the first interactive product demo, improving engagement and conversions</li>
+                    <li>Built all pitch decks, collateral, onboarding materials, and messaging</li>
+                    <li>Managed full cycle sales including onboarding, retention, and expansion</li>
+                    <li>Implemented Outreach, ZoomInfo, and Gong and optimized Salesforce workflows</li>
+                    <li>Collaborated with Marketing and Product to refine ICP, messaging, and demo strategy</li>
+                </ul>
+            </div>
+
+            <!-- Agility PR -->
+            <div class="work-card alt2">
+                <div class="work-header">
+                    <div class="company-logo agility">AGI</div>
+                    <div class="work-info">
+                        <h4 class="work-header-left">Multiple Roles - Rapid Advancement</h4>
+                        <p style="color: #34D399; font-weight: 600; margin-top: 0.25rem;">Agility PR Solutions</p>
+                    </div>
+                    <div class="work-header-right">
+                        <p>Dec 2021 – Jan 2024</p>
+                        <p>Austin, TX</p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2rem; padding-top: 1rem; border-top: 1px solid #E5E7EB;">
+                    <h5 class="role-subheader">Enterprise Account Executive</h5>
+                    <span class="role-label">Dec 2022 – Jan 2024</span>
                     <ul class="work-list">
-                        <li>Currently performing at <strong style="color: #10B981;">125% of quota</strong> in a full-cycle mid market and enterprise role</li>
-                        <li>Manage an average deal size of <strong style="color: #10B981;">$400K+</strong>, running discovery, demos, proposals, and closing</li>
-                        <li>Generate pipeline through consistent outbound prospecting and improve pipeline quality through collaboration with Marketing, Success, and RevOps</li>
-                        <li>Support the planning and execution of webinars, which significantly increased inbound lead flow</li>
-                        <li>Collaborate with Marketing on new product initiatives guided by customer needs</li>
-                        <li>Build personalized value-based proposals that accelerate sales cycles</li>
+                        <li>Achieved <strong style="color: #34D399;">130% quota attainment</strong>, managing full cycle mid market and enterprise opportunities</li>
+                        <li>Closed multi-year agreements using strong discovery and value based demos</li>
+                        <li>Enhanced outbound performance by improving messaging and competitive positioning</li>
+                        <li>Partnered with Marketing and RevOps to refine GTM execution and drive higher conversion rates</li>
                     </ul>
                 </div>
 
-                <!-- Shmoody -->
-                <div class="work-card alt">
-                    <div class="work-header">
-                        <div class="work-header-left">
-                            <h4>Founding Account Executive</h4>
-                            <p style="color: #059669;">Shmoody</p>
-                        </div>
-                        <div class="work-header-right">
-                            <p>Jan 2024 – May 2025</p>
-                            <p>Austin, TX</p>
-                        </div>
-                    </div>
+                <div>
+                    <h5 class="role-subheader">Senior Enterprise Business Development Manager</h5>
+                    <span class="role-label">Dec 2021 – Dec 2022 | 4 Promotions in 12 Months</span>
                     <ul class="work-list">
-                        <li>Achieved <strong style="color: #059669;">115% quota</strong>, building the full B2B sales motion from the ground up</li>
-                        <li>Created and delivered the first interactive product demo, improving engagement and conversions</li>
-                        <li>Built all pitch decks, collateral, onboarding materials, and messaging</li>
-                        <li>Managed full cycle sales including onboarding, retention, and expansion</li>
-                        <li>Implemented Outreach, ZoomInfo, and Gong and optimized Salesforce workflows</li>
-                        <li>Collaborated with Marketing and Product to refine ICP, messaging, and demo strategy</li>
-                    </ul>
-                </div>
-
-                <!-- Agility PR -->
-                <div class="work-card alt2">
-                    <div class="work-header">
-                        <div class="work-header-left">
-                            <h4>Multiple Roles - Rapid Advancement</h4>
-                            <p style="color: #34D399;">Agility PR Solutions</p>
-                        </div>
-                        <div class="work-header-right">
-                            <p>Dec 2021 – Jan 2024</p>
-                            <p>Austin, TX</p>
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom: 2rem;">
-                        <h5 style="color: #1E293B; font-weight: 700; margin-bottom: 1rem;">Enterprise Account Executive (Dec 2022 – Jan 2024)</h5>
-                        <ul class="work-list">
-                            <li>Achieved <strong style="color: #34D399;">130% quota attainment</strong>, managing full cycle mid market and enterprise opportunities</li>
-                            <li>Closed multi-year agreements using strong discovery and value based demos</li>
-                            <li>Enhanced outbound performance by improving messaging and competitive positioning</li>
-                            <li>Partnered with Marketing and RevOps to refine GTM execution and drive higher conversion rates</li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h5 style="color: #1E293B; font-weight: 700; margin-bottom: 1rem;">Senior Enterprise Business Development Manager (Dec 2021 – Dec 2022)</h5>
-                        <p style="margin-bottom: 1rem; color: #10B981; font-weight: 600;">4 Promotions in 12 Months - Enterprise Account Executive</p>
-                        <ul class="work-list">
-                            <li>Drove <strong style="color: #34D399;">176% quota attainment</strong> across BDM roles</li>
-                            <li>Generated high value outbound opportunities across enterprise and public sector accounts</li>
-                            <li>Developed industry messaging, outbound sequences, and competitive materials</li>
-                            <li>Supported onboarding and coaching for new BDMs</li>
-                            <li>Improved team performance through coaching on messaging and objection handling</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Kreat Partners -->
-                <div class="work-card alt3">
-                    <div class="work-header">
-                        <div class="work-header-left">
-                            <h4>Account Executive</h4>
-                            <p style="color: #6EE7B7;">Kreat Partners</p>
-                        </div>
-                        <div class="work-header-right">
-                            <p>Sep 2018 – Sep 2021</p>
-                            <p>Barcelona, Spain</p>
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 1rem; color: #10B981; font-weight: 600;">Peak Performance: 230% Quota Attainment</p>
-                    <ul class="work-list">
-                        <li>Achieved <strong style="color: #6EE7B7;">230% quota attainment</strong> across multiple sales cycles</li>
-                        <li>Led company rebrand and digital relaunch</li>
-                        <li>Created proposals, onboarding materials, and client training documentation</li>
-                        <li>Managed full cycle sales and post sale success including renewals and upsells</li>
+                        <li>Drove <strong style="color: #34D399;">176% quota attainment</strong> across BDM roles</li>
+                        <li>Generated high value outbound opportunities across enterprise and public sector accounts</li>
+                        <li>Developed industry messaging, outbound sequences, and competitive materials</li>
+                        <li>Supported onboarding and coaching for new BDMs</li>
+                        <li>Improved team performance through coaching on messaging and objection handling</li>
                     </ul>
                 </div>
             </div>
 
+            <!-- Kreat Partners -->
+            <div class="work-card alt3">
+                <div class="work-header">
+                    <div class="company-logo kreat">KRT</div>
+                    <div class="work-info">
+                        <h4 class="work-header-left">Account Executive</h4>
+                        <p style="color: #6EE7B7; font-weight: 600; margin-top: 0.25rem;">Kreat Partners</p>
+                    </div>
+                    <div class="work-header-right">
+                        <p>Sep 2018 – Sep 2021</p>
+                        <p>Barcelona, Spain</p>
+                    </div>
+                </div>
+                <span class="role-label" style="color: #10B981;">Peak Performance: 230% Quota Attainment</span>
+                <ul class="work-list" style="margin-top: 1rem;">
+                    <li>Achieved <strong style="color: #6EE7B7;">230% quota attainment</strong> across multiple sales cycles</li>
+                    <li>Led company rebrand and digital relaunch</li>
+                    <li>Created proposals, onboarding materials, and client training documentation</li>
+                    <li>Managed full cycle sales and post sale success including renewals and upsells</li>
+                </ul>
+            </div>
+
             <!-- Skills Section -->
-            <div style="margin-bottom: 4rem;">
-                <h3 style="color: #10B981; font-size: 1.75rem; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem;">
+            <div class="section-header">
+                <h2 class="section-title">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3"></polyline>
+                        <path d="M12 2L15.09 8.26H22L17.27 12.61L19.36 18.84L12 14.49L4.64 18.84L6.73 12.61L2 8.26H8.91L12 2Z"/>
                     </svg>
                     Skills & Tools
-                </h3>
+                </h2>
+            </div>
 
-                <div class="skills-section">
-                    <div class="skill-group">
-                        <h3>Sales Tech Stack</h3>
-                        <ul>
-                            <li>Salesforce</li>
-                            <li>HubSpot</li>
-                            <li>Outreach</li>
-                            <li>Apollo.io</li>
-                            <li>ZoomInfo</li>
-                            <li>Gong</li>
-                            <li>Loom</li>
-                            <li>Asana</li>
-                            <li>Pardot</li>
-                            <li>Salesloft</li>
-                            <li>Clari</li>
-                        </ul>
-                    </div>
+            <div class="skills-section">
+                <div class="skill-group">
+                    <h3>Sales Tech Stack</h3>
+                    <ul>
+                        <li>Salesforce</li>
+                        <li>HubSpot</li>
+                        <li>Outreach</li>
+                        <li>Apollo.io</li>
+                        <li>ZoomInfo</li>
+                        <li>Gong</li>
+                        <li>Loom</li>
+                        <li>Asana</li>
+                        <li>Pardot</li>
+                        <li>Salesloft</li>
+                        <li>Clari</li>
+                    </ul>
+                </div>
 
-                    <div class="skill-group">
-                        <h3>Core Competencies</h3>
-                        <ul>
-                            <li>Full Cycle Sales</li>
-                            <li>Enterprise Sales</li>
-                            <li>Outbound Prospecting</li>
-                            <li>Pipeline Management</li>
-                            <li>Discovery & Needs Assessment</li>
-                            <li>Demo Execution</li>
-                            <li>SaaS Sales</li>
-                            <li>Negotiation</li>
-                            <li>GTM Strategy</li>
-                            <li>RevOps Alignment</li>
-                            <li>Cross-Functional Collaboration</li>
-                            <li>Marketing Alignment</li>
-                            <li>Forecasting</li>
-                            <li>Quota Attainment</li>
-                            <li>ARR Growth</li>
-                        </ul>
-                    </div>
+                <div class="skill-group">
+                    <h3>Core Competencies</h3>
+                    <ul>
+                        <li>Full Cycle Sales</li>
+                        <li>Enterprise Sales</li>
+                        <li>Outbound Prospecting</li>
+                        <li>Pipeline Management</li>
+                        <li>Discovery & Needs Assessment</li>
+                        <li>Demo Execution</li>
+                        <li>SaaS Sales</li>
+                        <li>Negotiation</li>
+                        <li>GTM Strategy</li>
+                        <li>RevOps Alignment</li>
+                        <li>Cross-Functional Collaboration</li>
+                        <li>Marketing Alignment</li>
+                        <li>Forecasting</li>
+                        <li>Quota Attainment</li>
+                        <li>ARR Growth</li>
+                    </ul>
                 </div>
             </div>
 
             <!-- Education Section -->
-            <div>
-                <h3 style="color: #10B981; font-size: 1.75rem; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1rem;">
+            <div class="section-header">
+                <h2 class="section-title">
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 10v6m0 0v6m0-6H2m0 0v6m0-6V4m0 0h20M4 4a2 2 0 100-4 2 2 0 000 4zm16 0a2 2 0 100-4 2 2 0 000 4z"/>
                     </svg>
                     Education
-                </h3>
+                </h2>
+            </div>
 
-                <div class="education-section">
-                    <div class="education-item">
-                        <h4>University of California, Santa Barbara</h4>
-                        <p>UCSB</p>
-                        <p class="degree">Bachelor of Arts (BA) in Communications</p>
-                    </div>
+            <div class="education-section">
+                <div class="education-item">
+                    <h4>University of California, Santa Barbara</h4>
+                    <p class="school">UCSB</p>
+                    <p class="degree"><strong>Bachelor of Arts (BA)</strong> in Communications</p>
+                </div>
 
-                    <div class="education-item">
-                        <h4>Santa Barbara City College</h4>
-                        <p>SBCC</p>
-                        <p class="degree">Associate of Arts (AA) in Marketing</p>
-                    </div>
+                <div class="education-item">
+                    <h4>Santa Barbara City College</h4>
+                    <p class="school">SBCC</p>
+                    <p class="degree"><strong>Associate of Arts (AA)</strong> in Marketing</p>
                 </div>
             </div>
         </div>
