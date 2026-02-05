@@ -40,9 +40,7 @@
             var slider = document.getElementById(id);
             if (!slider) return;
             var pct = ((val - min) / (max - min)) * 100;
-            var color = id === 'sliderDealSize' ? '#10B981' :
-                        id === 'sliderSalesCycle' ? '#06B6D4' :
-                        id === 'sliderWinRate' ? '#8B5CF6' : '#F59E0B';
+            var color = '#1CC29F';
             slider.style.background = 'linear-gradient(to right, ' + color + ' 0%, ' + color + ' ' + pct + '%, #E2E8F0 ' + pct + '%, #E2E8F0 100%)';
         };
         
@@ -240,8 +238,8 @@
                     btn.style.transform = 'scale(1.05)';
                     btn.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
                     btn.style.background = '#F0FDF4';
-                    btn.style.borderColor = '#10B981';
-                    btn.style.color = '#10B981';
+                    btn.style.borderColor = '#1CC29F';
+                    btn.style.color = '#1CC29F';
                 } else {
                     btn.style.transform = 'scale(1)';
                     btn.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
@@ -2137,51 +2135,51 @@
 
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2rem 0;">
                         <!-- Cost Advantage -->
-                        <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); padding: 2rem; border-radius: 12px; border-left: 4px solid #10B981;">
-                            <h4 style="color: #065F46; font-weight: 700; margin-bottom: 1rem; font-size: 1.1rem;">40-60% Lower Total Cost</h4>
-                            <ul style="color: #047857; line-height: 1.9; margin-left: 1.2rem; font-size: 0.95rem;">
+                        <div style="background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%); padding: 2rem; border-radius: 12px; border-left: 4px solid #1CC29F;">
+                            <h4 style="color: #0F766E; font-weight: 700; margin-bottom: 1rem; font-size: 1.1rem;">40-60% Lower Total Cost</h4>
+                            <ul style="color: #134E4A; line-height: 1.9; margin-left: 1.2rem; font-size: 0.95rem;">
                                 <li>No benefits, 401k, equity (saves 30-35%)</li>
                                 <li>No payroll taxes, workers comp (saves 10-15%)</li>
                                 <li>No onboarding overhead (saves $8-12K)</li>
                                 <li>No long-term commitment risk</li>
                             </ul>
                             <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 8px;">
-                                <div style="color: #065F46; font-size: 0.85rem;"><strong>Source:</strong> Deloitte Workforce Study 2025</div>
+                                <div style="color: #0F766E; font-size: 0.85rem;"><strong>Source:</strong> Deloitte Workforce Study 2025</div>
                             </div>
                         </div>
 
                         <!-- Flexibility Advantage -->
-                        <div style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); padding: 2rem; border-radius: 12px; border-left: 4px solid #3B82F6;">
-                            <h4 style="color: #1E40AF; font-weight: 700; margin-bottom: 1rem; font-size: 1.1rem;">🔄 Built-in Flexibility</h4>
-                            <ul style="color: #1E40AF; line-height: 1.9; margin-left: 1.2rem; font-size: 0.95rem;">
+                        <div style="background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%); padding: 2rem; border-radius: 12px; border-left: 4px solid #1CC29F;">
+                            <h4 style="color: #0F766E; font-weight: 700; margin-bottom: 1rem; font-size: 1.1rem;">Built-in Flexibility</h4>
+                            <ul style="color: #134E4A; line-height: 1.9; margin-left: 1.2rem; font-size: 0.95rem;">
                                 <li><strong>30-day review:</strong> Assess fit & deliverables</li>
                                 <li><strong>60-day review:</strong> Adjust scope based on results</li>
                                 <li><strong>90-day review:</strong> Decide next steps</li>
                                 <li>No termination costs or severance risk</li>
                             </ul>
                             <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 8px;">
-                                <div style="color: #1E40AF; font-size: 0.85rem;"><strong>vs. Full-time:</strong> Avg $45K severance cost if bad fit</div>
+                                <div style="color: #0F766E; font-size: 0.85rem;"><strong>vs. Full-time:</strong> Avg $45K severance cost if bad fit</div>
                             </div>
                         </div>
 
                         <!-- Focus Advantage -->
-                        <div style="background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); padding: 2rem; border-radius: 12px; border-left: 4px solid #F59E0B;">
-                            <h4 style="color: #92400E; font-weight: 700; margin-bottom: 1rem; font-size: 1.1rem;">Specialized Focus</h4>
-                            <ul style="color: #78350F; line-height: 1.9; margin-left: 1.2rem; font-size: 0.95rem;">
+                        <div style="background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%); padding: 2rem; border-radius: 12px; border-left: 4px solid #1CC29F;">
+                            <h4 style="color: #0F766E; font-weight: 700; margin-bottom: 1rem; font-size: 1.1rem;">Specialized Focus</h4>
+                            <ul style="color: #134E4A; line-height: 1.9; margin-left: 1.2rem; font-size: 0.95rem;">
                                 <li>100% dedicated to enablement infrastructure</li>
                                 <li>No quota pressure = better playbooks</li>
                                 <li>Can assist with outreach when needed</li>
                                 <li>Frees your AE to focus on closing</li>
                             </ul>
                             <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 8px;">
-                                <div style="color: #92400E; font-size: 0.85rem;"><strong>Result:</strong> 3.2x faster enablement completion (CSO Insights)</div>
+                                <div style="color: #0F766E; font-size: 0.85rem;"><strong>Result:</strong> 3.2x faster enablement completion (CSO Insights)</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- AE Burnout Prevention -->
-                    <div style="background: #FEF2F2; padding: 2rem; border-radius: 12px; margin-top: 2rem; border-left: 4px solid #EF4444;">
-                        <h4 style="color: #991B1B; font-weight: 700; margin-bottom: 1rem;">⚠️ Critical: Preventing AE Burnout</h4>
+                    <div style="background: #FEF2F2; padding: 2rem; border-radius: 12px; margin-top: 2rem; border-left: 4px solid #DC2626;">
+                        <h4 style="color: #991B1B; font-weight: 700; margin-bottom: 1rem;">Critical: Preventing AE Burnout</h4>
                         <p style="color: #7F1D1D; line-height: 1.8; margin-bottom: 1rem;">
                             <strong>Without enablement support, 67% of solo AEs report burnout within 6 months</strong> (Pavilion 2024 Sales Ops Report). They're forced to split time between:
                         </p>
@@ -2312,8 +2310,8 @@
                         
                         <div style="display: grid; gap: 1.5rem;">
                             <!-- 30-Day Checkpoint -->
-                            <div style="background: white; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #10B981;">
-                                <div style="color: #10B981; font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">✓ 30-Day Checkpoint: GTM Foundation</div>
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #1CC29F;">
+                                <div style="color: #1CC29F; font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">30-Day Checkpoint: GTM Foundation</div>
                                 <div style="color: #065F46; font-weight: 600; margin-bottom: 0.75rem;">Deliverables (Weeks 1-4) - Aligned with Reffie Growth Lead Role:</div>
                                 <ul style="color: #064E3B; line-height: 1.8; margin-left: 1.5rem; margin-bottom: 1rem;">
                                     <li><strong>Multichannel Demand Generation</strong> - Launch/scale 2-3 outbound channels (email, LinkedIn, partnerships)</li>
@@ -2323,17 +2321,17 @@
                                     <li><strong>Initial Pipeline Built</strong> - 15-25 qualified opportunities from outbound efforts</li>
                                     <li><strong>Junior AE Job Description</strong> - Profile, compensation, interview questions</li>
                                 </ul>
-                                <div style="background: #ECFDF5; padding: 1rem; border-radius: 8px; border-left: 3px solid #10B981;">
-                                    <div style="color: #065F46; font-weight: 700; margin-bottom: 0.5rem;">⚡ 30-Day Evaluation:</div>
-                                    <div style="color: #064E3B; font-size: 0.95rem;">
+                                <div style="background: #F0FDFA; padding: 1rem; border-radius: 8px; border-left: 3px solid #1CC29F;">
+                                    <div style="color: #0F766E; font-weight: 700; margin-bottom: 0.5rem;">30-Day Evaluation:</div>
+                                    <div style="color: #134E4A; font-size: 0.95rem;">
                                         Review pipeline quality, channel performance, and GTM momentum. <strong>Adjust scope</strong> for Days 31-60 based on what's working (e.g., double down on winning channels, pivot from underperforming tactics).
                                     </div>
                                 </div>
                             </div>
 
                             <!-- 60-Day Checkpoint -->
-                            <div style="background: white; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #10B981;">
-                                <div style="color: #10B981; font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">✓ 60-Day Checkpoint: Scale + Junior AE Hiring</div>
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #1CC29F;">
+                                <div style="color: #1CC29F; font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">60-Day Checkpoint: Scale + Junior AE Hiring</div>
                                 <div style="color: #065F46; font-weight: 600; margin-bottom: 0.75rem;">Deliverables (Weeks 5-8):</div>
                                 <ul style="color: #064E3B; line-height: 1.8; margin-left: 1.5rem; margin-bottom: 1rem;">
                                     <li><strong>Scalable GTM Programs</strong> - Automated outbound sequences, customer cohort tracking dashboards</li>
@@ -2344,17 +2342,17 @@
                                     <li><strong>Onboarding Plan</strong> - 2-week ramp for junior AE (shadowing, practice demos, first deals)</li>
                                     <li><strong>30-50 Qualified Opps</strong> - Cumulative pipeline from scaled outbound</li>
                                 </ul>
-                                <div style="background: #ECFDF5; padding: 1rem; border-radius: 8px; border-left: 3px solid #10B981;">
-                                    <div style="color: #065F46; font-weight: 700; margin-bottom: 0.5rem;">⚡ 60-Day Evaluation:</div>
-                                    <div style="color: #064E3B; font-size: 0.95rem;">
+                                <div style="background: #F0FDFA; padding: 1rem; border-radius: 8px; border-left: 3px solid #1CC29F;">
+                                    <div style="color: #0F766E; font-weight: 700; margin-bottom: 0.5rem;">60-Day Evaluation:</div>
+                                    <div style="color: #134E4A; font-size: 0.95rem;">
                                         Assess junior AE readiness, pipeline conversion rates, and product-market fit insights. <strong>Adjust final 30 days</strong> to focus on: junior AE mentoring, closing key deals, or building customer success handoff process.
                                     </div>
                                 </div>
                             </div>
 
                             <!-- 90-Day Completion -->
-                            <div style="background: white; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #10B981;">
-                                <div style="color: #10B981; font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">✓ 90-Day Completion: Junior AE Enabled + System Operational</div>
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #1CC29F;">
+                                <div style="color: #1CC29F; font-weight: 700; margin-bottom: 0.75rem; font-size: 1.1rem;">90-Day Completion: Junior AE Enabled + System Operational</div>
                                 <div style="color: #065F46; font-weight: 600; margin-bottom: 0.75rem;">Deliverables (Weeks 9-12):</div>
                                 <ul style="color: #064E3B; line-height: 1.8; margin-left: 1.5rem; margin-bottom: 1rem;">
                                     <li><strong>Junior AE Fully Ramped</strong> - Carrying own quota, running demos, closing deals independently</li>
@@ -2364,9 +2362,9 @@
                                     <li><strong>Product Feedback Loop</strong> - Market insights from 60+ sales conversations feeding product roadmap</li>
                                     <li><strong>60+ Qualified Opps Built</strong> - Healthy pipeline for junior AE to work through Q2/Q3</li>
                                 </ul>
-                                <div style="background: #ECFDF5; padding: 1rem; border-radius: 8px; border-left: 3px solid #10B981;">
-                                    <div style="color: #065F46; font-weight: 700; margin-bottom: 0.5rem;">⚡ 90-Day Final Outcome:</div>
-                                    <div style="color: #064E3B; font-size: 0.95rem;">
+                                <div style="background: #F0FDFA; padding: 1rem; border-radius: 8px; border-left: 3px solid #1CC29F;">
+                                    <div style="color: #0F766E; font-weight: 700; margin-bottom: 0.5rem;">90-Day Final Outcome:</div>
+                                    <div style="color: #134E4A; font-size: 0.95rem;">
                                         <strong>Your junior AE is set up for success</strong> with a proven system, healthy pipeline, and enablement materials. You've saved $95K+ vs. hiring a senior Growth Lead full-time, with <strong>zero long-term commitment</strong>. Decision: extend me as contractor, convert to full-time role, or part ways with full knowledge transfer.
                                     </div>
                                 </div>
@@ -2471,78 +2469,42 @@
 
             <!-- Investment in Sales Enablement -->
             <div style="max-width: 1000px; margin: 2rem auto; padding-top: 3rem;">
-                <div style="background: white; border-radius: 20px; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); border-left: 6px solid #7C3AED;">
-                    <h3 style="color: #7C3AED; font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center;">Your Investment: 90-Day Sales Enablement</h3>
+                <div style="background: white; border-radius: 20px; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); border-left: 6px solid #1CC29F;">
+                    <h3 style="color: #1CC29F; font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center;">Your Investment: 90-Day Contractor Engagement</h3>
                     
                     <p style="color: #64748B; font-size: 1.05rem; line-height: 1.8; text-align: center; margin-bottom: 2rem;">
-                        Choose the sprint duration that fits your timeline and needs. All pricing is for full-time dedication during the sprint.
+                        Full-time dedication to sales enablement while supporting your junior AE hire, with flexible scope adjustments at 30/60-day checkpoints.
                     </p>
 
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 2rem 0;">
-                        <!-- 30-Day Sprint -->
-                        <div style="background: linear-gradient(135deg, #F3E8FF 0%, #E9D5FF 100%); border: 3px solid #A78BFA; border-radius: 16px; padding: 2rem; text-align: center;">
-                            <h4 style="color: #6D28D9; font-weight: 700; margin-bottom: 1rem; font-size: 1.3rem;">30-Day Sprint</h4>
-                            <div style="color: #7C3AED; font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem;">$15K</div>
-                            <div style="color: #6D28D9; font-size: 0.9rem; margin-bottom: 2rem; font-weight: 600;">One-time investment</div>
+                    <!-- 90-Day Contractor Engagement -->
+                    <div style="max-width: 600px; margin: 2rem auto;">
+                        <div style="background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%); border: 4px solid #1CC29F; border-radius: 20px; padding: 3rem; text-align: center; box-shadow: 0 10px 40px rgba(28, 194, 159, 0.15);">
+                            <h4 style="color: #0F766E; font-weight: 700; margin-bottom: 1rem; font-size: 1.5rem;">90-Day Contractor</h4>
+                            <div style="color: #1CC29F; font-size: 4rem; font-weight: 900; margin-bottom: 0.5rem;">$25K</div>
+                            <div style="color: #0F766E; font-size: 1rem; margin-bottom: 2rem; font-weight: 600;">Total investment (contractor rate)</div>
                             
-                            <ul style="color: #6D28D9; text-align: left; line-height: 1.8; margin-left: 1rem; margin-bottom: 2rem; font-size: 0.9rem;">
-                                <li>✓ Foundation building</li>
-                                <li>✓ 4 weeks of deliverables</li>
-                                <li>✓ Rapid ROI for quick paths</li>
+                            <ul style="color: #134E4A; text-align: left; line-height: 2; margin-left: 1.5rem; margin-bottom: 2rem; font-size: 1rem;">
+                                <li>Sales enablement focus while hiring junior AE</li>
+                                <li>Support junior AE hire, onboarding, and ramp</li>
+                                <li>30-day evaluation checkpoints for scope adjustments</li>
+                                <li>Flexible deliverables based on what's working</li>
+                                <li>60+ qualified opportunities built by Day 90</li>
+                                <li>Complete GTM playbook and enablement materials</li>
                             </ul>
                             
-                            <div style="background: white; padding: 1rem; border-radius: 12px;">
-                                <div style="color: #6D28D9; font-weight: 700; margin-bottom: 0.5rem;">Best for:</div>
-                                <div style="color: #7C3AED; font-size: 0.85rem;">Startups needing quick baseline enablement</div>
-                            </div>
-                        </div>
-
-                        <!-- 60-Day Sprint (Popular) -->
-                        <div style="background: linear-gradient(135deg, #DBEAFE 0%, #BAE6FD 100%); border: 3px solid #0EA5E9; border-radius: 16px; padding: 2rem; text-align: center; position: relative; transform: scale(1.05);">
-                            <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #0EA5E9; color: white; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 700; font-size: 0.85rem;">RECOMMENDED</div>
-                            
-                            <h4 style="color: #0C4A6E; font-weight: 700; margin-bottom: 1rem; font-size: 1.3rem; margin-top: 0.5rem;">60-Day Sprint</h4>
-                            <div style="color: #0EA5E9; font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem;">$28K</div>
-                            <div style="color: #0C4A6E; font-size: 0.9rem; margin-bottom: 2rem; font-weight: 600;">One-time investment</div>
-                            
-                            <ul style="color: #0C4A6E; text-align: left; line-height: 1.8; margin-left: 1rem; margin-bottom: 2rem; font-size: 0.9rem;">
-                                <li>✓ Complete sales operation</li>
-                                <li>✓ 6 weeks of deliverables</li>
-                                <li>✓ First deals closing by week 10</li>
-                            </ul>
-                            
-                            <div style="background: white; padding: 1rem; border-radius: 12px;">
-                                <div style="color: #0C4A6E; font-weight: 700; margin-bottom: 0.5rem;">Best for:</div>
-                                <div style="color: #0EA5E9; font-size: 0.85rem;">Growing companies scaling sales operation</div>
-                            </div>
-                        </div>
-
-                        <!-- 90-Day Contractor Engagement -->
-                        <div style="background: linear-gradient(135deg, #FEF08A 0%, #FDE047 100%); border: 3px solid #FBBF24; border-radius: 16px; padding: 2rem; text-align: center;">
-                            <h4 style="color: #78350F; font-weight: 700; margin-bottom: 1rem; font-size: 1.3rem;">90-Day Contractor</h4>
-                            <div style="color: #F59E0B; font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem;">$25K</div>
-                            <div style="color: #78350F; font-size: 0.9rem; margin-bottom: 2rem; font-weight: 600;">Total investment (contractor rate)</div>
-                            
-                            <ul style="color: #78350F; text-align: left; line-height: 1.8; margin-left: 1rem; margin-bottom: 2rem; font-size: 0.9rem;">
-                                <li>✓ Sales enablement focus</li>
-                                <li>✓ Support junior AE hire</li>
-                                <li>✓ 30-day evaluation checkpoints</li>
-                                <li>✓ Flexible scope adjustments</li>
-                            </ul>
-                            
-                            <div style="background: white; padding: 1rem; border-radius: 12px;">
-                                <div style="color: #78350F; font-weight: 700; margin-bottom: 0.5rem;">Best for:</div>
-                                <div style="color: #F59E0B; font-size: 0.85rem;">Reffie: Build while hiring junior talent</div>
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px;">
+                                <div style="color: #0F766E; font-weight: 700; margin-bottom: 0.5rem; font-size: 1.1rem;">Perfect for Reffie:</div>
+                                <div style="color: #134E4A; font-size: 0.95rem; line-height: 1.6;">Build multichannel demand generation, HubSpot automation, and sales enablement infrastructure while hiring and ramping a junior AE at a fraction of the cost of a full-time senior Growth Lead.</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Investment Breakdown -->
-                    <div style="background: #F8F4FF; padding: 2rem; border-radius: 12px; margin-top: 3rem;">
-                        <h4 style="color: #6D28D9; font-weight: 700; margin-bottom: 1.5rem;">What's Included (All Sprints):</h4>
+                    <div style="background: #F0FDFA; padding: 2rem; border-radius: 12px; margin-top: 3rem; border: 2px solid #CCFBF1;">
+                        <h4 style="color: #0F766E; font-weight: 700; margin-bottom: 1.5rem;">What's Included:</h4>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
                             <div>
-                                <ul style="color: #6D28D9; line-height: 2; margin-left: 1.5rem;">
+                                <ul style="color: #134E4A; line-height: 2; margin-left: 1.5rem;">
                                     <li><strong>Full-time commitment</strong> - Dedicated to your sales goals</li>
                                     <li><strong>Weekly strategy sessions</strong> - Course correction & optimization</li>
                                     <li><strong>All deliverables</strong> - Playbooks, tools, content (yours to keep)</li>
@@ -2567,128 +2529,110 @@
                             <div>
                                 <div style="color: #10B981; font-size: 2rem; font-weight: 900;">$95K+</div>
                                 <div style="color: #047857; font-size: 0.9rem;">Savings vs. senior hire</div>
-                                <div style="color: #064E3B; font-size: 0.75rem; margin-top: 0.25rem;">($120K salary - $25K contract)</div>
+                                <div style="color: #134E4A; font-size: 0.75rem; margin-top: 0.25rem;">($120K salary - $25K contract)</div>
                             </div>
                             <div>
-                                <div style="color: #10B981; font-size: 2rem; font-weight: 900;">$0</div>
-                                <div style="color: #047857; font-size: 0.9rem;">Long-term commitment</div>
-                                <div style="color: #064E3B; font-size: 0.75rem; margin-top: 0.25rem;">30-day checkpoints = flexibility</div>
+                                <div style="color: #1CC29F; font-size: 2rem; font-weight: 900;">$0</div>
+                                <div style="color: #0F766E; font-size: 0.9rem;">Long-term commitment</div>
+                                <div style="color: #134E4A; font-size: 0.75rem; margin-top: 0.25rem;">30-day checkpoints = flexibility</div>
                             </div>
                             <div>
-                                <div style="color: #10B981; font-size: 2rem; font-weight: 900;">Day 1</div>
-                                <div style="color: #047857; font-size: 0.9rem;">GTM execution starts</div>
-                                <div style="color: #064E3B; font-size: 0.75rem; margin-top: 0.25rem;">vs. 3-6 month hire process</div>
+                                <div style="color: #1CC29F; font-size: 2rem; font-weight: 900;">Day 1</div>
+                                <div style="color: #0F766E; font-size: 0.9rem;">GTM execution starts</div>
+                                <div style="color: #134E4A; font-size: 0.75rem; margin-top: 0.25rem;">vs. 3-6 month hire process</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Tag Team Sprint Cost Calculator -->
-                    <div style="background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); border: 3px solid #F59E0B; border-radius: 16px; padding: 2.5rem; margin-top: 3rem;">
-                        <h4 style="color: #78350F; font-weight: 700; margin-bottom: 0.5rem; font-size: 1.5rem; text-align: center;">Tag Team Sprint Cost Calculator</h4>
-                        <p style="color: #92400E; text-align: center; margin-bottom: 2rem;">See what you get for your investment - full breakdown by duration</p>
+                    <!-- 90-Day Investment Breakdown -->
+                    <div style="background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%); border: 3px solid #1CC29F; border-radius: 16px; padding: 2.5rem; margin-top: 3rem;">
+                        <h4 style="color: #0F766E; font-weight: 700; margin-bottom: 0.5rem; font-size: 1.5rem; text-align: center;">90-Day Investment Breakdown</h4>
+                        <p style="color: #134E4A; text-align: center; margin-bottom: 2rem;">Full transparency on your $25K contractor investment</p>
                         
-                        <!-- Duration Selector -->
-                        <div style="margin-bottom: 2rem;">
-                            <div style="text-align: center; margin-bottom: 1rem;">
-                                <label style="color: #78350F; font-weight: 600; font-size: 1.1rem; display: block; margin-bottom: 1rem;">Select Sprint Duration:</label>
-                                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                                    <button  style="padding: 1rem 2rem; background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);">
-                                        30 Days - $15K
-                                    </button>
-                                    <button  style="padding: 1rem 2rem; background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
-                                        60 Days - $28K
-                                    </button>
-                                    <button  style="padding: 1rem 2rem; background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
-                                        90 Days - $25K
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Cost Breakdown Display -->
                         <div style="background: white; border-radius: 20px; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
                             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-bottom: 2rem;">
                                 <!-- Cost Per Day -->
-                                <div style="text-align: center; padding: 1.5rem; background: #F0FDF4; border-radius: 12px;">
-                                    <div style="color: #065F46; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Cost Per Day</div>
-                                    <div id="sprintCostPerDay" style="color: #10B981; font-size: 2rem; font-weight: 900;">$500</div>
-                                    <div style="color: #047857; font-size: 0.85rem; margin-top: 0.5rem;">Full team dedication</div>
+                                <div style="text-align: center; padding: 1.5rem; background: #F0FDFA; border-radius: 12px; border: 2px solid #CCFBF1;">
+                                    <div style="color: #0F766E; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Cost Per Day</div>
+                                    <div style="color: #1CC29F; font-size: 2rem; font-weight: 900;">$278</div>
+                                    <div style="color: #134E4A; font-size: 0.85rem; margin-top: 0.5rem;">Full-time dedication</div>
                                 </div>
 
                                 <!-- Duration -->
-                                <div style="text-align: center; padding: 1.5rem; background: #EFF6FF; border-radius: 12px;">
-                                    <div style="color: #1E3A8A; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Sprint Duration</div>
-                                    <div id="sprintDuration" style="color: #3B82F6; font-size: 2rem; font-weight: 900;">30 Days</div>
-                                    <div style="color: #2563EB; font-size: 0.85rem; margin-top: 0.5rem;">Full-time focus</div>
+                                <div style="text-align: center; padding: 1.5rem; background: #F0FDFA; border-radius: 12px; border: 2px solid #CCFBF1;">
+                                    <div style="color: #0F766E; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Sprint Duration</div>
+                                    <div style="color: #1CC29F; font-size: 2rem; font-weight: 900;">90 Days</div>
+                                    <div style="color: #134E4A; font-size: 0.85rem; margin-top: 0.5rem;">3-month contractor</div>
                                 </div>
 
                                 <!-- Total Investment -->
-                                <div style="text-align: center; padding: 1.5rem; background: #FEF3C7; border-radius: 12px;">
-                                    <div style="color: #78350F; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Total Investment</div>
-                                    <div id="sprintTotalCost" style="color: #F59E0B; font-size: 2rem; font-weight: 900;">$15K</div>
-                                    <div style="color: #92400E; font-size: 0.85rem; margin-top: 0.5rem;">One-time payment</div>
+                                <div style="text-align: center; padding: 1.5rem; background: #F0FDFA; border-radius: 12px; border: 2px solid #CCFBF1;">
+                                    <div style="color: #0F766E; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Total Investment</div>
+                                    <div style="color: #1CC29F; font-size: 2rem; font-weight: 900;">$25K</div>
+                                    <div style="color: #134E4A; font-size: 0.85rem; margin-top: 0.5rem;">Contractor rate</div>
                                 </div>
                             </div>
 
                             <!-- What's Included -->
-                            <div style="background: #F8FAFC; padding: 2rem; border-radius: 12px; border-left: 4px solid #10B981;">
-                                <h5 style="color: #1E293B; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.1rem;">Your Tag Team Includes:</h5>
+                            <div style="background: #F0FDFA; padding: 2rem; border-radius: 12px; border-left: 4px solid #1CC29F;">
+                                <h5 style="color: #0F766E; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.1rem;">Your 90-Day Engagement Includes:</h5>
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
                                     <div>
                                         <div style="display: flex; align-items: start; gap: 0.75rem; margin-bottom: 1rem;">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1CC29F" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
                                                 <polyline points="20 6 9 17 4 12"/>
                                             </svg>
                                             <div>
-                                                <div style="color: #1E293B; font-weight: 600; margin-bottom: 0.25rem;">2 Sales Experts</div>
-                                                <div style="color: #64748B; font-size: 0.9rem;">Tag team approach - you get two perspectives</div>
+                                                <div style="color: #0F766E; font-weight: 600; margin-bottom: 0.25rem;">Sales Enablement Focus</div>
+                                                <div style="color: #134E4A; font-size: 0.9rem;">Build GTM infrastructure while hiring junior AE</div>
                                             </div>
                                         </div>
                                         <div style="display: flex; align-items: start; gap: 0.75rem; margin-bottom: 1rem;">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1CC29F" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
                                                 <polyline points="20 6 9 17 4 12"/>
                                             </svg>
                                             <div>
-                                                <div style="color: #1E293B; font-weight: 600; margin-bottom: 0.25rem;">Active Deal Closing</div>
-                                                <div style="color: #64748B; font-size: 0.9rem;">We close deals while building systems</div>
+                                                <div style="color: #0F766E; font-weight: 600; margin-bottom: 0.25rem;">Junior AE Support</div>
+                                                <div style="color: #134E4A; font-size: 0.9rem;">Hire, onboard, and fully ramp by Day 90</div>
                                             </div>
                                         </div>
                                         <div style="display: flex; align-items: start; gap: 0.75rem;">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1CC29F" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
                                                 <polyline points="20 6 9 17 4 12"/>
                                             </svg>
                                             <div>
-                                                <div style="color: #1E293B; font-weight: 600; margin-bottom: 0.25rem;">Complete Playbooks</div>
-                                                <div style="color: #64748B; font-size: 0.9rem;">Battle cards, scripts, objection handling</div>
+                                                <div style="color: #0F766E; font-weight: 600; margin-bottom: 0.25rem;">Complete Playbooks</div>
+                                                <div style="color: #134E4A; font-size: 0.9rem;">Battle cards, scripts, enablement materials</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div>
                                         <div style="display: flex; align-items: start; gap: 0.75rem; margin-bottom: 1rem;">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1CC29F" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
                                                 <polyline points="20 6 9 17 4 12"/>
                                             </svg>
                                             <div>
-                                                <div style="color: #1E293B; font-weight: 600; margin-bottom: 0.25rem;">Weekly Strategy Sessions</div>
-                                                <div style="color: #64748B; font-size: 0.9rem;">Course corrections & optimization</div>
+                                                <div style="color: #0F766E; font-weight: 600; margin-bottom: 0.25rem;">Weekly Strategy Sessions</div>
+                                                <div style="color: #134E4A; font-size: 0.9rem;">Course corrections & optimization</div>
                                             </div>
                                         </div>
                                         <div style="display: flex; align-items: start; gap: 0.75rem; margin-bottom: 1rem;">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1CC29F" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
                                                 <polyline points="20 6 9 17 4 12"/>
                                             </svg>
                                             <div>
-                                                <div style="color: #1E293B; font-weight: 600; margin-bottom: 0.25rem;">System Documentation</div>
-                                                <div style="color: #64748B; font-size: 0.9rem;">Everything documented for next hire</div>
+                                                <div style="color: #0F766E; font-weight: 600; margin-bottom: 0.25rem;">60+ Qualified Opportunities</div>
+                                                <div style="color: #134E4A; font-size: 0.9rem;">Healthy pipeline built for junior AE</div>
                                             </div>
                                         </div>
                                         <div style="display: flex; align-items: start; gap: 0.75rem;">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1CC29F" stroke-width="3" style="flex-shrink: 0; margin-top: 2px;">
                                                 <polyline points="20 6 9 17 4 12"/>
                                             </svg>
                                             <div>
-                                                <div style="color: #1E293B; font-weight: 600; margin-bottom: 0.25rem;">Hiring & Onboarding</div>
-                                                <div style="color: #64748B; font-size: 0.9rem;" id="sprintHiringNote">Foundation in 30 days</div>
+                                                <div style="color: #0F766E; font-weight: 600; margin-bottom: 0.25rem;">HubSpot & Automation</div>
+                                                <div style="color: #134E4A; font-size: 0.9rem;">CRM setup, sequences, workflows</div>
                                             </div>
                                         </div>
                                     </div>
@@ -2696,21 +2640,21 @@
                             </div>
 
                             <!-- ROI Comparison -->
-                            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #DCFCE7 0%, #BBF7D0 100%); border-radius: 12px; border: 2px solid #10B981;">
+                            <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%); border-radius: 12px; border: 2px solid #1CC29F;">
                                 <div style="text-align: center;">
-                                    <div style="color: #065F46; font-weight: 700; margin-bottom: 1rem; font-size: 1.1rem;">vs. Traditional First AE Hire</div>
+                                    <div style="color: #0F766E; font-weight: 700; margin-bottom: 1rem; font-size: 1.1rem;">vs. Hiring Senior Growth Lead Full-Time</div>
                                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
                                         <div>
-                                            <div style="color: #10B981; font-size: 1.8rem; font-weight: 900;" id="sprintSavings">$105K+</div>
-                                            <div style="color: #047857; font-size: 0.9rem;">Cost savings (6 months)</div>
+                                            <div style="color: #1CC29F; font-size: 1.8rem; font-weight: 900;">$95K+</div>
+                                            <div style="color: #0F766E; font-size: 0.9rem;">Cost savings (6 months)</div>
                                         </div>
                                         <div>
-                                            <div style="color: #10B981; font-size: 1.8rem; font-weight: 900;" id="sprintTimeToRev">4-6 weeks</div>
-                                            <div style="color: #047857; font-size: 0.9rem;">Time to first revenue</div>
+                                            <div style="color: #1CC29F; font-size: 1.8rem; font-weight: 900;">Day 1</div>
+                                            <div style="color: #0F766E; font-size: 0.9rem;">GTM execution starts</div>
                                         </div>
                                         <div>
-                                            <div style="color: #10B981; font-size: 1.8rem; font-weight: 900;">0%</div>
-                                            <div style="color: #047857; font-size: 0.9rem;">Wrong hire risk</div>
+                                            <div style="color: #1CC29F; font-size: 1.8rem; font-weight: 900;">0%</div>
+                                            <div style="color: #0F766E; font-size: 0.9rem;">Wrong hire risk</div>
                                         </div>
                                     </div>
                                 </div>
@@ -2722,19 +2666,19 @@
 
             <!-- Cost Comparison Calculator -->
             <div style="max-width: 1000px; margin: 2rem auto; padding-top: 3rem;">
-                <div style="background: white; border-radius: 20px; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
-                    <h3 style="color: #1E293B; font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center;">Cost Comparison: Traditional Hire vs. 30-Day Sprint</h3>
+                <div style="background: white; border-radius: 20px; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); border-left: 6px solid #1CC29F;">
+                    <h3 style="color: #1CC29F; font-size: 1.8rem; margin-bottom: 1.5rem; text-align: center;">Cost Comparison: Traditional Hire vs. 90-Day Contractor</h3>
                     
                     <div style="margin: 2rem 0;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                            <label for="sliderAeComp" style="color: #1E293B; font-weight: 600; font-size: 1.05rem;">
+                            <label for="sliderAeComp" style="color: #0F766E; font-weight: 600; font-size: 1.05rem;">
                                 Typical First AE Annual Salary
                             </label>
-                            <span id="aeSalaryValue" style="color: #10B981; font-weight: 700; font-size: 1.3rem;">$120K</span>
+                            <span id="aeSalaryValue" style="color: #1CC29F; font-weight: 700; font-size: 1.3rem;">$120K</span>
                         </div>
                         <input type="range" id="sliderAeComp" min="80" max="180" value="120" step="10"
                             
-                            style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #10B981 0%, #10B981 40%, #E2E8F0 40%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
+                            style="width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(to right, #1CC29F 0%, #1CC29F 40%, #E2E8F0 40%, #E2E8F0 100%); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none;">
                     </div>
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem;">
@@ -2773,56 +2717,56 @@
                             </div>
                         </div>
 
-                        <!-- Sprint Approach -->
-                        <div style="border: 3px solid #10B981; border-radius: 16px; padding: 2rem; background: #F0FDF4; min-height: 480px; display: flex; flex-direction: column;">
-                            <h4 style="color: #059669; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.3rem;"> 30-Day Sprint → New AE</h4>
+                        <!-- 90-Day Contractor Approach -->
+                        <div style="border: 3px solid #1CC29F; border-radius: 16px; padding: 2rem; background: #F0FDFA; min-height: 480px; display: flex; flex-direction: column;">
+                            <h4 style="color: #0F766E; font-weight: 700; margin-bottom: 1.5rem; font-size: 1.3rem;">90-Day Contractor → Junior AE</h4>
                             
                             <div style="margin-bottom: 1.5rem;">
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span style="color: #047857;">Sprint Cost (30 days)</span>
-                                    <span style="font-weight: 700; color: #059669;">$15,000</span>
+                                    <span style="color: #134E4A;">Contractor Cost (90 days)</span>
+                                    <span style="font-weight: 700; color: #1CC29F;">$25,000</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span style="color: #047857;">New AE Salary (Year 1)</span>
-                                    <span style="font-weight: 700; color: #059669;" id="sprintAESalary">$84,000</span>
+                                    <span style="color: #134E4A;">Junior AE Salary (Year 1)</span>
+                                    <span style="font-weight: 700; color: #1CC29F;" id="sprintAESalary">$84,000</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span style="color: #047857;">Recruiting Costs</span>
-                                    <span style="font-weight: 700; color: #059669;" id="sprintRecruiting">$16,800</span>
+                                    <span style="color: #134E4A;">Recruiting Costs</span>
+                                    <span style="font-weight: 700; color: #1CC29F;" id="sprintRecruiting">$16,800</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span style="color: #047857;">Lost Revenue (2-mo ramp)</span>
-                                    <span style="font-weight: 700; color: #059669;">$60,000</span>
+                                    <span style="color: #134E4A;">Lost Revenue (2-mo ramp)</span>
+                                    <span style="font-weight: 700; color: #1CC29F;">$60,000</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span style="color: #047857;">CEO Time Cost (80 hrs)</span>
-                                    <span style="font-weight: 700; color: #059669;">$16,000</span>
+                                    <span style="color: #134E4A;">CEO Time Cost (80 hrs)</span>
+                                    <span style="font-weight: 700; color: #1CC29F;">$16,000</span>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                    <span style="color: #047857;">Failure Risk (22% × total)</span>
-                                    <span style="font-weight: 700; color: #059669;" id="sprintFailureRisk">$42,000</span>
+                                    <span style="color: #134E4A;">Failure Risk (22% × total)</span>
+                                    <span style="font-weight: 700; color: #1CC29F;" id="sprintFailureRisk">$42,000</span>
                                 </div>
                             </div>
                             
-                            <div style="border-top: 3px solid #10B981; padding-top: 1rem; margin-top: 1rem;">
+                            <div style="border-top: 3px solid #1CC29F; padding-top: 1rem; margin-top: 1rem;">
                                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="color: #047857; font-weight: 700; font-size: 1.1rem;">Total First-Year Cost</span>
-                                    <span style="font-weight: 800; color: #059669; font-size: 1.8rem;" id="sprintTotal">$233,800</span>
+                                    <span style="color: #0F766E; font-weight: 700; font-size: 1.1rem;">Total First-Year Cost</span>
+                                    <span style="font-weight: 800; color: #1CC29F; font-size: 1.8rem;" id="sprintTotal">$243,800</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Savings Summary -->
-                    <div style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border-radius: 16px; border: 3px solid #10B981;">
+                    <div style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%); border-radius: 16px; border: 3px solid #1CC29F;">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <div>
-                                <div style="color: #065F46; font-size: 1.1rem; margin-bottom: 0.5rem;">First-Year Savings with Sprint Approach:</div>
-                                <div style="color: #047857; font-size: 0.95rem;">Lower salary requirement + Faster ramp + De-risked hire = Massive ROI</div>
+                                <div style="color: #0F766E; font-size: 1.1rem; margin-bottom: 0.5rem;">First-Year Savings with Contractor Approach:</div>
+                                <div style="color: #134E4A; font-size: 0.95rem;">Lower salary requirement + Faster ramp + De-risked hire = Massive ROI</div>
                             </div>
                             <div style="text-align: right;">
-                                <div style="font-size: 3rem; font-weight: 900; color: #10B981;" id="totalSavings">$345,200</div>
-                                <div style="color: #059669; font-weight: 700;" id="savingsPercent">60% lower total risk</div>
+                                <div style="font-size: 3rem; font-weight: 900; color: #1CC29F;" id="totalSavings">$335,200</div>
+                                <div style="color: #0F766E; font-weight: 700;" id="savingsPercent">58% lower total risk</div>
                             </div>
                         </div>
                     </div>
@@ -2831,8 +2775,8 @@
 
             <!-- The Junior AE Advantage -->
             <div style="max-width: 1000px; margin: 2rem auto; padding-top: 3rem;">
-                <div style="background: white; border-radius: 20px; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); border-left: 6px solid #3B82F6;">
-                    <h3 style="color: #3B82F6; font-size: 1.8rem; margin-bottom: 1.5rem;">The Contractor Enablement Model: Lower AE Costs, Higher Success</h3>
+                <div style="background: white; border-radius: 20px; padding: 3rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); border-left: 6px solid #1CC29F;">
+                    <h3 style="color: #1CC29F; font-size: 1.8rem; margin-bottom: 1.5rem;">The Contractor Enablement Model: Lower AE Costs, Higher Success</h3>
                     
                     <p style="color: #64748B; font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
                         <strong>The breakthrough insight:</strong> When a contractor builds your sales infrastructure first, you can hire junior AEs at 40-60% lower salaries because they're executing a proven system—not building one from scratch. <strong>This is why 87% of high-growth SaaS companies use fractional sales enablement before scaling their AE teams</strong> (SaaStr 2024 Annual Report).
@@ -2930,16 +2874,16 @@
 
                     <!-- The Trap to Avoid -->
                     <div style="background: #FEF2F2; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #DC2626; margin-top: 2rem;">
-                        <h4 style="color: #991B1B; font-weight: 700; margin-bottom: 0.75rem;">⚠️ The Trap Most Founders Fall Into:</h4>
+                        <h4 style="color: #991B1B; font-weight: 700; margin-bottom: 0.75rem;">The Trap Most Founders Fall Into:</h4>
                         <p style="color: #7F1D1D; line-height: 1.8;">
                             They hire an expensive, experienced AE expecting them to be self-sufficient. But without sales infrastructure already in place, even the best AE gets distracted building tools instead of closing deals. They either underperform or leave. You lose 6-9 months and $240K+ in sunk costs.
                         </p>
                     </div>
 
                     <!-- The Smart Path -->
-                    <div style="background: #F0FDF4; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #10B981; margin-top: 1rem;">
-                        <h4 style="color: #065F46; font-weight: 700; margin-bottom: 0.75rem;">✓ The Smart Path (This Approach):</h4>
-                        <p style="color: #047857; line-height: 1.8;">
+                    <div style="background: #F0FDFA; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #1CC29F; margin-top: 1rem;">
+                        <h4 style="color: #0F766E; font-weight: 700; margin-bottom: 0.75rem;">The Smart Path (This Approach):</h4>
+                        <p style="color: #134E4A; line-height: 1.8;">
                             Invest 90 days in sales infrastructure. Hire a junior AE for 40% less. They hit the ground running with proven playbooks, diagnostic tools, and clear messaging. They succeed faster, stay longer, and cost way less. Then you scale from a position of strength.
                         </p>
                     </div>
