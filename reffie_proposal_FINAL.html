@@ -321,6 +321,38 @@
                 })(sprintBtns[i]);
             }
         };
+        
+        console.log('All functions defined, setting up init...');
+        
+        // INIT - Run when DOM is ready
+        if (document.readyState === 'loading') {
+            console.log('Waiting for DOMContentLoaded...');
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('DOMContentLoaded fired, running init...');
+                window.attachListeners();
+                window.runCalc();
+                window.runAeCalc();
+                window.pickSprint(30);
+                window.updateSlider('sliderDealSize', 1, 50, 6);
+                window.updateSlider('sliderSalesCycle', 7, 120, 45);
+                window.updateSlider('sliderWinRate', 5, 100, 20);
+                window.updateSlider('sliderCallsPerDay', 1, 30, 6);
+                window.updateSlider('sliderAeComp', 80, 180, 120);
+                console.log('Calculator initialized!');
+            });
+        } else {
+            console.log('DOM already loaded, running init immediately...');
+            window.attachListeners();
+            window.runCalc();
+            window.runAeCalc();
+            window.pickSprint(30);
+            window.updateSlider('sliderDealSize', 1, 50, 6);
+            window.updateSlider('sliderSalesCycle', 7, 120, 45);
+            window.updateSlider('sliderWinRate', 5, 100, 20);
+            window.updateSlider('sliderCallsPerDay', 1, 30, 6);
+            window.updateSlider('sliderAeComp', 80, 180, 120);
+            console.log('Calculator initialized!');
+        }
     </script>
     
     <style>
@@ -3025,8 +3057,6 @@
 
 <script>
 // Navigation and UI Initialization
-console.log('Initializing navigation and UI...');
-
 function initNav() {
     var sections = document.querySelectorAll('section[id]');
     var links = document.querySelectorAll('nav a[href^="#"]');
@@ -3087,49 +3117,15 @@ function initExpand() {
     }
 }
 
-// INIT
-function init() {
-    console.log('INIT STARTING...');
-    console.log('Document ready state:', document.readyState);
-    
-    console.log('Attaching event listeners...');
-    if (typeof window.attachListeners === 'function') {
-        window.attachListeners();
-    }
-    
-    console.log('Running initial calculations...');
-    if (typeof window.runCalc === 'function') {
-        window.runCalc();
-    }
-    if (typeof window.runAeCalc === 'function') {
-        window.runAeCalc();
-    }
-    if (typeof window.pickSprint === 'function') {
-        window.pickSprint(30);
-    }
-    
-    console.log('Updating slider backgrounds...');
-    if (typeof window.updateSlider === 'function') {
-        window.updateSlider('sliderDealSize', 1, 50, 6);
-        window.updateSlider('sliderSalesCycle', 7, 120, 45);
-        window.updateSlider('sliderWinRate', 5, 100, 20);
-        window.updateSlider('sliderCallsPerDay', 1, 30, 6);
-        window.updateSlider('sliderAeComp', 80, 180, 120);
-    }
-    
-    console.log('Initializing nav and expand...');
+// Initialize nav and expand when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        initNav();
+        initExpand();
+    });
+} else {
     initNav();
     initExpand();
-    console.log('INIT COMPLETE - Calculators ready.');
-}
-
-console.log('Script loaded. Document state:', document.readyState);
-if (document.readyState === 'loading') {
-    console.log('Waiting for DOMContentLoaded...');
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    console.log('DOM already loaded, running init immediately');
-    init();
 }
 </script>
 </body>
