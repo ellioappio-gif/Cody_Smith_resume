@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cody Smith | Growth Lead for Reffie</title>
     
-    <!-- CALCULATOR SCRIPT - IN HEAD SO FUNCTIONS EXIST BEFORE HTML -->
+    <!-- CALCULATOR SCRIPT -->
     <script>
-        console.log('Calculator script loading in HEAD');
-        
-        // State objects
+        // STATE AND DATA
         var calc = { dealSize: 6, cycle: 45, winRate: 20, callsDay: 6 };
         var aeSalary = 120000;
         var sprintData = {
@@ -18,7 +16,7 @@
             90: { cost: 42000, perDay: 467, save: '78K+', time: '2-3 weeks', note: 'Complete onboarding blueprint' }
         };
         
-        // Helper to safely get/update elements
+        // UTILITIES
         function update(id, txt) {
             var el = document.getElementById(id);
             if (el) el.textContent = txt;
@@ -33,13 +31,10 @@
             return '$' + Math.round(num / 1000) + 'K';
         }
         
-        // Make updateSlider global
+        // SLIDER STYLING
         window.updateSlider = function(id, min, max, val) {
             var slider = document.getElementById(id);
-            if (!slider) {
-                console.warn('updateSlider: slider not found:', id);
-                return;
-            }
+            if (!slider) return;
             var pct = ((val - min) / (max - min)) * 100;
             var color = id === 'sliderDealSize' ? '#10B981' :
                         id === 'sliderSalesCycle' ? '#06B6D4' :
@@ -47,9 +42,8 @@
             slider.style.background = 'linear-gradient(to right, ' + color + ' 0%, ' + color + ' ' + pct + '%, #E2E8F0 ' + pct + '%, #E2E8F0 100%)';
         };
         
-        // Main calculation function - Make global
+        // MAIN CALCULATION
         window.runCalc = function() {
-            console.log('runCalc executing with state:', calc);
             var dealSize = calc.dealSize * 1000;
             var cycle = calc.cycle;
             var winRate = calc.winRate / 100;
@@ -120,7 +114,7 @@
             window.updateChart(closed1, closed2, closed3, m1Pipe, m2Pipe, m3Pipe);
         };
         
-        // Make updateChart global  
+        // CHART RENDERING
         window.updateChart = function(r1, r2, r3, p1, p2, p3) {
             var cumR1 = r1;
             var cumR2 = r1 + r2;
@@ -168,9 +162,8 @@
             setAttr('pipeLabel3', 'y', Math.min(350, py3 + 25));
         };
         
-        // Make runAeCalc global
+        // AE COMPARISON CALCULATOR
         window.runAeCalc = function() {
-            console.log('runAeCalc executing with salary:', aeSalary);
             var salary = aeSalary;
             var recruiting = salary * 0.20;
             var lostRev = 180000;
@@ -197,9 +190,8 @@
             update('sprintSavings', k(savings));
         };
         
-        // GLOBAL HANDLER FUNCTIONS
+        // EVENT HANDLERS
         window.onDealSize = function(val) {
-            console.log('onDealSize:', val);
             calc.dealSize = parseFloat(val);
             update('dealSizeValue', '$' + val + 'K');
             window.updateSlider('sliderDealSize', 1, 50, val);
@@ -207,7 +199,6 @@
         };
         
         window.onCycle = function(val) {
-            console.log('onCycle:', val);
             calc.cycle = parseFloat(val);
             update('salesCycleValue', val + 'd');
             window.updateSlider('sliderSalesCycle', 7, 120, val);
@@ -215,7 +206,6 @@
         };
         
         window.onWinRate = function(val) {
-            console.log('onWinRate:', val);
             calc.winRate = parseFloat(val);
             update('winRateValue', val + '%');
             window.updateSlider('sliderWinRate', 5, 100, val);
@@ -223,7 +213,6 @@
         };
         
         window.onCallsDay = function(val) {
-            console.log('onCallsDay:', val);
             calc.callsDay = parseFloat(val);
             update('callsPerDayValue', val + '/day');
             window.updateSlider('sliderCallsPerDay', 1, 30, val);
@@ -231,7 +220,6 @@
         };
         
         window.onAeSalary = function(val) {
-            console.log('onAeSalary:', val);
             aeSalary = parseFloat(val) * 1000;
             update('aeSalaryValue', '$' + val + 'K');
             window.updateSlider('sliderAeComp', 80, 180, val);
@@ -239,10 +227,7 @@
         };
         
         window.pickSprint = function(days) {
-            console.log('pickSprint:', days);
             var d = sprintData[days];
-            
-            // Update button states using data-sprint-days attribute
             var btns = document.querySelectorAll('[data-sprint-days]');
             for (var i = 0; i < btns.length; i++) {
                 var btn = btns[i];
@@ -270,73 +255,29 @@
             update('sprintHiringNote', d.note);
         };
         
-        // ATTACH EVENT LISTENERS - Make global so init() can call it
+        // SETUP EVENT LISTENERS
         window.attachListeners = function() {
-            console.log('Attaching event listeners to sliders and buttons...');
-            
-            // Attach slider listeners
             var dealSlider = document.getElementById('sliderDealSize');
             var cycleSlider = document.getElementById('sliderSalesCycle');
             var winRateSlider = document.getElementById('sliderWinRate');
             var callsSlider = document.getElementById('sliderCallsPerDay');
             var aeSlider = document.getElementById('sliderAeComp');
             
-            if (dealSlider) {
-                dealSlider.addEventListener('input', function() { window.onDealSize(this.value); });
-                console.log('Deal size slider attached');
-            } else {
-                console.error('ERROR: sliderDealSize not found!');
-            }
+            if (dealSlider) dealSlider.addEventListener('input', function() { window.onDealSize(this.value); });
+            if (cycleSlider) cycleSlider.addEventListener('input', function() { window.onCycle(this.value); });
+            if (winRateSlider) winRateSlider.addEventListener('input', function() { window.onWinRate(this.value); });
+            if (callsSlider) callsSlider.addEventListener('input', function() { window.onCallsDay(this.value); });
+            if (aeSlider) aeSlider.addEventListener('input', function() { window.onAeSalary(this.value); });
             
-            if (cycleSlider) {
-                cycleSlider.addEventListener('input', function() { window.onCycle(this.value); });
-                console.log('Cycle slider attached');
-            } else {
-                console.error('ERROR: sliderSalesCycle not found!');
-            }
-            
-            if (winRateSlider) {
-                winRateSlider.addEventListener('input', function() { window.onWinRate(this.value); });
-                console.log('Win rate slider attached');
-            } else {
-                console.error('ERROR: sliderWinRate not found!');
-            }
-            
-            if (callsSlider) {
-                callsSlider.addEventListener('input', function() { window.onCallsDay(this.value); });
-                console.log('Calls slider attached');
-            } else {
-                console.error('ERROR: sliderCallsPerDay not found!');
-            }
-            
-            if (aeSlider) {
-                aeSlider.addEventListener('input', function() { window.onAeSalary(this.value); });
-                console.log('AE salary slider attached');
-            } else {
-                console.error('ERROR: sliderAeComp not found!');
-            }
-            
-            // Attach sprint button listeners
             var sprintBtns = document.querySelectorAll('[data-sprint-days]');
-            console.log('Found sprint buttons:', sprintBtns.length);
             for (var i = 0; i < sprintBtns.length; i++) {
                 (function(btn) {
                     var days = parseInt(btn.getAttribute('data-sprint-days'), 10);
-                    btn.addEventListener('click', function() {
-                        window.pickSprint(days);
-                    });
-                    console.log('Sprint button attached for ' + days + ' days');
+                    btn.addEventListener('click', function() { window.pickSprint(days); });
                 })(sprintBtns[i]);
             }
         };
-        
-        console.log('All calculator functions defined');
     </script>
-    
-    <!-- DEBUG INDICATOR -->
-    <div id="debugIndicator" style="position: fixed; top: 10px; right: 10px; background: #FEF2F2; border: 2px solid #DC2626; color: #991B1B; padding: 8px 12px; border-radius: 6px; font-family: monospace; font-size: 11px; z-index: 10000; display: none;">
-        Calculator: <span id="debugStatus">Loading...</span>
-    </div>
     
     <style>
         * {
@@ -1178,10 +1119,6 @@
 
                         <!-- Results Section -->
                         <div style="border-top: 2px solid #E2E8F0; padding-top: 2rem;">
-                        </div>
-
-                        <!-- Results Section -->
-                        <div style="border-top: 2px solid #E2E8F0; padding-top: 2rem;">
                             <h3 style="color: #1E293B; margin-bottom: 1.5rem; font-size: 1.3rem;">90-Day Projections</h3>
                             
                             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
@@ -1246,7 +1183,6 @@
 
 
     <!-- METRICS WITH PIE CHART -->
-    <section id="metrics">
     <section id="impact" class="container">
         <div class="metrics-bar">
             <div class="metrics-grid">
@@ -1311,7 +1247,6 @@
     </section>
 
     <!-- FEATURES -->
-    <section id="features" style="padding: 0;">
     <section id="approach" class="features">
         <div class="container">
             <div class="section-header">
@@ -1354,7 +1289,6 @@
         </div>
     </section>
 
-    </section><!-- End features -->
     <!-- INTEGRATION DIAGRAM -->
     <section id="systems" data-expandable="true" data-expanded="true">
     <section id="tools" class="integration-section">
@@ -1384,8 +1318,6 @@
             </div>
         </div>
     </section>
-
-    </section><!-- End systems -->
     
     <!-- 90 DAY PLAN WITH REVENUE CHART -->
     <section id="plan" style="padding: 5rem 0; background: white;">
