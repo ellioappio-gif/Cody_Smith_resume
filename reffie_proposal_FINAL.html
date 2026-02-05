@@ -848,17 +848,7 @@
             transform: rotate(180deg);
         }
 
-        .section-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease, opacity 0.3s ease;
-            opacity: 0;
-        }
 
-        .section-content.expanded {
-            max-height: 5000px;
-            opacity: 1;
-        }
 
         /* Feature card hover effects */
         .feature-card {
@@ -2164,26 +2154,7 @@
                 </p>
             </div>
 
-            <!-- Sprint Duration Selector -->
-            <div style="max-width: 900px; margin: 2rem auto; padding: 2rem;">
-                <div style="text-align: center; margin-bottom: 2rem;">
-                    <h3 style="color: #1E293B; font-size: 1.3rem; margin-bottom: 1.5rem;">Select Your Sprint Duration</h3>
-                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                        <button id="sprintBtn30" data-sprint-days="30" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #10B981; background: #F0FDF4; color: #10B981; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
-                            <div style="font-size: 1.3rem; font-weight: 800;">30 Days</div>
-                            <div style="font-size: 0.85rem;">Foundation</div>
-                        </button>
-                        <button id="sprintBtn60" data-sprint-days="60" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #E2E8F0; background: white; color: #64748B; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
-                            <div style="font-size: 1.3rem; font-weight: 800;">60 Days</div>
-                            <div style="font-size: 0.85rem;">Extended</div>
-                        </button>
-                        <button id="sprintBtn90" data-sprint-days="90" style="padding: 1rem 2rem; font-size: 1rem; font-weight: 600; border: 3px solid #E2E8F0; background: white; color: #64748B; border-radius: 12px; cursor: pointer; transition: all 0.3s;">
-                            <div style="font-size: 1.3rem; font-weight: 800;">90 Days</div>
-                            <div style="font-size: 0.85rem;">Full Ramp</div>
-                        </button>
-                    </div>
-                </div>
-            </div>
+
 
             <!-- Why Contractor Model Works Better -->
             <div style="max-width: 1000px; margin: 2rem auto; padding-top: 1rem;">
