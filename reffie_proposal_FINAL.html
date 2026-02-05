@@ -1405,7 +1405,7 @@
             </div>
 
             <!-- Revenue Growth Chart - REACTIVE -->
-            <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); padding: 3rem; border-radius: 20px; margin-bottom: 4rem; box-shadow: 0 8px 24px rgba(0,0,0,0.06);">
+            <div style="background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%); padding: 3rem; border-radius: 20px; margin-bottom: 4rem; box-shadow: 0 8px 24px rgba(0,0,0,0.06); border: 1px solid #99F6E4;">
                 <h3 style="text-align: center; color: #1E293B; margin-bottom: 2rem; font-size: 1.5rem;">Cumulative Revenue & Pipeline Growth</h3>
                 <svg viewBox="0 0 600 350" style="width: 100%; height: auto; max-width: 700px; margin: 0 auto; display: block;">
                     <!-- Grid lines -->
@@ -1429,48 +1429,48 @@
                     <text x="315" y="305" text-anchor="middle" fill="#64748B" font-size="14" font-weight="600">Month 2</text>
                     <text x="480" y="305" text-anchor="middle" fill="#64748B" font-size="14" font-weight="600">Month 3</text>
 
-                    <!-- Revenue line (green) - REACTIVE -->
+                    <!-- Revenue line (teal) - REACTIVE -->
                     <polyline id="revenueLine" 
                         points="150,280 315,280 480,280" 
                         fill="none" 
-                        stroke="#10B981" 
+                        stroke="#1CC29F" 
                         stroke-width="4" 
                         stroke-linecap="round"
                         stroke-linejoin="round"/>
                     
                     <!-- Revenue dots -->
-                    <circle id="revPoint1" cx="150" cy="280" r="6" fill="#10B981"/>
-                    <circle id="revPoint2" cx="315" cy="280" r="6" fill="#10B981"/>
-                    <circle id="revPoint3" cx="480" cy="280" r="6" fill="#10B981"/>
+                    <circle id="revPoint1" cx="150" cy="280" r="6" fill="#1CC29F"/>
+                    <circle id="revPoint2" cx="315" cy="280" r="6" fill="#1CC29F"/>
+                    <circle id="revPoint3" cx="480" cy="280" r="6" fill="#1CC29F"/>
 
-                    <!-- Pipeline line (blue, dashed) - REACTIVE -->
+                    <!-- Pipeline line (darker teal, dashed) - REACTIVE -->
                     <polyline id="pipelineLine" 
                         points="150,280 315,280 480,280" 
                         fill="none" 
-                        stroke="#3B82F6" 
+                        stroke="#0D9488" 
                         stroke-width="3" 
                         stroke-dasharray="8,4"
                         stroke-linecap="round"
                         stroke-linejoin="round"/>
                     
                     <!-- Pipeline dots -->
-                    <circle id="pipePoint1" cx="150" cy="280" r="5" fill="#3B82F6"/>
-                    <circle id="pipePoint2" cx="315" cy="280" r="5" fill="#3B82F6"/>
-                    <circle id="pipePoint3" cx="480" cy="280" r="5" fill="#3B82F6"/>
+                    <circle id="pipePoint1" cx="150" cy="280" r="5" fill="#0D9488"/>
+                    <circle id="pipePoint2" cx="315" cy="280" r="5" fill="#0D9488"/>
+                    <circle id="pipePoint3" cx="480" cy="280" r="5" fill="#0D9488"/>
 
                     <!-- Value labels - REACTIVE -->
-                    <text id="revLabel1" x="150" y="270" text-anchor="middle" fill="#10B981" font-size="13" font-weight="700">$0</text>
-                    <text id="revLabel2" x="315" y="270" text-anchor="middle" fill="#10B981" font-size="13" font-weight="700">$0</text>
-                    <text id="revLabel3" x="480" y="270" text-anchor="middle" fill="#10B981" font-size="13" font-weight="700">$0</text>
+                    <text id="revLabel1" x="150" y="270" text-anchor="middle" fill="#1CC29F" font-size="13" font-weight="700">$0</text>
+                    <text id="revLabel2" x="315" y="270" text-anchor="middle" fill="#1CC29F" font-size="13" font-weight="700">$0</text>
+                    <text id="revLabel3" x="480" y="270" text-anchor="middle" fill="#1CC29F" font-size="13" font-weight="700">$0</text>
 
-                    <text id="pipeLabel1" x="150" y="45" text-anchor="middle" fill="#3B82F6" font-size="13" font-weight="700">$0</text>
-                    <text id="pipeLabel2" x="315" y="45" text-anchor="middle" fill="#3B82F6" font-size="13" font-weight="700">$0</text>
-                    <text id="pipeLabel3" x="480" y="45" text-anchor="middle" fill="#3B82F6" font-size="13" font-weight="700">$0</text>
+                    <text id="pipeLabel1" x="150" y="45" text-anchor="middle" fill="#0D9488" font-size="13" font-weight="700">$0</text>
+                    <text id="pipeLabel2" x="315" y="45" text-anchor="middle" fill="#0D9488" font-size="13" font-weight="700">$0</text>
+                    <text id="pipeLabel3" x="480" y="45" text-anchor="middle" fill="#0D9488" font-size="13" font-weight="700">$0</text>
 
                     <!-- Legend -->
-                    <rect x="200" y="20" width="20" height="4" fill="#10B981" rx="2"/>
+                    <rect x="200" y="20" width="20" height="4" fill="#1CC29F" rx="2"/>
                     <text x="225" y="25" fill="#64748B" font-size="13">Closed Revenue</text>
-                    <rect x="350" y="20" width="20" height="4" fill="#3B82F6" rx="2"/>
+                    <rect x="350" y="20" width="20" height="4" fill="#0D9488" rx="2"/>
                     <text x="375" y="25" fill="#64748B" font-size="13">Pipeline Built</text>
                 </svg>
             </div>
@@ -1478,145 +1478,103 @@
             <!-- Month by Month Details - REACTIVE -->
             <div style="display: grid; gap: 2rem; margin-bottom: 4rem;">
                 <!-- Month 1 -->
-                <div style="background: white; border-radius: 20px; padding: 3rem; border-left: 6px solid #10B981; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
+                <div style="background: white; border-radius: 20px; padding: 3rem; border-left: 6px solid #1CC29F; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
                     <div style="display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start;">
-                        <div style="min-width: 200px;">
-                            <h3 style="color: #10B981; font-size: 1.8rem; margin-bottom: 0.5rem;">Month 1</h3>
-                            <div style="background: #F0FDF4; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                                <div style="color: #064E3B; font-size: 0.9rem; margin-bottom: 0.25rem;">Closed Revenue</div>
-                                <div style="color: #10B981; font-size: 1.8rem; font-weight: 800;" id="planM1Rev">$0</div>
-                                <div style="color: #047857; font-size: 0.85rem;" id="planM1Deals">(0-1 deal)</div>
+                        <div style="min-width: 220px;">
+                            <h3 style="color: #1CC29F; font-size: 1.8rem; margin-bottom: 0.5rem;">Month 1</h3>
+                            <div style="background: #F0FDFA; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #CCFBF1;">
+                                <div style="color: #134E4A; font-size: 0.9rem; margin-bottom: 0.25rem;">Closed Revenue</div>
+                                <div style="color: #1CC29F; font-size: 1.8rem; font-weight: 800;" id="planM1Rev">$0</div>
+                                <div style="color: #0F766E; font-size: 0.85rem;" id="planM1Deals">(0-1 deal)</div>
                             </div>
-                            <div style="background: #EFF6FF; padding: 1rem; border-radius: 8px;">
-                                <div style="color: #1E3A8A; font-size: 0.9rem; margin-bottom: 0.25rem;">Pipeline Built</div>
-                                <div style="color: #3B82F6; font-size: 1.8rem; font-weight: 800;" id="planM1Pipe">$0</div>
-                                <div style="color: #2563EB; font-size: 0.85rem;" id="planM1Opps">(4-6 opps)</div>
+                            <div style="background: #F0FDFA; padding: 1rem; border-radius: 8px; border: 1px solid #CCFBF1;">
+                                <div style="color: #134E4A; font-size: 0.9rem; margin-bottom: 0.25rem;">Pipeline Built</div>
+                                <div style="color: #1CC29F; font-size: 1.8rem; font-weight: 800;" id="planM1Pipe">$0</div>
+                                <div style="color: #0F766E; font-size: 0.85rem;" id="planM1Opps">(15-25 opps)</div>
                             </div>
                         </div>
                         <div>
-                            <h4 style="color: #1E293B; font-size: 1.2rem; margin-bottom: 1rem;">Learning & Foundation Building (30% productivity)</h4>
-                            <p style="color: #64748B; margin-bottom: 1.5rem; line-height: 1.7;">
-                                With <strong id="planCycleDays1">30-45</strong> day sales cycles, Month 1 activity closes in Month 2-3. Focus: learning, qualification, building strong pipeline foundation.
+                            <h4 style="color: #1E293B; font-size: 1.2rem; margin-bottom: 0.5rem;">Foundation: GTM Setup + Junior AE Hiring</h4>
+                            <p style="color: #64748B; margin-bottom: 1.25rem; line-height: 1.7; font-size: 0.95rem;">
+                                Focus on multichannel demand generation, HubSpot infrastructure, and sales enablement asset creation while sourcing junior AE candidates.
                             </p>
-                            <div style="display: grid; gap: 1rem;">
-                                <div style="display: flex; gap: 1rem; align-items: start;">
-                                    <div style="background: #10B981; color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">1</div>
-                                    <div>
-                                        <strong style="color: #1E293B;">Product & Market Learning</strong>
-                                        <p style="color: #64748B; font-size: 0.95rem; margin-top: 0.25rem;">Deep dive on Reffie capabilities, competitive landscape, customer pain points</p>
-                                    </div>
-                                </div>
-                                <div style="display: flex; gap: 1rem; align-items: start;">
-                                    <div style="background: #10B981; color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">2</div>
-                                    <div>
-                                        <strong style="color: #1E293B;">Shadow to Solo</strong>
-                                        <p style="color: #64748B; font-size: 0.95rem; margin-top: 0.25rem;">8-12 demos (shadow first 3-5, then solo)</p>
-                                    </div>
-                                </div>
-                                <div style="display: flex; gap: 1rem; align-items: start;">
-                                    <div style="background: #10B981; color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3</div>
-                                    <div>
-                                        <strong style="color: #1E293B;">Initial Systems</strong>
-                                        <p style="color: #64748B; font-size: 0.95rem; margin-top: 0.25rem;">2 battle cards, diagnostic framework, demo documentation</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <ul style="color: #475569; line-height: 1.9; margin: 0; padding-left: 1.25rem; font-size: 0.95rem;">
+                                <li><strong>Outbound Channels:</strong> Launch email sequences, LinkedIn outreach, partnership conversations</li>
+                                <li><strong>HubSpot Setup:</strong> Pipeline stages, automation workflows, lead scoring, email templates</li>
+                                <li><strong>Enablement Assets:</strong> Sales playbook v1, competitive battle cards (Reffie vs. manual/legacy)</li>
+                                <li><strong>Pipeline Target:</strong> 15-25 qualified property mgmt leads from multichannel outbound</li>
+                                <li><strong>Junior AE Hiring:</strong> Job description posted, initial candidate sourcing begins</li>
+                                <li><strong>Forecast:</strong> Minimal revenue (learning phase), strong pipeline foundation built</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- Month 2 -->
-                <div style="background: white; border-radius: 20px; padding: 3rem; border-left: 6px solid #3B82F6; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
+                <div style="background: white; border-radius: 20px; padding: 3rem; border-left: 6px solid #1CC29F; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
                     <div style="display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start;">
-                        <div style="min-width: 200px;">
-                            <h3 style="color: #3B82F6; font-size: 1.8rem; margin-bottom: 0.5rem;">Month 2</h3>
-                            <div style="background: #F0FDF4; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                                <div style="color: #064E3B; font-size: 0.9rem; margin-bottom: 0.25rem;">Closed Revenue</div>
-                                <div style="color: #10B981; font-size: 1.8rem; font-weight: 800;" id="planM2Rev">$0</div>
-                                <div style="color: #047857; font-size: 0.85rem;" id="planM2Deals">(2-3 deals)</div>
+                        <div style="min-width: 220px;">
+                            <h3 style="color: #1CC29F; font-size: 1.8rem; margin-bottom: 0.5rem;">Month 2</h3>
+                            <div style="background: #F0FDFA; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #CCFBF1;">
+                                <div style="color: #134E4A; font-size: 0.9rem; margin-bottom: 0.25rem;">Closed Revenue</div>
+                                <div style="color: #1CC29F; font-size: 1.8rem; font-weight: 800;" id="planM2Rev">$0</div>
+                                <div style="color: #0F766E; font-size: 0.85rem;" id="planM2Deals">(2-3 deals)</div>
                             </div>
-                            <div style="background: #EFF6FF; padding: 1rem; border-radius: 8px;">
-                                <div style="color: #1E3A8A; font-size: 0.9rem; margin-bottom: 0.25rem;">Pipeline Built</div>
-                                <div style="color: #3B82F6; font-size: 1.8rem; font-weight: 800;" id="planM2Pipe">$0</div>
-                                <div style="color: #2563EB; font-size: 0.85rem;" id="planM2Opps">(8-12 opps)</div>
+                            <div style="background: #F0FDFA; padding: 1rem; border-radius: 8px; border: 1px solid #CCFBF1;">
+                                <div style="color: #134E4A; font-size: 0.9rem; margin-bottom: 0.25rem;">Pipeline Built</div>
+                                <div style="color: #1CC29F; font-size: 1.8rem; font-weight: 800;" id="planM2Pipe">$0</div>
+                                <div style="color: #0F766E; font-size: 0.85rem;" id="planM2Opps">(30-50 opps)</div>
                             </div>
                         </div>
                         <div>
-                            <h4 style="color: #1E293B; font-size: 1.2rem; margin-bottom: 1rem;">Initial Production (50% productivity)</h4>
-                            <p style="color: #64748B; margin-bottom: 1.5rem; line-height: 1.7;">
-                                Month 1 pipeline converting. Confidence building. Systems operational. 50% of full productivity (conservative).
+                            <h4 style="color: #1E293B; font-size: 1.2rem; margin-bottom: 0.5rem;">Scale: GTM Programs + Junior AE Onboarding</h4>
+                            <p style="color: #64748B; margin-bottom: 1.25rem; line-height: 1.7; font-size: 0.95rem;">
+                                Scalable GTM programs operational, junior AE hired and starting onboarding, sales enablement materials complete.
                             </p>
-                            <div style="display: grid; gap: 1rem;">
-                                <div style="display: flex; gap: 1rem; align-items: start;">
-                                    <div style="background: #3B82F6; color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">1</div>
-                                    <div>
-                                        <strong style="color: #1E293B;">Pipeline Converting</strong>
-                                        <p style="color: #64748B; font-size: 0.95rem; margin-top: 0.25rem;">Deals from first month activity begin closing</p>
-                                    </div>
-                                </div>
-                                <div style="display: flex; gap: 1rem; align-items: start;">
-                                    <div style="background: #3B82F6; color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">2</div>
-                                    <div>
-                                        <strong style="color: #1E293B;">Systems Operational</strong>
-                                        <p style="color: #64748B; font-size: 0.95rem; margin-top: 0.25rem;">Diagnostic tool complete, 4-5 battle cards, demo automation v1</p>
-                                    </div>
-                                </div>
-                                <div style="display: flex; gap: 1rem; align-items: start;">
-                                    <div style="background: #3B82F6; color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3</div>
-                                    <div>
-                                        <strong style="color: #1E293B;">Outbound Beginning</strong>
-                                        <p style="color: #64748B; font-size: 0.95rem; margin-top: 0.25rem;">First sequences live, expanding beyond inbound</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <ul style="color: #475569; line-height: 1.9; margin: 0; padding-left: 1.25rem; font-size: 0.95rem;">
+                                <li><strong>Automated Outbound:</strong> Sequences live in HubSpot, Zapier integrations, cohort tracking dashboards</li>
+                                <li><strong>Enablement Materials:</strong> Case studies, ROI calculators, demo videos, email template library</li>
+                                <li><strong>Pricing Strategy:</strong> Tiered packages documented, discount guidelines, competitive positioning</li>
+                                <li><strong>Tool Stack:</strong> HubSpot + Zapier + Notion fully integrated for seamless workflow</li>
+                                <li><strong>Junior AE Status:</strong> Hired, offer accepted, starting 2-week onboarding (shadow demos, practice pitch)</li>
+                                <li><strong>Pipeline Target:</strong> 30-50 cumulative qualified opps from scaled multichannel outreach</li>
+                                <li><strong>Forecast:</strong> Early revenue from Month 1 outreach converting, pipeline accelerating</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
                 <!-- Month 3 -->
-                <div style="background: white; border-radius: 20px; padding: 3rem; border-left: 6px solid #8B5CF6; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
+                <div style="background: white; border-radius: 20px; padding: 3rem; border-left: 6px solid #1CC29F; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
                     <div style="display: grid; grid-template-columns: auto 1fr; gap: 2rem; align-items: start;">
-                        <div style="min-width: 200px;">
-                            <h3 style="color: #8B5CF6; font-size: 1.8rem; margin-bottom: 0.5rem;">Month 3</h3>
-                            <div style="background: #F0FDF4; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                                <div style="color: #064E3B; font-size: 0.9rem; margin-bottom: 0.25rem;">Closed Revenue</div>
-                                <div style="color: #10B981; font-size: 1.8rem; font-weight: 800;" id="planM3Rev">$0</div>
-                                <div style="color: #047857; font-size: 0.85rem;" id="planM3Deals">(3-4 deals)</div>
+                        <div style="min-width: 220px;">
+                            <h3 style="color: #1CC29F; font-size: 1.8rem; margin-bottom: 0.5rem;">Month 3</h3>
+                            <div style="background: #F0FDFA; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #CCFBF1;">
+                                <div style="color: #134E4A; font-size: 0.9rem; margin-bottom: 0.25rem;">Closed Revenue</div>
+                                <div style="color: #1CC29F; font-size: 1.8rem; font-weight: 800;" id="planM3Rev">$0</div>
+                                <div style="color: #0F766E; font-size: 0.85rem;" id="planM3Deals">(3-4 deals)</div>
                             </div>
-                            <div style="background: #EFF6FF; padding: 1rem; border-radius: 8px;">
-                                <div style="color: #1E3A8A; font-size: 0.9rem; margin-bottom: 0.25rem;">Pipeline Built</div>
-                                <div style="color: #3B82F6; font-size: 1.8rem; font-weight: 800;" id="planM3Pipe">$0</div>
-                                <div style="color: #2563EB; font-size: 0.85rem;" id="planM3Opps">(12-18 opps)</div>
+                            <div style="background: #F0FDFA; padding: 1rem; border-radius: 8px; border: 1px solid #CCFBF1;">
+                                <div style="color: #134E4A; font-size: 0.9rem; margin-bottom: 0.25rem;">Pipeline Built</div>
+                                <div style="color: #1CC29F; font-size: 1.8rem; font-weight: 800;" id="planM3Pipe">$0</div>
+                                <div style="color: #0F766E; font-size: 0.85rem;" id="planM3Opps">(60+ opps)</div>
                             </div>
                         </div>
                         <div>
-                            <h4 style="color: #1E293B; font-size: 1.2rem; margin-bottom: 1rem;">Building Momentum (70% productivity)</h4>
-                            <p style="color: #64748B; margin-bottom: 1.5rem; line-height: 1.7;">
-                                Consistent deal flow. Complete GTM playbook delivered. Leadership fully transitioned. 70% productivity (conservative estimate).
+                            <h4 style="color: #1E293B; font-size: 1.2rem; margin-bottom: 0.5rem;">Handoff: Junior AE Enabled + System Operational</h4>
+                            <p style="color: #64748B; margin-bottom: 1.25rem; line-height: 1.7; font-size: 0.95rem;">
+                                Junior AE fully ramped and carrying quota, complete sales playbook delivered, healthy pipeline for sustained growth.
                             </p>
-                            <div style="display: grid; gap: 1rem;">
-                                <div style="display: flex; gap: 1rem; align-items: start;">
-                                    <div style="background: #8B5CF6; color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">1</div>
-                                    <div>
-                                        <strong style="color: #1E293B;">Consistent Flow</strong>
-                                        <p style="color: #64748B; font-size: 0.95rem; margin-top: 0.25rem;">2-3 deals closing, mix of Starter, Growth, Pro tiers</p>
-                                    </div>
-                                </div>
-                                <div style="display: flex; gap: 1rem; align-items: start;">
-                                    <div style="background: #8B5CF6; color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">2</div>
-                                    <div>
-                                        <strong style="color: #1E293B;">Complete Playbook</strong>
-                                        <p style="color: #64748B; font-size: 0.95rem; margin-top: 0.25rem;">100+ page documentation, training curriculum for next AE</p>
-                                    </div>
-                                </div>
-                                <div style="display: flex; gap: 1rem; align-items: start;">
-                                    <div style="background: #8B5CF6; color: white; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3</div>
-                                    <div>
-                                        <strong style="color: #1E293B;">Leadership Transition</strong>
-                                        <p style="color: #64748B; font-size: 0.95rem; margin-top: 0.25rem;">40-50% time freed, focused on CEO priorities</p>
-                                    </div>
-                                </div>
-                            </div>
+                            <ul style="color: #475569; line-height: 1.9; margin: 0; padding-left: 1.25rem; font-size: 0.95rem;">
+                                <li><strong>Junior AE Performance:</strong> Fully ramped, running demos independently, closing deals, carrying quota</li>
+                                <li><strong>Complete Playbook:</strong> Sales methodology documented, objection handling, demo scripts, pricing guides</li>
+                                <li><strong>Customer Success:</strong> Handoff process established between Sales and CS teams for smooth transitions</li>
+                                <li><strong>GTM Scalability Report:</strong> Channel performance (cost-per-lead, conversion rates, LTV:CAC by source)</li>
+                                <li><strong>Product Feedback Loop:</strong> Market insights from 60+ conversations feeding into product roadmap priorities</li>
+                                <li><strong>Pipeline Health:</strong> 60+ qualified opps built for junior AE to work through Q2/Q3</li>
+                                <li><strong>Forecast:</strong> Consistent revenue, junior AE set up for $200K+ annual quota, system repeatable</li>
+                                <li><strong>Decision Point:</strong> Extend contractor, convert to full-time, or transition with complete knowledge transfer</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
