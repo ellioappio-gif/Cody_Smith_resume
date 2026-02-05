@@ -158,12 +158,12 @@
             update('pipeLabel2', k(cumP2));
             update('pipeLabel3', k(cumP3));
             
-            setAttr('revLabel1', 'y', Math.max(30, ry1 - 15));
-            setAttr('revLabel2', 'y', Math.max(30, ry2 - 15));
-            setAttr('revLabel3', 'y', Math.max(30, ry3 - 15));
-            setAttr('pipeLabel1', 'y', Math.min(350, py1 + 25));
-            setAttr('pipeLabel2', 'y', Math.min(350, py2 + 25));
-            setAttr('pipeLabel3', 'y', Math.min(350, py3 + 25));
+            setAttr('revLabel1', 'y', Math.max(65, ry1 - 12));
+            setAttr('revLabel2', 'y', Math.max(65, ry2 - 12));
+            setAttr('revLabel3', 'y', Math.max(65, ry3 - 12));
+            setAttr('pipeLabel1', 'y', Math.max(65, Math.min(295, py1 + 20)));
+            setAttr('pipeLabel2', 'y', Math.max(65, Math.min(295, py2 + 20)));
+            setAttr('pipeLabel3', 'y', Math.max(65, Math.min(295, py3 + 20)));
         };
         
         // AE COMPARISON CALCULATOR
@@ -1459,9 +1459,9 @@
                     <circle id="pipePoint3" cx="480" cy="280" r="5" fill="#3B82F6"/>
 
                     <!-- Value labels - REACTIVE -->
-                    <text id="revLabel1" x="150" y="295" text-anchor="middle" fill="#10B981" font-size="13" font-weight="700">$0</text>
-                    <text id="revLabel2" x="315" y="295" text-anchor="middle" fill="#10B981" font-size="13" font-weight="700">$0</text>
-                    <text id="revLabel3" x="480" y="295" text-anchor="middle" fill="#10B981" font-size="13" font-weight="700">$0</text>
+                    <text id="revLabel1" x="150" y="270" text-anchor="middle" fill="#10B981" font-size="13" font-weight="700">$0</text>
+                    <text id="revLabel2" x="315" y="270" text-anchor="middle" fill="#10B981" font-size="13" font-weight="700">$0</text>
+                    <text id="revLabel3" x="480" y="270" text-anchor="middle" fill="#10B981" font-size="13" font-weight="700">$0</text>
 
                     <text id="pipeLabel1" x="150" y="45" text-anchor="middle" fill="#3B82F6" font-size="13" font-weight="700">$0</text>
                     <text id="pipeLabel2" x="315" y="45" text-anchor="middle" fill="#3B82F6" font-size="13" font-weight="700">$0</text>
