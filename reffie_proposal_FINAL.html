@@ -257,19 +257,59 @@
         
         // SETUP EVENT LISTENERS
         window.attachListeners = function() {
+            console.log('attachListeners called');
             var dealSlider = document.getElementById('sliderDealSize');
             var cycleSlider = document.getElementById('sliderSalesCycle');
             var winRateSlider = document.getElementById('sliderWinRate');
             var callsSlider = document.getElementById('sliderCallsPerDay');
             var aeSlider = document.getElementById('sliderAeComp');
             
-            if (dealSlider) dealSlider.addEventListener('input', function() { window.onDealSize(this.value); });
-            if (cycleSlider) cycleSlider.addEventListener('input', function() { window.onCycle(this.value); });
-            if (winRateSlider) winRateSlider.addEventListener('input', function() { window.onWinRate(this.value); });
-            if (callsSlider) callsSlider.addEventListener('input', function() { window.onCallsDay(this.value); });
-            if (aeSlider) aeSlider.addEventListener('input', function() { window.onAeSalary(this.value); });
+            console.log('Found sliders:', {
+                deal: !!dealSlider,
+                cycle: !!cycleSlider,
+                winRate: !!winRateSlider,
+                calls: !!callsSlider,
+                ae: !!aeSlider
+            });
+            
+            if (dealSlider) {
+                dealSlider.addEventListener('input', function() { 
+                    console.log('Deal slider moved to:', this.value);
+                    window.onDealSize(this.value); 
+                });
+                console.log('Deal slider listener attached');
+            }
+            if (cycleSlider) {
+                cycleSlider.addEventListener('input', function() { 
+                    console.log('Cycle slider moved to:', this.value);
+                    window.onCycle(this.value); 
+                });
+                console.log('Cycle slider listener attached');
+            }
+            if (winRateSlider) {
+                winRateSlider.addEventListener('input', function() { 
+                    console.log('Win rate slider moved to:', this.value);
+                    window.onWinRate(this.value); 
+                });
+                console.log('Win rate slider listener attached');
+            }
+            if (callsSlider) {
+                callsSlider.addEventListener('input', function() { 
+                    console.log('Calls slider moved to:', this.value);
+                    window.onCallsDay(this.value); 
+                });
+                console.log('Calls slider listener attached');
+            }
+            if (aeSlider) {
+                aeSlider.addEventListener('input', function() { 
+                    console.log('AE slider moved to:', this.value);
+                    window.onAeSalary(this.value); 
+                });
+                console.log('AE slider listener attached');
+            }
             
             var sprintBtns = document.querySelectorAll('[data-sprint-days]');
+            console.log('Found sprint buttons:', sprintBtns.length);
             for (var i = 0; i < sprintBtns.length; i++) {
                 (function(btn) {
                     var days = parseInt(btn.getAttribute('data-sprint-days'), 10);
